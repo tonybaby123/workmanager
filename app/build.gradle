@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 
 android {
     compileSdkVersion 27
@@ -64,4 +66,5 @@ dependencies {
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //coroutines
     compile "org.jetbrains.kotlinx:kotlinx-coroutines-core:0.21"
+    compile "org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5"
 }
