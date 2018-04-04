@@ -1,7 +1,7 @@
 package net.appitiza.moderno.ui.splash.view
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.coroutines.experimental.delay
 import kotlinx.coroutines.experimental.launch
@@ -29,4 +29,5 @@ class SplashActivity : AppCompatActivity() {
        // Thread.sleep(2000) // wait for 2 seconds
         tv_name.text = "Stop";
     }
+    //test change
 }
