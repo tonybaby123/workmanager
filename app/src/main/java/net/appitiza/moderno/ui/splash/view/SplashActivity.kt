@@ -29,5 +29,4 @@ class SplashActivity : AppCompatActivity() {
        // Thread.sleep(2000) // wait for 2 seconds
         tv_name.text = "Stop";
     }
-    //test change
 }
