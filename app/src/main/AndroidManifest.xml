@@ -22,9 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.home.view.HomeActivity" />
-        <activity
-            android:name=".ui.startup.view.LoginActivity"
-            android:label="@string/title_activity_login" />
+
         <activity android:name=".ui.startup.view.StartUpActivity"></activity>
     </application>
 
