@@ -37,4 +37,12 @@ class SplashActivity : AppCompatActivity() {
         startActivity(intent);
         finish()
     }
+
+    private fun Login() = launch(UI) {
+        async (CommonPool) { delay(delayTime) } .await()
+
+        val intent = Intent(this@SplashActivity,HomeActivity::class.java)
+        startActivity(intent);
+        finish()
+    }
 }
