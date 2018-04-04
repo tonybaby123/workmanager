@@ -1,32 +1,40 @@
 package net.appitiza.moderno.ui.splash.view
 
-import android.os.Bundle
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_splash.*
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.*
 import net.appitiza.moderno.R
-
+import net.appitiza.moderno.ui.home.view.HomeActivity
+import kotlin.coroutines.experimental.CoroutineContext
+import kotlin.coroutines.experimental.coroutineContext
+import kotlinx.coroutines.experimental.android.UI
 class SplashActivity : AppCompatActivity() {
 
+    private val delayTime: Long = 3000
+    private var delayJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        startHome()
+
+        //Navigate with delay
+        delayJob = delaySplashScreen()
+
     }
-    fun startHome()
-    {
-        println("Start")
 
-        tv_name.text = "Start";
-        // Start a coroutine
-        launch {
-            delay(1000)
-            //tv_name.text = "Stop";
-        }
+    public override fun onDestroy() {
+        delayJob?.cancel()
 
-       // Thread.sleep(2000) // wait for 2 seconds
-        tv_name.text = "Stop";
+        super.onDestroy()
+    }
+
+    private fun delaySplashScreen() = launch(UI) {
+        async (CommonPool) { delay(delayTime) } .await()
+
+        val intent = Intent(this@SplashActivity,HomeActivity::class.java)
+        startActivity(intent);
+        finish()
     }
 }
