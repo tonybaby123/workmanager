@@ -7,15 +7,15 @@
 
     <color name="colorPrimary_login">#1f6076</color>
     <color name="colorPrimaryDark_login">#2d5074</color>
-    <color name="colorAccent_login">#ffffff</color>
-    <color name="text_color_login">#ffffff</color>
+    <color name="colorAccent_login">#2d5074</color>
+    <color name="text_color_login">#2d5074</color>
     <color name="line_login">#74c8cf</color>
 
 
     <color name="colorPrimary_admin">#af405d</color>
     <color name="colorPrimaryDark_admin">#772f3f</color>
-    <color name="colorAccent_admin">#ffffff</color>
-    <color name="text_color_admin">#ffffff</color>
+    <color name="colorAccent_admin">#772f3f</color>
+    <color name="text_color_admin">#772f3f</color>
     <color name="line_admin">#c76387</color>
 
     <color name="colorPrimary_user">#028f6b</color>
