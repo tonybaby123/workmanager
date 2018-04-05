@@ -30,4 +30,8 @@
     <string name="password_login_register">password_login_register</string>
     <string name="passwordtext_login_register">passwordtext_login_register</string>
     <string name="register_login_register">register_login_register</string>
+    <string name="sites">sites</string>
+    <string name="work_reports">work reports</string>
+    <string name="site_reports">site reports</string>
+    <string name="select_site_txt">select site</string>
 </resources>

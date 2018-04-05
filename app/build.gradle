@@ -28,10 +28,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dataBinding
-            {
-                enabled = true
-            }
+
 }
 
 kotlin {
@@ -59,17 +56,24 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
     implementation "com.android.support:animated-vector-drawable:$rootProject.supportLibraryVersion"
-    // view model
-    implementation "android.arch.lifecycle:extensions:$rootProject.lifecycle"
-    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.lifecycle"
-    //retrofit
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.google.code.gson:gson:2.8.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+
     //leak canary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
     //coroutines
-    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
-    compile 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
+    //firebase
+    implementation 'com.google.firebase:firebase-auth:12.0.1'
+    implementation 'com.google.firebase:firebase-database:12.0.1'
+
+    implementation 'com.google.firebase:firebase-messaging:12.0.1'
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:3.2.2'
+
+    // FirebaseUI for Firebase Auth
+    implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
+
 }
+apply plugin: 'com.google.gms.google-services'
+
