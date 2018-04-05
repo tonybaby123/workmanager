@@ -4,23 +4,25 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="white">#ffffff</color>
+
     <color name="colorPrimary_login">#1f6076</color>
     <color name="colorPrimaryDark_login">#2d5074</color>
     <color name="colorAccent_login">#ffffff</color>
     <color name="text_color_login">#ffffff</color>
     <color name="line_login">#74c8cf</color>
 
-    <color name="colorPrimary_admin">#1f6076</color>
-    <color name="colorPrimaryDark_admin">#2d5074</color>
+
+    <color name="colorPrimary_admin">#af405d</color>
+    <color name="colorPrimaryDark_admin">#772f3f</color>
     <color name="colorAccent_admin">#ffffff</color>
     <color name="text_color_admin">#ffffff</color>
-    <color name="line_admin">#74c8cf</color>
+    <color name="line_admin">#c76387</color>
 
-    <color name="colorPrimary_client">#1f6076</color>
-    <color name="colorPrimaryDark_client">#2d5074</color>
-    <color name="colorAccent_client">#ffffff</color>
-    <color name="text_color_client">#ffffff</color>
-    <color name="line_client">#74c8cf</color>
+    <color name="colorPrimary_user">#028f6b</color>
+    <color name="colorPrimaryDark_user">#026559</color>
+    <color name="colorAccent_user">#ffffff</color>
+    <color name="text_color_user">#ffffff</color>
+    <color name="line_user">#02ba8b</color>
 
 
     <color name="start_login_top_bg" >#467bb0</color>
