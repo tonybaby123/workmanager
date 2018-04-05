@@ -26,12 +26,14 @@
         android:paddingStart="@dimen/double_margin">
 
         <TextView
+            android:id="@+id/tv_email_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:fontFamily="@font/roboto"
             android:text="@string/email_hint"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:transitionName="@string/emailtext_login_register"/>
 
 
         <EditText
@@ -47,12 +49,14 @@
             android:padding="@dimen/default_margin" />
 
         <TextView
+            android:id="@+id/tv_password_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:fontFamily="@font/roboto"
             android:text="@string/password"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:transitionName="@string/passwordtext_login_register"/>
 
         <EditText
             android:id="@+id/et_login_password"
@@ -106,7 +110,8 @@
             android:gravity="center_horizontal"
             android:padding="@dimen/double_margin"
             android:text="@string/register_btn_txt"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:transitionName="@string/transition_login_register"/>
     </LinearLayout>
 
 </LinearLayout>
