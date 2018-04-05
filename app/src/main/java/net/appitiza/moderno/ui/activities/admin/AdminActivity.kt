@@ -1,4 +1,4 @@
-package net.appitiza.moderno.ui.activities
+package net.appitiza.moderno.ui.activities.admin
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

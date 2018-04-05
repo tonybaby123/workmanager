@@ -39,12 +39,12 @@
     <color name="start_admin_container_bg" >#b75a73</color>
     <color name="end_admin_container_bg" >#621c50</color>
 
-    <color name="centre_client_container_bg" >#027b2f</color>
-    <color name="end_client_container_bg" >#0e6a1a</color>
-    <color name="start_client_container_bg" >#029c72</color>
+    <color name="centre_users_container_bg" >#027b2f</color>
+    <color name="end_users_container_bg" >#0e6a1a</color>
+    <color name="start_users_container_bg" >#029c72</color>
 
-    <color name="centre_client_top_bg" >#027e4c</color>
-    <color name="start_client_top_bg" >#029c87</color>
-    <color name="end_client_top_bg" >#026926</color>
+    <color name="centre_users_top_bg" >#027e4c</color>
+    <color name="start_users_top_bg" >#029c87</color>
+    <color name="end_users_top_bg" >#026926</color>
 
 </resources>

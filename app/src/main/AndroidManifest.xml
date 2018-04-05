@@ -22,11 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.AdminActivity" />
+        <activity android:name=".ui.activities.admin.AdminActivity" />
         <activity
             android:name=".ui.activities.StartUpActivity"
             android:theme="@style/MainMaterialTheme.Base.login" />
-        <activity android:name=".ui.activities.ClientActivity"></activity>
+        <activity android:name=".ui.activities.users.UsersActivity"></activity>
     </application>
 
 </manifest>

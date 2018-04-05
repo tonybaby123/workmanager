@@ -8,6 +8,7 @@ import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
+import net.appitiza.moderno.ui.activities.admin.AdminActivity
 import net.appitiza.moderno.utils.PreferenceHelper
 
 class SplashActivity : AppCompatActivity() {

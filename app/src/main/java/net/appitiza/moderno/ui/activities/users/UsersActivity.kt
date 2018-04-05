@@ -1,13 +1,13 @@
-package net.appitiza.moderno.ui.activities
+package net.appitiza.moderno.ui.activities.users
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import net.appitiza.moderno.R
 
-class ClientActivity : AppCompatActivity() {
+class UsersActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_client)
+        setContentView(R.layout.activity_users)
     }
 }
