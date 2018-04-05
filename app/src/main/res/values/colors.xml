@@ -3,25 +3,41 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="white">#ffffff</color>
     <color name="colorPrimary_login">#1f6076</color>
     <color name="colorPrimaryDark_login">#2d5074</color>
     <color name="colorAccent_login">#ffffff</color>
     <color name="text_color_login">#ffffff</color>
     <color name="line_login">#74c8cf</color>
-    <color name="white">#ffffff</color>
+
+    <color name="colorPrimary_admin">#1f6076</color>
+    <color name="colorPrimaryDark_admin">#2d5074</color>
+    <color name="colorAccent_admin">#ffffff</color>
+    <color name="text_color_admin">#ffffff</color>
+    <color name="line_admin">#74c8cf</color>
+
+    <color name="colorPrimary_client">#1f6076</color>
+    <color name="colorPrimaryDark_client">#2d5074</color>
+    <color name="colorAccent_client">#ffffff</color>
+    <color name="text_color_client">#ffffff</color>
+    <color name="line_client">#74c8cf</color>
+
 
     <color name="start_login_top_bg" >#467bb0</color>
     <color name="end_login_top_bg" >#195c6c</color>
     <color name="centre_login_top_bg" >#356f96</color>
 
-    <color name="centre_login_container_bg">#8b395f</color>
-    <color name="start_login_container_bg" >#b75a73</color>
-    <color name="end_login_container_bg" >#621c50</color>
+    <color name="centre_login_container_bg">#306c76</color>
+    <color name="start_login_container_bg" >#1b5e55</color>
+    <color name="end_login_container_bg" >#4c7e9e</color>
 
     <color name="centre_admin_top_bg" >#aa3e5b</color>
     <color name="start_admin_top_bg" >#b74760</color>
     <color name="end_admin_top_bg" >#932e51</color>
+
+    <color name="centre_admin_container_bg">#8b395f</color>
+    <color name="start_admin_container_bg" >#b75a73</color>
+    <color name="end_admin_container_bg" >#621c50</color>
 
     <color name="centre_client_container_bg" >#027b2f</color>
     <color name="end_client_container_bg" >#0e6a1a</color>
