@@ -15,16 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.splash.view.SplashActivity">
+        <activity android:name=".ui.activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.view.HomeActivity" />
+        <activity android:name=".ui.activities.HomeActivity" />
 
-        <activity android:name=".ui.startup.view.StartUpActivity"
+        <activity android:name=".ui.activities.StartUpActivity"
             android:theme="@style/MainMaterialTheme.Base.login"/>
     </application>
 

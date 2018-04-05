@@ -1,4 +1,4 @@
-package net.appitiza.moderno.ui.splash.view
+package net.appitiza.moderno.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,6 @@ import kotlinx.coroutines.experimental.*
 import kotlinx.coroutines.experimental.android.UI
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
-import net.appitiza.moderno.ui.home.view.HomeActivity
-import net.appitiza.moderno.ui.startup.view.StartUpActivity
 import net.appitiza.moderno.utils.PreferenceHelper
 
 class SplashActivity : AppCompatActivity() {
