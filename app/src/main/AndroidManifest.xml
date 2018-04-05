@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".app.Moderno"
@@ -52,6 +53,10 @@
         <activity
             android:name=".ui.activities.users.UserHistoryActivity"
             android:theme="@style/MainMaterialTheme.Base.user" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="1b51e8b0302b7be7b38730959217caac3067a095" />
     </application>
 
 </manifest>
