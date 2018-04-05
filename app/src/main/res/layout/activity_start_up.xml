@@ -1,107 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-
-    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="40"
-            android:background="@drawable/login_top_bg">
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="60"
-            android:orientation="vertical"
-            android:padding="@dimen/double_margin"
-            android:background="@drawable/login_container_bg">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
-                android:text="@string/email_hint"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-
-
-            <EditText
-                android:id="@+id/et_login_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
-                android:background="@drawable/et_bg"
-                android:padding="@dimen/default_margin"
-                android:layout_marginTop="@dimen/semi_margin"
-                android:maxLength="30"
-                android:longClickable="false"
-                android:maxLines="1"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/default_margin"
-                android:text="@string/password"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-            <EditText
-                android:id="@+id/et_login_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:background="@drawable/et_bg"
-                android:padding="@dimen/default_margin"
-                android:layout_marginTop="@dimen/semi_margin"
-                android:maxLength="30"
-                android:longClickable="false"
-                android:maxLines="1"
-                app:passwordToggleEnabled="true"
-                />
-
-            <view
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:background="@color/line_login"
-                android:layout_marginTop="@dimen/default_margin"/>
-
-            <TextView
-                android:id="@+id/tv_login_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="@dimen/default_padding"
-                android:text="@string/login_btn_txt"
-                android:textColor="@color/white" />
-
-            <view
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:background="@color/line_login" />
-
-            <TextView
-                android:id="@+id/tv_login_reset_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:padding="@dimen/default_padding"
-                android:text="@string/reset_password"
-                android:textColor="@color/white"
-                android:layout_gravity="center_horizontal"
-                android:textStyle="bold" />
-        </LinearLayout>
+        android:layout_height="0dp"
+        android:layout_weight="40"
+        android:background="@drawable/login_top_bg">
 
     </LinearLayout>
-</layout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="60"
+        android:background="@drawable/login_container_bg"
+        android:orientation="vertical"
+        android:padding="@dimen/double_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/email_hint"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/et_login_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/semi_margin"
+            android:background="@drawable/et_bg"
+            android:inputType="textEmailAddress"
+            android:longClickable="false"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:padding="@dimen/default_margin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:text="@string/password"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/semi_margin"
+            android:background="@drawable/et_bg"
+            android:inputType="textPassword"
+            android:longClickable="false"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:padding="@dimen/default_margin"
+            app:passwordToggleEnabled="true" />
+
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:layout_marginTop="@dimen/default_margin"
+            android:background="@color/line_login" />
+
+        <TextView
+            android:id="@+id/tv_login_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/default_padding"
+            android:text="@string/login_btn_txt"
+            android:textColor="@color/white" />
+
+        <view
+            android:layout_width="match_parent"
+            android:layout_height="1.5dp"
+            android:background="@color/line_login" />
+
+        <TextView
+            android:id="@+id/tv_login_reset_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:padding="@dimen/default_padding"
+            android:text="@string/reset_password"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
