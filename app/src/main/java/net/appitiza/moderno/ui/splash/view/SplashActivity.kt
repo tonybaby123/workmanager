@@ -40,7 +40,7 @@ class SplashActivity : AppCompatActivity() {
     private fun delaySplashScreen() = launch(UI) {
         tv_name.text = "Configuring.."
         async(CommonPool) { delay(delayTime) }.await()
-        isLoggedIn = true;
+        //isLoggedIn = true;
         val intent = Intent(this@SplashActivity, StartUpActivity::class.java)
         startActivity(intent);
         finish()

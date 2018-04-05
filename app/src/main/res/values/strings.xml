@@ -11,10 +11,12 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-        <string name="user_name">User Name</string>
-        <string name="password">Password</string>
-        <string name="login_text">Login</string>
-    </string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="login_text">Login</string>
+
+    <string name="reset_password">Reset Password</string>
+    <string name="login_btn_txt">Login</string>
+    <string name="email_hint">Email Id</string>
 </resources>
