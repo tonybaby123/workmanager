@@ -23,7 +23,6 @@
     <string name="name_hint">Full Name</string>
 
 
-
     <!--transition name-->
     <string name="transition_login_register">email_login_register</string>
     <string name="email_login_register">email_login_register</string>

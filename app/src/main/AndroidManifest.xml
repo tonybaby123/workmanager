@@ -25,16 +25,33 @@
         <activity
             android:name=".ui.activities.StartUpActivity"
             android:theme="@style/MainMaterialTheme.Base.login" />
-
-        <activity android:name=".ui.activities.RegisterActivity"
-            android:theme="@style/MainMaterialTheme.Base.login"/>
+        <activity
+            android:name=".ui.activities.RegisterActivity"
+            android:theme="@style/MainMaterialTheme.Base.login" />
         <activity
             android:name=".ui.activities.admin.AdminActivity"
             android:theme="@style/MainMaterialTheme.Base.admin" />
         <activity
+            android:name=".ui.activities.admin.AdminSitesActivity"
+            android:theme="@style/MainMaterialTheme.Base.admin" />
+        <activity
+            android:name=".ui.activities.admin.AdminWorkReportsActivity"
+            android:theme="@style/MainMaterialTheme.Base.admin" />
+        <activity
+            android:name=".ui.activities.admin.AdminSiteReportsActivity"
+            android:theme="@style/MainMaterialTheme.Base.admin" />
+        <activity
             android:name=".ui.activities.users.UsersActivity"
             android:theme="@style/MainMaterialTheme.Base.user" />
-
+        <activity
+            android:name=".ui.activities.users.UserReportActivity"
+            android:theme="@style/MainMaterialTheme.Base.user" />
+        <activity
+            android:name=".ui.activities.users.UserNotificationsActivity"
+            android:theme="@style/MainMaterialTheme.Base.user" />
+        <activity
+            android:name=".ui.activities.users.UserHistoryActivity"
+            android:theme="@style/MainMaterialTheme.Base.user" />
     </application>
 
 </manifest>
