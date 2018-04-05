@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.activities.StartUpActivity"
             android:theme="@style/MainMaterialTheme.Base.login" />
@@ -32,6 +31,7 @@
         <activity
             android:name=".ui.activities.users.UsersActivity"
             android:theme="@style/MainMaterialTheme.Base.user" />
+        <activity android:name=".ui.activities.RegisterActivity"></activity>
     </application>
 
 </manifest>

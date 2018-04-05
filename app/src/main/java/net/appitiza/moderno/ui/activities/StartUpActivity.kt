@@ -13,5 +13,6 @@ class StartUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_up)
         tv_login_login.setOnClickListener { startActivity(Intent(this@StartUpActivity, AdminActivity::class.java)) }
+        tv_login_register.setOnClickListener { startActivity(Intent(this@StartUpActivity, RegisterActivity::class.java)) }
     }
 }

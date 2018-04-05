@@ -18,5 +18,7 @@
 
     <string name="reset_password">Reset Password</string>
     <string name="login_btn_txt">Login</string>
+    <string name="register_btn_txt">Register</string>
     <string name="email_hint">Email Id</string>
+    <string name="name_hint">Full Name</string>
 </resources>

@@ -19,12 +19,27 @@
         android:layout_weight="65"
         android:background="@drawable/login_container_bg"
         android:orientation="vertical"
-        android:paddingTop="@dimen/double_margin"
-        android:paddingRight="@dimen/double_margin"
-        android:paddingEnd="@dimen/double_margin"
-        android:paddingLeft="@dimen/double_margin"
-        android:paddingStart="@dimen/double_margin">
+        android:padding="@dimen/double_margin">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_margin"
+            android:fontFamily="@font/roboto"
+            android:text="@string/name_hint"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/et_register_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/semi_margin"
+            android:background="@drawable/et_bg"
+            android:inputType="text"
+            android:longClickable="false"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:padding="@dimen/default_margin" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,10 +47,8 @@
             android:fontFamily="@font/roboto"
             android:text="@string/email_hint"
             android:textColor="@color/white" />
-
-
         <EditText
-            android:id="@+id/et_login_email"
+            android:id="@+id/et_register_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/semi_margin"
@@ -55,7 +68,7 @@
             android:textColor="@color/white" />
 
         <EditText
-            android:id="@+id/et_login_password"
+            android:id="@+id/et_register_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/semi_margin"
@@ -68,45 +81,26 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="1dp"
             android:layout_marginTop="@dimen/default_margin"
             android:background="@color/line_login" />
 
         <TextView
-            android:id="@+id/tv_login_login"
+            android:id="@+id/tv_register_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
             android:gravity="center"
             android:padding="@dimen/default_padding"
-            android:text="@string/login_btn_txt"
+            android:text="@string/register_btn_txt"
             android:textColor="@color/white" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
+            android:layout_height="1dp"
             android:background="@color/line_login" />
 
-        <TextView
-            android:id="@+id/tv_login_reset_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:fontFamily="@font/roboto"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/default_padding"
-            android:text="@string/reset_password"
-            android:textColor="@color/white" />
-        <TextView
-            android:id="@+id/tv_login_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:fontFamily="@font/roboto"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/double_margin"
-            android:text="@string/register_btn_txt"
-            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </LinearLayout>
