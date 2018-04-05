@@ -4,10 +4,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import net.appitiza.moderno.R
 
-class HomeActivity : AppCompatActivity() {
+class ClientActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_client)
     }
 }

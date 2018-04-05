@@ -49,7 +49,7 @@ class SplashActivity : AppCompatActivity() {
     {
         tv_name.text = "Logging.."
         async(CommonPool) { delay(delayTime) }.await()
-        val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+        val intent = Intent(this@SplashActivity, AdminActivity::class.java)
         startActivity(intent);
         finish()
     }

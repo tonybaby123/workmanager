@@ -10,11 +10,25 @@
     <color name="text_color_login">#ffffff</color>
     <color name="line_login">#74c8cf</color>
     <color name="white">#ffffff</color>
+
     <color name="start_login_top_bg" >#467bb0</color>
     <color name="end_login_top_bg" >#195c6c</color>
     <color name="centre_login_top_bg" >#356f96</color>
-    <color name="centre_login_container_bg">#306c76</color>
-    <color name="start_login_container_bg" >#1b5e55</color>
-    <color name="end_login_container_bg" >#4c7e9e</color>
+
+    <color name="centre_login_container_bg">#8b395f</color>
+    <color name="start_login_container_bg" >#b75a73</color>
+    <color name="end_login_container_bg" >#621c50</color>
+
+    <color name="centre_admin_top_bg" >#aa3e5b</color>
+    <color name="start_admin_top_bg" >#b74760</color>
+    <color name="end_admin_top_bg" >#932e51</color>
+
+    <color name="centre_client_container_bg" >#027b2f</color>
+    <color name="end_client_container_bg" >#0e6a1a</color>
+    <color name="start_client_container_bg" >#029c72</color>
+
+    <color name="centre_client_top_bg" >#027e4c</color>
+    <color name="start_client_top_bg" >#029c87</color>
+    <color name="end_client_top_bg" >#026926</color>
 
 </resources>
