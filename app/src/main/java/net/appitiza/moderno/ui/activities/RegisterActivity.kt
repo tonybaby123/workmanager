@@ -1,5 +1,6 @@
 package net.appitiza.moderno.ui.activities
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
@@ -11,7 +12,7 @@ import net.appitiza.moderno.R
 import java.util.*
 
 class RegisterActivity : AppCompatActivity() {
-   // private var mProgress: ProgressDialog? = null
+    private var mProgress: ProgressDialog? = null
 
     //Firebase auth
     private var mAuth: FirebaseAuth? = null
@@ -26,17 +27,17 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initializeFireBase() {
-      //  mProgress = ProgressDialog(this)
+        mProgress = ProgressDialog(this)
         mAuth = FirebaseAuth.getInstance()
     }
 
     private fun registerUser(displayname: String, email: String, password: String) {
         if (validation(displayname, email, password)) {
-           /* mProgress?.setTitle("Registering")
+            mProgress?.setTitle("Registering")
             mProgress?.setMessage("Please wait..")
             mProgress?.setCancelable(false)
             mProgress?.show()
-*/
+
             mAuth?.createUserWithEmailAndPassword(email, password)
                     ?.addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
@@ -50,18 +51,18 @@ class RegisterActivity : AppCompatActivity() {
                             map["type"] = "user"
                             mDatabase?.setValue(map)?.addOnCompleteListener { reg_task ->
                                 if (reg_task.isSuccessful) {
-                                  //  mProgress!!.dismiss()
+                                    mProgress!!.dismiss()
                                     finish()
 
                                 } else {
-                                //    mProgress!!.hide()
+                                    mProgress!!.hide()
                                     Toast.makeText(this@RegisterActivity, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show()
                                 }
                             }
 
                         } else {
-                          //  mProgress!!.hide()
+                            mProgress!!.hide()
                             // If sign in fails, display a message to the user.
                             Toast.makeText(this@RegisterActivity, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show()

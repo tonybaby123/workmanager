@@ -8,26 +8,37 @@ apply plugin: 'kotlin-kapt'
 
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'moderno'
+            keyPassword 'moderno123'
+            storeFile file('D:/projects/moderno/moderno/app/moderno.jks')
+            storePassword 'moderno123'
+        }
+    }
     compileSdkVersion 27
     defaultConfig {
         applicationId "net.appitiza.moderno"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
+    productFlavors {
+    }
 }
 
 kotlin {
@@ -51,33 +62,23 @@ dependencies {
     implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
     implementation "com.android.support:animated-vector-drawable:$rootProject.supportLibraryVersion"
-
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.22.5'
-
     //Firebase
-
     implementation 'com.google.firebase:firebase-auth:11.8.0'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
-
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.google.firebase:firebase-storage:11.8.0'
-
     implementation 'com.google.firebase:firebase-messaging:11.8.0'
-
     // FirebaseUI for Firebase Realtime Database
     compile 'com.firebaseui:firebase-ui-database:3.2.2'
-
     // FirebaseUI for Cloud Firestore
     compile 'com.firebaseui:firebase-ui-firestore:3.2.2'
-
     // FirebaseUI for Firebase Auth
     compile 'com.firebaseui:firebase-ui-auth:3.2.2'
-
     // FirebaseUI for Cloud Storage
     compile 'com.firebaseui:firebase-ui-storage:3.2.2'
-
 }
 apply plugin: 'com.google.gms.google-services'
 

@@ -1,5 +1,6 @@
 package net.appitiza.moderno.ui.activities
 
+import android.app.ProgressDialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
@@ -17,7 +18,7 @@ import net.appitiza.moderno.ui.activities.admin.AdminActivity
 
 class StartUpActivity : AppCompatActivity() {
 
-   // private var mProgress: ProgressDialog? = null
+    private var mProgress: ProgressDialog? = null
     //Firebase auth
     private var mAuth: FirebaseAuth? = null
     private var mDatabase: DatabaseReference? = null
@@ -45,7 +46,7 @@ class StartUpActivity : AppCompatActivity() {
     }
 
     private fun initialize() {
-     //   mProgress = ProgressDialog(this)
+        mProgress = ProgressDialog(this)
         //Firebase auth
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
@@ -53,15 +54,15 @@ class StartUpActivity : AppCompatActivity() {
 
     private fun loginUser(email: String, password: String) {
         if (validation(email, password)) {
-        /*    mProgress?.setTitle("Registering")
+            mProgress?.setTitle("Registering")
             mProgress?.setMessage("Please wait..")
             mProgress?.setCancelable(false)
-            mProgress?.show()*/
+            mProgress?.show()
 
             mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(this)
             { task ->
                 if (task.isSuccessful) {
-                   // mProgress?.dismiss()
+                    mProgress?.dismiss()
 
                     val deviceToken = FirebaseInstanceId.getInstance().token
                     val userId = mAuth?.getCurrentUser()!!.uid
@@ -73,7 +74,7 @@ class StartUpActivity : AppCompatActivity() {
                     }
 
                 } else {
-                  //  mProgress?.hide()
+                    mProgress?.hide()
                     // If sign in fails, display a message to the user.
                     Toast.makeText(this@StartUpActivity, "Authentication failed.",
                             Toast.LENGTH_SHORT).show()

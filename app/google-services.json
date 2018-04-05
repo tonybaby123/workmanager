@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "671026419885-te45ob6s2l9esj0dpcamm2m45v7a8ssr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.appitiza.moderno",
+            "certificate_hash": "297f42869bcb9def27742921d991263e3ab5621e"
+          }
+        },
+        {
+          "client_id": "671026419885-as79u0cnf3sjkh2ti6ir71mama2teqqg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.appitiza.moderno",
+            "certificate_hash": "1ce9f10bdd99d503233640a59a8bb4ded8a62958"
+          }
+        },
+        {
           "client_id": "671026419885-vp7uoiv1mjoos3va30mkf3gkdfbhhjnn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

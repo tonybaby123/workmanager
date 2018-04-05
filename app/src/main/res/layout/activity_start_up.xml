@@ -44,6 +44,7 @@
             android:background="@drawable/et_bg"
             android:inputType="textEmailAddress"
             android:longClickable="false"
+            android:textColor="@color/colorPrimaryDark_login"
             android:maxLength="30"
             android:maxLines="1"
             android:padding="@dimen/default_margin" />
@@ -66,6 +67,7 @@
             android:background="@drawable/et_bg"
             android:inputType="textPassword"
             android:longClickable="false"
+            android:textColor="@color/colorPrimaryDark_login"
             android:maxLength="30"
             android:maxLines="1"
             android:padding="@dimen/default_margin" />
