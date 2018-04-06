@@ -79,7 +79,7 @@ class RegisterActivity : AppCompatActivity() {
             return false
         } else if (email.equals("")) {
             return false
-        } else if (password.equals("")) {
+        } else if (password.equals("") || password.length < 6) {
             return false
         } else {
             return true
