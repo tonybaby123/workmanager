@@ -5,31 +5,56 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
+import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_start_up.*
 import net.appitiza.moderno.R
+import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.admin.AdminActivity
+import net.appitiza.moderno.ui.activities.users.UsersActivity
+import net.appitiza.moderno.utils.PreferenceHelper
+
 
 class StartUpActivity : AppCompatActivity() {
 
     private var mProgress: ProgressDialog? = null
     //Firebase auth
     private var mAuth: FirebaseAuth? = null
-    private var mDatabase: DatabaseReference? = null
+    //Firestore referrence
+    private lateinit var db: FirebaseFirestore
+
+    private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
+    private var displayName by PreferenceHelper(Constants.PREF_KEY_IS_USER_DISPLAY_NAME, "")
+    private var useremail by PreferenceHelper(Constants.PREF_KEY_IS_USER_EMAIL, "")
+    private var userpassword by PreferenceHelper(Constants.PREF_KEY_IS_USER_PASSWORD, "")
+    private var usertype by PreferenceHelper(Constants.PREF_KEY_IS_USER_USER_TYPE, "")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_start_up)
         initialize()
+        setClick()
+
+    }
+
+    private fun initialize() {
+        mProgress = ProgressDialog(this)
+        //Firebase auth
+        mAuth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+    }
+
+    private fun setClick() {
         tv_login_login.setOnClickListener {
 
             loginUser(et_login_email.text.toString(), et_login_password.text.toString())
         }
+        tv_login_reset_password.setOnClickListener { resetPassword(et_login_email.text.toString()) }
         tv_login_register.setOnClickListener {
 
 
@@ -45,17 +70,34 @@ class StartUpActivity : AppCompatActivity() {
         }
     }
 
-    private fun initialize() {
-        mProgress = ProgressDialog(this)
-        //Firebase auth
-        mAuth = FirebaseAuth.getInstance()
-        mDatabase = FirebaseDatabase.getInstance().reference
+    private fun resetPassword(email: String) {
+        if (!et_login_email.text.equals("")) {
+            mProgress?.setTitle(getString(R.string.app_name))
+            mProgress?.setMessage(getString(R.string.registering_message))
+            mProgress?.setCancelable(false)
+            mProgress?.show()
+            FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { resetTask ->
+
+                mProgress?.dismiss()
+                if (resetTask.isSuccessful) {
+                    Toast.makeText(this@StartUpActivity, "reset link sent",
+                            Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this@StartUpActivity, resetTask.exception.toString(),
+                            Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            Toast.makeText(this@StartUpActivity, "email missing",
+                    Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun loginUser(email: String, password: String) {
         if (validation(email, password)) {
-            mProgress?.setTitle("Registering")
-            mProgress?.setMessage("Please wait..")
+            mProgress?.setTitle(getString(R.string.app_name))
+            mProgress?.setMessage(getString(R.string.registering_message))
             mProgress?.setCancelable(false)
             mProgress?.show()
 
@@ -64,23 +106,47 @@ class StartUpActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     mProgress?.dismiss()
 
-                    val deviceToken = FirebaseInstanceId.getInstance().token
-                    val userId = mAuth?.getCurrentUser()!!.uid
-                    mDatabase?.child("User")?.child(userId)?.child("device_token")?.setValue(deviceToken)?.addOnSuccessListener {
-                        // Sign in success, update UI with the signed-in user's information
-                        val user = mAuth?.getCurrentUser()
-                        val intent = Intent(this@StartUpActivity, AdminActivity::class.java)
-                        startActivity(intent);
-                    }
+                    db.collection(Constants.USER_TABLE_NAME)
+                            .whereEqualTo(Constants.USER_EMAIL, mAuth?.currentUser?.email.toString())
+                            .get()
+                            .addOnCompleteListener { login_task ->
+                                if (login_task.isSuccessful) {
+                                    val document = task.result as DocumentSnapshot
+                                    if (document.exists()) {
+                                        useremail = mAuth?.getCurrentUser()?.email.toString()
+                                        isLoggedIn = true
+                                        displayName = document.data[Constants.USER_DISPLAY_NAME].toString()
+                                        userpassword = password
+                                        usertype = document.data[Constants.USER_TYPE].toString()
+                                        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@StartUpActivity, tv_login_login,
+                                                ViewCompat.getTransitionName(tv_login_login))
+                                        if (usertype.equals("user")) {
+                                            val intent = Intent(this@StartUpActivity, UsersActivity::class.java)
 
+                                            startActivity(intent, options.toBundle())
+                                        } else {
+                                            val intent = Intent(this@StartUpActivity, AdminActivity::class.java)
+
+                                            startActivity(intent, options.toBundle())
+                                        }
+
+
+                                    } else {
+                                        Toast.makeText(this@StartUpActivity, "no User Exist",
+                                                Toast.LENGTH_SHORT).show()
+                                    }
+
+                                } else {
+                                    Toast.makeText(this@StartUpActivity, login_task.exception.toString(),
+                                            Toast.LENGTH_SHORT).show()
+
+                                }
+                            }
                 } else {
                     mProgress?.hide()
-                    // If sign in fails, display a message to the user.
-                    Toast.makeText(this@StartUpActivity, "Authentication failed.",
+                    Toast.makeText(this@StartUpActivity, task.exception.toString(),
                             Toast.LENGTH_SHORT).show()
-
                 }
-
             }
         } else {
             Toast.makeText(this@StartUpActivity, "incomplete",

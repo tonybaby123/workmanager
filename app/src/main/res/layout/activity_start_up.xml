@@ -86,7 +86,8 @@
             android:gravity="center"
             android:padding="@dimen/default_padding"
             android:text="@string/login_btn_txt"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"
+            android:transitionName="@string/transition_login_main"/>
 
         <View
             android:layout_width="match_parent"
