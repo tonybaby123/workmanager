@@ -26,7 +26,7 @@
             android:padding="@dimen/double_margin">
 
             <LinearLayout
-                android:id="@+id/ll_users_home_sites"
+                android:id="@+id/ll_users_home_report"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/users_home_btn_bg"
@@ -60,7 +60,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_users_home_wrk_reports"
+                android:id="@+id/ll_users_home_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/users_home_btn_bg"
@@ -95,7 +95,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_users_home_site_reports"
+                android:id="@+id/ll_users_home_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/users_home_btn_bg"

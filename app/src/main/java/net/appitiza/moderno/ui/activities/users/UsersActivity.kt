@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_users.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.StartUpActivity
@@ -20,9 +21,13 @@ class UsersActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
+        setClick()
 
     }
 
+    fun setClick() {
+        ll_users_home_report.setOnClickListener { startActivity(Intent(this@UsersActivity, UserReportActivity::class.java)) }
+    }
 
 
     private fun showExitWarning() {
@@ -54,6 +59,6 @@ class UsersActivity : AppCompatActivity() {
         usertype = ""
         finish()
         //showExitWarning()
-       // super.onBackPressed()
+        // super.onBackPressed()
     }
 }

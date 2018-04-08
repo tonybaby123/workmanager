@@ -104,7 +104,7 @@ class StartUpActivity : AppCompatActivity() {
             mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(this)
             { auth_task ->
                 if (auth_task.isSuccessful) {
-                    mProgress?.dismiss()
+
 
                     db.collection(Constants.COLLECTION_USER)
                             /*.whereEqualTo(Constants.USER_EMAIL, mAuth?.currentUser?.email.toString())*/
@@ -119,6 +119,7 @@ class StartUpActivity : AppCompatActivity() {
                                         displayName = document.data[Constants.USER_DISPLAY_NAME].toString()
                                         userpassword = password
                                         usertype = document.data[Constants.USER_TYPE].toString()
+                                        mProgress?.dismiss()
                                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@StartUpActivity, tv_login_login,
                                                 ViewCompat.getTransitionName(tv_login_login))
                                         if (usertype.equals("user")) {
@@ -133,11 +134,13 @@ class StartUpActivity : AppCompatActivity() {
 
 
                                     } else {
+                                        mProgress?.dismiss()
                                         Toast.makeText(this@StartUpActivity, "no User Exist",
                                                 Toast.LENGTH_SHORT).show()
                                     }
 
                                 } else {
+                                    mProgress?.dismiss()
                                     Toast.makeText(this@StartUpActivity, login_task.exception.toString(),
                                             Toast.LENGTH_SHORT).show()
 

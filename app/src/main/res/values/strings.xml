@@ -72,6 +72,11 @@
     <string name="getting_completed_site">Getting Completed Site List</string>
     <string name="getting_undergoing_site">Getting Undergoing Site List</string>
     <string name="getting_site">Getting Site List</string>
+    <string name="reporting">reporting</string>
+    <string name="date">date</string>
+    <string name="at">at</string>
+    <string name="check_out">check out</string>
+    <string name="check_in">check in</string>
 
 
 </resources>
