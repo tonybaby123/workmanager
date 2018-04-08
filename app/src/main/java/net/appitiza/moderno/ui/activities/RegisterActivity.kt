@@ -1,13 +1,13 @@
 package net.appitiza.moderno.ui.activities
 
 import android.app.ProgressDialog
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.telephony.TelephonyManager
+import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.iid.FirebaseInstanceId
@@ -18,7 +18,8 @@ import net.appitiza.moderno.ui.activities.users.UsersActivity
 import net.appitiza.moderno.utils.PreferenceHelper
 import java.util.*
 
-class RegisterActivity : AppCompatActivity() {
+
+class RegisterActivity : BaseActivity() {
     private var mProgress: ProgressDialog? = null
 
     //Firebase auth
@@ -51,7 +52,8 @@ class RegisterActivity : AppCompatActivity() {
             mProgress?.setMessage(getString(R.string.signing_message))
             mProgress?.setCancelable(false)
             mProgress?.show()
-
+            //val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            //val device_id = tm.deviceId
             mAuth?.createUserWithEmailAndPassword(email, password)
                     ?.addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
@@ -64,11 +66,12 @@ class RegisterActivity : AppCompatActivity() {
                             map[Constants.USER_DISPLAY_NAME] = displayname
                             map[Constants.USER_EMAIL] = mAuth?.getCurrentUser()?.email.toString()
                             map[Constants.USER_TOKEN] = deviceToken.toString()
+                            map[Constants.USER_IMEI] = "123"
                             map[Constants.USER_TYPE] = "user"
 
 
 
-                            db.collection(Constants.USER_TABLE_NAME)
+                            db.collection(Constants.COLLECTION_USER)
                                     .document(mAuth?.getCurrentUser()?.email.toString())
                                     .set(map, SetOptions.merge())
                                     .addOnCompleteListener { reg_task ->
@@ -79,7 +82,7 @@ class RegisterActivity : AppCompatActivity() {
                                             this.displayName = displayname
                                             userpassword = password
                                             usertype = "user"
-                                            startActivity(Intent(this@RegisterActivity,UsersActivity::class.java))
+                                            startActivity(Intent(this@RegisterActivity, UsersActivity::class.java))
                                             finish()
 
                                         } else {
@@ -88,7 +91,6 @@ class RegisterActivity : AppCompatActivity() {
                                                     Toast.LENGTH_SHORT).show()
                                         }
                                     }
-
 
 
                         } else {
@@ -105,14 +107,21 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validation(displayname: String, email: String, password: String): Boolean {
-        if (displayname.equals("")) {
+        if (TextUtils.isEmpty(displayname)) {
+            showValidationWarning(getString(R.string.name_missing))
             return false
-        } else if (email.equals("")) {
+        } else if (TextUtils.isEmpty(email)) {
+            showValidationWarning(getString(R.string.email_missing))
             return false
-        } else if (password.equals("") || password.length < 6) {
+        } else if (TextUtils.isEmpty(password)) {
+            showValidationWarning(getString(R.string.password_missing))
+            return false
+        } else if (password.length < 6) {
+            showValidationWarning(getString(R.string.password_length_missing))
             return false
         } else {
             return true
         }
     }
+
 }

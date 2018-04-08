@@ -91,7 +91,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/quad_margin"
                 android:background="@drawable/white_strock_bg">
-                >
 
                 <EditText
                     android:layout_width="match_parent"

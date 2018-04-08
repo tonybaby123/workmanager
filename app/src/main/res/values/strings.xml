@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Moderno</string>
+    <string name="exit_message">Would you like to logout</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
@@ -38,4 +41,37 @@
     <string name="select_site_txt">select site</string>
 
     <string name="transition_login_main">login_main</string>
+    <string name="users_report">report</string>
+    <string name="users_notification">notifications</string>
+    <string name="users_history">history</string>
+    <string name="create_site">create site</string>
+    <string name="name_of_site">name of site</string>
+    <string name="site_type">site type</string>
+    <string name="date_of_start">date of start</string>
+    <string name="project_cost">project cost</string>
+    <string name="contact_number">contact number</string>
+    <string name="contact_person">contact person</string>
+    <string name="update_location">update location</string>
+
+
+    <string name="name_missing">Name is missing</string>
+    <string name="email_missing">Email Id is missing</string>
+    <string name="password_missing">Password is missing</string>
+    <string name="password_length_missing">Password should be at least 6 Digits</string>
+    <string name="site_name_missing">Site name is missing</string>
+    <string name="site_date_missing">Date is missing</string>
+    <string name="site_cost_missing">Cost is missing</string>
+    <string name="site_contact_number_missing">Contact person number is missing</string>
+    <string name="site_contact_person_missing">Contact person name is missing</string>
+    <string name="all">all</string>
+    <string name="undergoing">undergoing</string>
+    <string name="completed">completed</string>
+    <string name="site_status">status</string>
+    <string name="edit_site">edit site</string>
+    <string name="loginin_message">Loging In</string>
+    <string name="getting_completed_site">Getting Completed Site List</string>
+    <string name="getting_undergoing_site">Getting Undergoing Site List</string>
+    <string name="getting_site">Getting Site List</string>
+
+
 </resources>

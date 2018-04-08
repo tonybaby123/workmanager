@@ -97,21 +97,22 @@ class StartUpActivity : AppCompatActivity() {
     private fun loginUser(email: String, password: String) {
         if (validation(email, password)) {
             mProgress?.setTitle(getString(R.string.app_name))
-            mProgress?.setMessage(getString(R.string.registering_message))
+            mProgress?.setMessage(getString(R.string.loginin_message))
             mProgress?.setCancelable(false)
             mProgress?.show()
 
             mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(this)
-            { task ->
-                if (task.isSuccessful) {
+            { auth_task ->
+                if (auth_task.isSuccessful) {
                     mProgress?.dismiss()
 
-                    db.collection(Constants.USER_TABLE_NAME)
-                            .whereEqualTo(Constants.USER_EMAIL, mAuth?.currentUser?.email.toString())
+                    db.collection(Constants.COLLECTION_USER)
+                            /*.whereEqualTo(Constants.USER_EMAIL, mAuth?.currentUser?.email.toString())*/
+                            .document(email)
                             .get()
                             .addOnCompleteListener { login_task ->
                                 if (login_task.isSuccessful) {
-                                    val document = task.result as DocumentSnapshot
+                                    val document = login_task.result
                                     if (document.exists()) {
                                         useremail = mAuth?.getCurrentUser()?.email.toString()
                                         isLoggedIn = true
@@ -144,7 +145,7 @@ class StartUpActivity : AppCompatActivity() {
                             }
                 } else {
                     mProgress?.hide()
-                    Toast.makeText(this@StartUpActivity, task.exception.toString(),
+                    Toast.makeText(this@StartUpActivity, auth_task.exception.toString(),
                             Toast.LENGTH_SHORT).show()
                 }
             }

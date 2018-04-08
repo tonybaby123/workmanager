@@ -84,7 +84,7 @@ class SplashActivity : AppCompatActivity() {
         mAuth?.signInWithEmailAndPassword(email, password)?.addOnCompleteListener(this)
         { task ->
             if (task.isSuccessful) {
-                db.collection(Constants.USER_TABLE_NAME)
+                db.collection(Constants.COLLECTION_USER)
                         /*.whereEqualTo(Constants.USER_EMAIL, mAuth?.currentUser?.email.toString())*/
                         .document(email)
                         .get()
