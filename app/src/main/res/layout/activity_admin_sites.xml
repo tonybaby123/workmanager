@@ -113,23 +113,16 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_admin_site_all"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:overScrollMode="never"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_admin_site_undergoing"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_admin_site_completed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
             <android.support.design.widget.FloatingActionButton
                 android:id="@+id/fab_admin_add_site"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/admin_fab_btn_bg"
-                android:src="@android:drawable/ic_input_add"
+                android:src="@drawable/add"
                 android:layout_gravity="bottom|right"/>
         </FrameLayout>
     </LinearLayout>

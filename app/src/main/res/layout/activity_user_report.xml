@@ -52,7 +52,6 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
             <TextView
-                android:id="@+id/et_admin_create_site_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/semi_margin"

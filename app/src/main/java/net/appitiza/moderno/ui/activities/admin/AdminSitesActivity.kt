@@ -6,7 +6,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_admin_sites.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
@@ -14,6 +15,7 @@ import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.AdminSiteAdapter
 import net.appitiza.moderno.ui.activities.interfaces.AdminSiteClick
 import net.appitiza.moderno.ui.model.SiteListdata
+import org.jetbrains.annotations.Nullable
 
 
 class AdminSitesActivity : BaseActivity(), AdminSiteClick {
@@ -97,6 +99,11 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
 
                     }
                 }
+
+
+
+
+
     }
 
     private fun getUndergoing() {

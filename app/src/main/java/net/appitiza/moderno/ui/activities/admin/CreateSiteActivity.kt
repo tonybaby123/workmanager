@@ -9,17 +9,21 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_create_site.*
+import kotlinx.android.synthetic.main.activity_user_report.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
+import net.appitiza.moderno.ui.activities.adapter.SiteTypesAdapter
+import net.appitiza.moderno.ui.model.SiteListdata
 import java.util.HashMap
 
 class CreateSiteActivity : BaseActivity() {
 
-    internal var blood_list = arrayOf("Interior", "Exterior")
+    private var type_list = ArrayList<String>()
     private var mAuth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
     private var mProgress: ProgressDialog? = null
+    private lateinit var mTypeAdapter : SiteTypesAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_site)
@@ -36,9 +40,12 @@ class CreateSiteActivity : BaseActivity() {
     }
     fun setSiteType()
     {
-        val bloodgroups = ArrayAdapter(applicationContext, android.R.layout.simple_spinner_item, blood_list)
-        bloodgroups.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spnr_admin_create_type.adapter = bloodgroups
+
+        type_list.add("Interior")
+        type_list.add("Exterior")
+                mTypeAdapter = SiteTypesAdapter(this,type_list)
+        spnr_admin_create_type.adapter = mTypeAdapter
+        spnr_admin_create_type.setAdapter(mTypeAdapter)
     }
     private fun setClick() {
         tv_admin_create_create.setOnClickListener {

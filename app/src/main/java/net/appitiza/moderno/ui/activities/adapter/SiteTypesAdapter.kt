@@ -9,33 +9,32 @@ import android.widget.TextView
 import net.appitiza.moderno.R
 import net.appitiza.moderno.ui.model.SiteListdata
 
+class SiteTypesAdapter : BaseAdapter {
 
-class UserCheckInSiteAdapter : BaseAdapter {
-
-    private var siteList = ArrayList<SiteListdata>()
+    private var siteList = ArrayList<String>()
     private var context: Context? = null
 
-    constructor(context: Context, notesList: ArrayList<SiteListdata>) : super() {
-        this.siteList = notesList
+    constructor(context: Context, siteList: ArrayList<String>) : super() {
+        this.siteList = siteList
         this.context = context
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
         val view: View?
-        val vh: ViewHolder
+        val vh: SiteTypeHolder
 
-      //  if (convertView == null) {
+        if (convertView == null) {
             val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
             view = inflater.inflate(R.layout.item_users_checkin_sitelist, parent, false)
-            vh = ViewHolder(view)
-      /*  } else {
+            vh = SiteTypeHolder(view)
+        } else {
             view = convertView
-            vh = view.tag as ViewHolder
-        }*/
+            vh = view.tag as SiteTypeHolder
+        }
 
-        vh.tvTitle.text = siteList[position].sitename
+        vh.tvTitle.text = siteList[position]
 
         return view
     }
@@ -53,7 +52,7 @@ class UserCheckInSiteAdapter : BaseAdapter {
     }
 }
 
-private class ViewHolder(view: View?) {
+private class SiteTypeHolder(view: View?) {
     val tvTitle: TextView
 
     init {
