@@ -11,11 +11,11 @@ import net.appitiza.moderno.ui.model.SiteListdata
 
 class SiteTypesAdapter : BaseAdapter {
 
-    private var siteList = ArrayList<String>()
+    private var typeList = ArrayList<String>()
     private var context: Context? = null
 
-    constructor(context: Context, siteList: ArrayList<String>) : super() {
-        this.siteList = siteList
+    constructor(context: Context, typeList: ArrayList<String>) : super() {
+        this.typeList = typeList
         this.context = context
     }
 
@@ -27,20 +27,21 @@ class SiteTypesAdapter : BaseAdapter {
         if (convertView == null) {
             val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-            view = inflater.inflate(R.layout.item_users_checkin_sitelist, parent, false)
+            view = inflater.inflate(R.layout.item_admin_site_type, parent, false)
             vh = SiteTypeHolder(view)
+            view.tag = vh
         } else {
             view = convertView
             vh = view.tag as SiteTypeHolder
         }
 
-        vh.tvTitle.text = siteList[position]
+        vh.tvTitle.text = typeList[position]
 
         return view
     }
 
     override fun getItem(position: Int): Any {
-        return siteList[position]
+        return typeList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -48,7 +49,7 @@ class SiteTypesAdapter : BaseAdapter {
     }
 
     override fun getCount(): Int {
-        return siteList.size
+        return typeList.size
     }
 }
 
@@ -56,7 +57,7 @@ private class SiteTypeHolder(view: View?) {
     val tvTitle: TextView
 
     init {
-        this.tvTitle = view?.findViewById(R.id.tv_checkin_site_item_name) as TextView
+        this.tvTitle = view?.findViewById(R.id.tv_site_type) as TextView
     }
 
     //  if you target API 26, you should change to:

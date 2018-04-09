@@ -29,6 +29,7 @@ class UserCheckSiteAdapter : BaseAdapter {
 
             view = inflater.inflate(R.layout.item_users_checkin_sitelist, parent, false)
             vh = UserCheckInSiteHolder(view)
+            view.tag = vh
         } else {
             view = convertView
             vh = view.tag as UserCheckInSiteHolder

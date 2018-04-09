@@ -21,22 +21,70 @@ import net.appitiza.moderno.ui.activities.adapter.UserCheckSiteAdapter
 import net.appitiza.moderno.ui.activities.admin.AdminEditSiteActivity
 import net.appitiza.moderno.ui.activities.interfaces.UserSiteClick
 import net.appitiza.moderno.ui.model.SiteListdata
+import net.appitiza.moderno.utils.PreferenceHelper
 
 class UserReportActivity : BaseActivity(),UserSiteClick {
-
+    private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
+    private var displayName by PreferenceHelper(Constants.PREF_KEY_IS_USER_DISPLAY_NAME, "")
+    private var useremail by PreferenceHelper(Constants.PREF_KEY_IS_USER_EMAIL, "")
+    private var userpassword by PreferenceHelper(Constants.PREF_KEY_IS_USER_PASSWORD, "")
+    private var usertype by PreferenceHelper(Constants.PREF_KEY_IS_USER_USER_TYPE, "")
     private var mAuth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
     private var mProgress: ProgressDialog? = null
     private lateinit var mSiteList: ArrayList<SiteListdata>
     private lateinit var ciadapter: UserCheckSiteAdapter
     private lateinit var coadapter: UserCheckSiteAdapter
-    private var listener : ListenerRegistration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_report)
         initializeFireBase()
         getSites()
+        getCheckInInfo()
     }
+
+    private fun getCheckInInfo() {
+        val currentTime =
+        mProgress?.setTitle(getString(R.string.app_name))
+        mProgress?.setMessage(getString(R.string.get_checkin_info))
+        mProgress?.setCancelable(false)
+        mProgress?.show()
+        db.collection(Constants.COLLECTION_CHECKIN_DATA)
+                .whereEqualTo(Constants.CHECKIN_USER, useremail)
+                .get()
+                .addOnCompleteListener { fetchall_task ->
+                    mProgress?.dismiss()
+                    if (fetchall_task.isSuccessful) {
+                        for (document in fetchall_task.getResult()) {
+                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                            val data: SiteListdata = SiteListdata()
+                            data.siteid = document.getId()
+                            data.sitename = document.getData()[Constants.SITE_NAME].toString()
+                            data.type = document.getData()[Constants.SITE_TYPE].toString()
+                            data.date = document.getData()[Constants.SITE_DATE].toString()
+                            data.cost = document.getData()[Constants.SITE_COST].toString()
+                            data.contact = document.getData()[Constants.SITE_CONTACT].toString()
+                            data.person = document.getData()[Constants.SITE_PERSON].toString()
+                            data.status = document.getData()[Constants.SITE_STATUS].toString()
+                            mSiteList.add(data)
+
+                        }
+                        ciadapter = UserCheckSiteAdapter(this,mSiteList)
+                        coadapter = UserCheckSiteAdapter(this,mSiteList)
+                        spnr_users_check_in_site.setAdapter(ciadapter)
+                        spnr_users_check_out_site.setAdapter(coadapter)
+                        mProgress?.dismiss()
+
+                    } else {
+                        Toast.makeText(this@UserReportActivity, fetchall_task.exception.toString(),
+                                Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+
+
+    }
+
     private fun initializeFireBase() {
 
         mSiteList = arrayListOf()
@@ -50,7 +98,7 @@ class UserReportActivity : BaseActivity(),UserSiteClick {
         mProgress?.setCancelable(false)
         mProgress?.show()
 
-        /*db.collection(Constants.COLLECTION_SITE)
+        db.collection(Constants.COLLECTION_SITE)
                 .whereEqualTo(Constants.SITE_STATUS, "undergoing")
                 .get()
                 .addOnCompleteListener { fetchall_task ->
@@ -70,45 +118,20 @@ class UserReportActivity : BaseActivity(),UserSiteClick {
                             mSiteList.add(data)
 
                         }
-                        ciadapter = UserCheckInSiteAdapter(this,mSiteList)
-                        coadapter = UserCheckInSiteAdapter(this,mSiteList)
+                        ciadapter = UserCheckSiteAdapter(this,mSiteList)
+                        coadapter = UserCheckSiteAdapter(this,mSiteList)
                         spnr_users_check_in_site.setAdapter(ciadapter)
                         spnr_users_check_out_site.setAdapter(coadapter)
+                        mProgress?.dismiss()
 
                     } else {
                         Toast.makeText(this@UserReportActivity, fetchall_task.exception.toString(),
                                 Toast.LENGTH_SHORT).show()
 
                     }
-                }*/
-
-        listener =  db.collection(Constants.COLLECTION_SITE)
-                .whereEqualTo(Constants.SITE_STATUS, "undergoing")
-                .addSnapshotListener(EventListener<QuerySnapshot> { snapshots, e ->
-                    if (e != null) {
-                        return@EventListener
-                    }
-                    for (document in snapshots) {
-                        // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
-                        val data: SiteListdata = SiteListdata()
-                        data.siteid = document.getId()
-                        data.sitename = document.getData()[Constants.SITE_NAME].toString()
-                        data.type = document.getData()[Constants.SITE_TYPE].toString()
-                        data.date = document.getData()[Constants.SITE_DATE].toString()
-                        data.cost = document.getData()[Constants.SITE_COST].toString()
-                        data.contact = document.getData()[Constants.SITE_CONTACT].toString()
-                        data.person = document.getData()[Constants.SITE_PERSON].toString()
-                        data.status = document.getData()[Constants.SITE_STATUS].toString()
-                        mSiteList.add(data)
-
-                    }
-                    ciadapter = UserCheckSiteAdapter(this,mSiteList)
-                    coadapter = UserCheckSiteAdapter(this,mSiteList)
-                    spnr_users_check_in_site.setAdapter(ciadapter)
-                    spnr_users_check_out_site.setAdapter(coadapter)
+                }
 
 
-                })
 
 
 
@@ -119,7 +142,6 @@ class UserReportActivity : BaseActivity(),UserSiteClick {
         startActivity(intent)
     }
     override fun onDestroy() {
-        listener!!.remove()
         super.onDestroy()
     }
 }

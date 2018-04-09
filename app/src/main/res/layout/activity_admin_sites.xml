@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:layout_marginTop="@dimen/quad_margin"
-            android:background="@color/white" />
+            android:background="@color/admin_home_btn_strock" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -65,7 +65,7 @@
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/quad_margin"
-                android:background="@color/white" />
+                android:background="@color/admin_home_btn_strock" />
 
             <TextView
                 android:id="@+id/tv_admin_site_undergoing"
@@ -84,7 +84,7 @@
                 android:layout_width="0.5dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/quad_margin"
-                android:background="@color/white" />
+                android:background="@color/admin_home_btn_strock" />
 
             <TextView
                 android:id="@+id/tv_admin_site_completed"
@@ -103,7 +103,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/white" />
+            android:background="@color/admin_home_btn_strock" />
 
         <FrameLayout
             android:layout_width="match_parent"
