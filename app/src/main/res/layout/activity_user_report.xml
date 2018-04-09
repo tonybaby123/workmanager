@@ -10,7 +10,7 @@
         android:layout_height="0dp"
         android:layout_weight="20"
         android:background="@drawable/users_top_bg">
-
+        <include layout="@layout/top_layout" />
     </LinearLayout>
 
     <ScrollView

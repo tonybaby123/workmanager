@@ -9,8 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="35"
-        android:background="@drawable/users_top_bg">
-
+        android:background="@drawable/users_top_bg"
+        android:padding="@dimen/default_padding">
+        <include layout="@layout/top_layout" />
     </LinearLayout>
 
     <ScrollView
@@ -37,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/dummy"
                     android:padding="@dimen/default_padding"/>
 
                 <View
@@ -72,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/dummy"
                     android:padding="@dimen/default_padding"/>
 
                 <View
@@ -107,7 +108,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:src="@mipmap/ic_launcher"
+                    android:src="@drawable/dummy"
                     android:padding="@dimen/default_padding"/>
 
                 <View
