@@ -11,6 +11,7 @@ class Constants {
         const val COLLECTION_USER = "users"
         const val COLLECTION_SITE = "sites"
         const val COLLECTION_CHECKIN_DATA = "checkin"
+        const val COLLECTION_CHECKIN_HISTORY = "checkin_history"
         const val DOCUMENT_USER = "users"
         const val CHECKIN_USER = "users_email"
         const val CHECKIN_NAME = "users_name"
@@ -27,6 +28,13 @@ class Constants {
         const val SITE_COST = "site_cost"
         const val SITE_CONTACT = "site_contact"
         const val SITE_PERSON = "site_person"
+        const val SITE_LAT = "lat"
+        const val SITE_LON = "lon"
         const val SITE_STATUS = "site_status"
+        const val CHECKIN_SITE = "site"
+        const val CHECKIN_SITENAME = "site_name"
+        const val CHECKIN_USEREMAIL = "email"
+        const val CHECKIN_CHECKIN = "checkin"
+        const val CHECKIN_CHECKOUT = "checkout"
     }
 }

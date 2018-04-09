@@ -78,6 +78,9 @@
     <string name="check_out">check out</string>
     <string name="check_in">check in</string>
     <string name="get_checkin_info">Getting checkin Info</string>
+    <string name="checking_in_user">Checking in User..</string>
+    <string name="syn">Sync Information..</string>
+    <string name="checking_out_user">Checking Out User..</string>
 
 
 </resources>

@@ -7,16 +7,19 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import net.appitiza.moderno.R
+import net.appitiza.moderno.ui.activities.interfaces.UserSiteClick
 import net.appitiza.moderno.ui.model.SiteListdata
 
 class UserCheckSiteAdapter : BaseAdapter {
 
     private var siteList = ArrayList<SiteListdata>()
     private var context: Context? = null
+    private var callback: UserSiteClick? = null
 
-    constructor(context: Context, siteList: ArrayList<SiteListdata>) : super() {
+    constructor(context: Context, siteList: ArrayList<SiteListdata>,callback : UserSiteClick) : super() {
         this.siteList = siteList
         this.context = context
+        this.callback = callback
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {

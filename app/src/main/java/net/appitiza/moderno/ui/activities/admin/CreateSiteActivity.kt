@@ -107,6 +107,8 @@ class CreateSiteActivity : BaseActivity() {
         map[Constants.SITE_COST] = et_admin_create_project_cost.text.toString()
         map[Constants.SITE_CONTACT] = et_admin_create_contact_number.text.toString()
         map[Constants.SITE_PERSON] = et_admin_create_contact_person.text.toString()
+        map[Constants.SITE_LAT] = 0.0
+        map[Constants.SITE_LON] = 0.0
         map[Constants.SITE_STATUS] = "undergoing"
         return map
     }
