@@ -42,6 +42,17 @@
     <string name="txt_adminhome_sitesreport">txt_adminhome_sitesreport</string>
     <string name="transition_adminhome_wrkreport">adminhome_wrkreport</string>
     <string name="txt_adminhome_wrkreport">txt_adminhome_wrkreport</string>
+    <string name="transition_adminhome_notification">adminhome_notification</string>
+    <string name="txt_adminhome_notification">txt_adminhome_notification</string>
+
+    <string name="transition_usershome_notification">usershome_notification</string>
+    <string name="txt_usershome_notification">txt_usershome_notification</string>
+
+    <string name="transition_usershome_history">usershome_history</string>
+    <string name="txt_usershome_history">txt_usershome_history</string>
+
+    <string name="transition_usershome_wrkreport">usershome_wrkreport</string>
+    <string name="txt_usershome_wrkreport">txt_usershome_wrkreport</string>
 
     <string name="sites">sites</string>
     <string name="work_reports">work reports</string>
@@ -89,6 +100,16 @@
     <string name="checking_in_user">Checking in User..</string>
     <string name="syn">Sync Information..</string>
     <string name="checking_out_user">Checking Out User..</string>
+    <string name="payment">Payment Recieved</string>
+    <string name="notification">Notification</string>
+    <string name="notification_title">Notification Title</string>
+    <string name="notification_to">Notification To</string>
+    <string name="message">Message</string>
+    <string name="send">Send</string>
+    <string name="sending_notification">Sending notification..</string>
+    <string name="user_missing">User Missing</string>
+    <string name="message_missing">Message Missing</string>
+    <string name="title_missing">Title Missing</string>
 
 
 </resources>

@@ -65,7 +65,13 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
             if (!TextUtils.isEmpty(mCheckInData.siteid)) {
                 if (mCheckInData.siteid.equals(checkoutSite.siteid)) {
-                    updateHistory()
+                    if(!TextUtils.isEmpty(et_users_site_payment.text.toString())) {
+                        updateHistory()
+                    }
+                    else {
+                        Toast.makeText(this@UserReportActivity, "Please Enter a Payment",
+                                Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(this@UserReportActivity, "You have checked in at " + mCheckInData.sitename + " \nPlease check out from same site",
                             Toast.LENGTH_SHORT).show()
@@ -197,6 +203,7 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
         mProgress?.show()
         val map = HashMap<String, Any>()
         map[Constants.CHECKIN_CHECKOUT] = FieldValue.serverTimestamp()
+        map[Constants.CHECKIN_PAYMENT] = et_users_site_payment.text.toString()
         db.collection(Constants.COLLECTION_CHECKIN_HISTORY)
                 .document(mCheckInData.documentid.toString())
                 .set(map, SetOptions.merge())

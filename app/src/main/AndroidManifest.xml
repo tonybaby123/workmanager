@@ -65,7 +65,8 @@
             android:name=".ui.activities.admin.CreateSiteActivity"
             android:theme="@style/MainMaterialTheme.Base.admin" />
         <activity android:name=".ui.activities.BaseActivity" />
-        <activity android:name=".ui.activities.admin.AdminEditSiteActivity"></activity>
+        <activity android:name=".ui.activities.admin.AdminEditSiteActivity" />
+        <activity android:name=".ui.activities.admin.NotificationActivity"></activity>
     </application>
 
 </manifest>

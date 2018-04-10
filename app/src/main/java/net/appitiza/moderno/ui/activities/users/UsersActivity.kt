@@ -4,7 +4,10 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_users.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
@@ -26,7 +29,9 @@ class UsersActivity : AppCompatActivity() {
     }
 
     fun setClick() {
-        ll_users_home_report.setOnClickListener { startActivity(Intent(this@UsersActivity, UserReportActivity::class.java)) }
+        ll_users_home_report.setOnClickListener { loadReport() }
+        ll_users_home_history.setOnClickListener { loadHistory() }
+        ll_users_home_notification.setOnClickListener { loadNotification() }
     }
 
 
@@ -49,6 +54,30 @@ class UsersActivity : AppCompatActivity() {
         })
         mAlert.show()
 
+    }
+
+    fun loadReport() {
+        val intent = Intent(this@UsersActivity, UserReportActivity::class.java)
+
+        val p1 = Pair(tv_users_home_reports as View, getString(R.string.txt_usershome_wrkreport))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@UsersActivity, p1)
+        startActivity(intent, options.toBundle())
+    }
+
+    fun loadHistory() {
+        val intent = Intent(this@UsersActivity, UserHistoryActivity::class.java)
+
+        val p1 = Pair(tv_users_home_history as View, getString(R.string.txt_usershome_history))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@UsersActivity, p1)
+        startActivity(intent, options.toBundle())
+    }
+
+    fun loadNotification() {
+        val intent = Intent(this@UsersActivity, UserNotificationsActivity::class.java)
+
+        val p1 = Pair(tv_users_home_notification as View, getString(R.string.txt_usershome_notification))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@UsersActivity, p1)
+        startActivity(intent, options.toBundle())
     }
 
     override fun onBackPressed() {

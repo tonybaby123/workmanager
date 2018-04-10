@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:transitionName="@string/transition_usershome_wrkreport">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,6 +153,28 @@
                         android:src="@android:drawable/arrow_down_float" />
                 </RelativeLayout>
             </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/default_margin"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:text="@string/payment"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_medium" />
+            <EditText
+                android:id="@+id/et_users_site_payment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/semi_margin"
+                android:background="@drawable/et_bg"
+                android:inputType="number"
+                android:longClickable="false"
+                android:textColor="@color/colorPrimaryDark_user"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:padding="@dimen/semi_padding" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

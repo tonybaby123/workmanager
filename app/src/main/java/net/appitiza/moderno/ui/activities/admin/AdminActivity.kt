@@ -31,6 +31,7 @@ class AdminActivity : AppCompatActivity() {
         ll_admin_home_sites.setOnClickListener { loadSites()  }
         ll_admin_home_site_reports.setOnClickListener { loadSitesReport()  }
         ll_admin_home_wrk_reports.setOnClickListener { loadWorkReport() }
+        ll_admin_home_site_notification.setOnClickListener { loadNotification() }
 
     }
     fun loadSites()
@@ -54,6 +55,14 @@ class AdminActivity : AppCompatActivity() {
         val intent = Intent(this@AdminActivity, AdminWorkReportsActivity::class.java)
 
         val p1 = Pair(tv_admin_home_wrk_reports as View, getString(R.string.txt_adminhome_wrkreport))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
+        startActivity(intent, options.toBundle())
+    }
+    fun loadNotification()
+    {
+        val intent = Intent(this@AdminActivity, NotificationActivity::class.java)
+
+        val p1 = Pair(tv_admin_home_site_notification as View, getString(R.string.txt_adminhome_notification))
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
         startActivity(intent, options.toBundle())
     }

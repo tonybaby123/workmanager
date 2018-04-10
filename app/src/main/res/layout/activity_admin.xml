@@ -136,6 +136,43 @@
                     android:transitionName="@string/transition_adminhome_sitesreprt"
                     android:textColor="@color/white" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_admin_home_site_notification"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/admin_home_btn_bg"
+                android:orientation="horizontal"
+                android:padding="@dimen/default_margin"
+                android:layout_marginTop="@dimen/default_margin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/dummy"
+                    android:padding="@dimen/default_padding"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/semi_margin"
+                    android:layout_marginStart="@dimen/semi_margin"
+                    android:background="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_admin_home_site_notification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/default_margin"
+                    android:layout_marginStart="@dimen/default_margin"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/notification"
+                    android:textAllCaps="true"
+                    android:transitionName="@string/transition_adminhome_notification"
+                    android:textColor="@color/white" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

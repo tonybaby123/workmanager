@@ -22,6 +22,7 @@ class Constants {
         const val USER_PASSWORD = "password"
         const val USER_IMEI = "imei"
         const val USER_TYPE = "type"
+        const val USER_REG_TIME = "time"
         const val SITE_NAME = "site_name"
         const val SITE_TYPE = "site_type"
         const val SITE_DATE = "site_date"
@@ -36,5 +37,13 @@ class Constants {
         const val CHECKIN_USEREMAIL = "email"
         const val CHECKIN_CHECKIN = "checkin"
         const val CHECKIN_CHECKOUT = "checkout"
+        const val CHECKIN_PAYMENT = "payment"
+        const val COLLECTION_NOTIFICATION = "notification"
+        const val NOTIFICATION_ID = "id"
+        const val NOTIFICATION_TITLE = "title"
+        const val NOTIFICATION_MESSAGE = "mesage"
+        const val NOTIFICATION_TO = "to"
+        const val NOTIFICATION_TIME = "time"
+
     }
 }

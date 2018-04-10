@@ -8,6 +8,7 @@ import android.telephony.TelephonyManager
 import android.text.TextUtils
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.iid.FirebaseInstanceId
@@ -68,6 +69,7 @@ class RegisterActivity : BaseActivity() {
                             map[Constants.USER_TOKEN] = deviceToken.toString()
                             map[Constants.USER_IMEI] = "123"
                             map[Constants.USER_TYPE] = "user"
+                            map[Constants.USER_REG_TIME] = FieldValue.serverTimestamp()
 
 
 
