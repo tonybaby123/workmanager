@@ -53,7 +53,7 @@ class NotificationActivity : BaseActivity(), UserClick {
     private fun setClick() {
         tv_admin_notification_send.setOnClickListener { sendNotification(et_admin_notification_title.text.toString(), et_admin_notification_message.text.toString()) }
 
-        spnr_users_check_out_site.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        spnr_admin_notificaion_to.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }

@@ -38,10 +38,13 @@
 
     <string name="transition_adminhome_sites">adminhome_sites</string>
     <string name="txt_adminhome_sites">txt_adminhome_sites</string>
+
     <string name="transition_adminhome_sitesreprt">adminhome_sitesreport</string>
     <string name="txt_adminhome_sitesreport">txt_adminhome_sitesreport</string>
+
     <string name="transition_adminhome_wrkreport">adminhome_wrkreport</string>
     <string name="txt_adminhome_wrkreport">txt_adminhome_wrkreport</string>
+
     <string name="transition_adminhome_notification">adminhome_notification</string>
     <string name="txt_adminhome_notification">txt_adminhome_notification</string>
 
