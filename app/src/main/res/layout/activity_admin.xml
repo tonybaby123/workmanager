@@ -50,6 +50,7 @@
                     android:background="@color/white" />
 
                 <TextView
+                    android:id="@+id/tv_admin_home_sites"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/default_margin"
@@ -58,6 +59,7 @@
                     android:gravity="center"
                     android:text="@string/sites"
                     android:textAllCaps="true"
+                    android:transitionName="@string/transition_adminhome_sites"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -85,6 +87,7 @@
                     android:background="@color/white" />
 
                 <TextView
+                    android:id="@+id/tv_admin_home_wrk_reports"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/default_margin"
@@ -93,6 +96,7 @@
                     android:gravity="center"
                     android:text="@string/work_reports"
                     android:textAllCaps="true"
+                    android:transitionName="@string/transition_adminhome_wrkreport"
                     android:textColor="@color/white" />
             </LinearLayout>
 
@@ -120,6 +124,7 @@
                     android:background="@color/white" />
 
                 <TextView
+                    android:id="@+id/tv_admin_home_site_reports"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="@dimen/default_margin"
@@ -128,6 +133,7 @@
                     android:gravity="center"
                     android:text="@string/site_reports"
                     android:textAllCaps="true"
+                    android:transitionName="@string/transition_adminhome_sitesreprt"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>

@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:transitionName="@string/transition_adminhome_sites">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,6 +32,7 @@
             android:text="@string/sites"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:transitionName="@string/txt_adminhome_sites"
             android:textSize="@dimen/text_size_large" />
 
         <View
@@ -123,7 +125,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/admin_fab_btn_bg"
                 android:src="@drawable/add"
-                android:layout_gravity="bottom|right"/>
+                android:layout_gravity="bottom|right"
+                android:padding="@dimen/default_padding"/>
         </FrameLayout>
     </LinearLayout>
 </LinearLayout>

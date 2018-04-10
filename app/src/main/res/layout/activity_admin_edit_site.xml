@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -39,7 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="@dimen/quad_margin"
-                android:background="@color/white" />
+                android:background="@color/admin_home_btn_strock" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,7 +52,6 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <EditText
                 android:id="@+id/et_admin_edit_site_name"
                 android:layout_width="match_parent"
@@ -60,11 +60,10 @@
                 android:background="@drawable/et_bg"
                 android:inputType="textEmailAddress"
                 android:longClickable="false"
+                android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
-                android:padding="@dimen/threefourth_padding"
-                android:textColor="@color/colorPrimaryDark_admin" />
-
+                android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -75,7 +74,6 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,9 +95,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/default_padding"
-                    android:src="@android:drawable/arrow_down_float" />
+                    android:src="@drawable/down_arrow" />
             </RelativeLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -110,7 +107,6 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <EditText
                 android:id="@+id/et_admin_edit_start_date"
                 android:layout_width="match_parent"
@@ -118,11 +114,10 @@
                 android:layout_marginTop="@dimen/semi_margin"
                 android:background="@drawable/et_bg"
                 android:longClickable="false"
+                android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
-                android:padding="@dimen/threefourth_padding"
-                android:textColor="@color/colorPrimaryDark_admin" />
-
+                android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -133,20 +128,18 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <EditText
                 android:id="@+id/et_admin_edit_project_cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/semi_margin"
                 android:background="@drawable/et_bg"
-                android:inputType="number"
                 android:longClickable="false"
+                android:textColor="@color/colorPrimaryDark_admin"
+                android:inputType="number"
                 android:maxLength="30"
                 android:maxLines="1"
-                android:padding="@dimen/threefourth_padding"
-                android:textColor="@color/colorPrimaryDark_admin" />
-
+                android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -157,20 +150,18 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <EditText
                 android:id="@+id/et_admin_edit_contact_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/semi_margin"
                 android:background="@drawable/et_bg"
-                android:inputType="number"
                 android:longClickable="false"
+                android:textColor="@color/colorPrimaryDark_admin"
+                android:inputType="number"
                 android:maxLength="30"
                 android:maxLines="1"
-                android:padding="@dimen/threefourth_padding"
-                android:textColor="@color/colorPrimaryDark_admin" />
-
+                android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -181,7 +172,6 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <EditText
                 android:id="@+id/et_admin_edit_contact_person"
                 android:layout_width="match_parent"
@@ -189,10 +179,10 @@
                 android:layout_marginTop="@dimen/semi_margin"
                 android:background="@drawable/et_bg"
                 android:longClickable="false"
+                android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
-                android:padding="@dimen/threefourth_padding"
-                android:textColor="@color/colorPrimaryDark_admin" />
+                android:padding="@dimen/threefourth_padding" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -204,7 +194,6 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -219,13 +208,14 @@
                     android:background="@android:color/transparent" />
 
                 <ImageView
+                    android:id="@+id/iv_admin_edit_site_report_down_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/default_padding"
-                    android:src="@android:drawable/arrow_down_float" />
+                    android:src="@drawable/down_arrow" />
             </RelativeLayout>
 
             <View
@@ -243,7 +233,7 @@
                 android:padding="@dimen/default_padding"
                 android:text="@string/update_location"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="@dimen/text_size_large"/>
 
             <View
                 android:layout_width="match_parent"

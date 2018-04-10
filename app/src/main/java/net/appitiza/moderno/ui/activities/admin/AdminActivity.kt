@@ -5,9 +5,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import android.support.v4.util.Pair
+import android.view.View
 import kotlinx.android.synthetic.main.activity_admin.*
+import kotlinx.android.synthetic.main.activity_start_up.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
+import net.appitiza.moderno.ui.activities.RegisterActivity
 import net.appitiza.moderno.ui.activities.StartUpActivity
 import net.appitiza.moderno.utils.PreferenceHelper
 
@@ -23,8 +28,34 @@ class AdminActivity : AppCompatActivity() {
         setclick()
     }
     private fun setclick() {
-        ll_admin_home_sites.setOnClickListener {  startActivity(Intent(this@AdminActivity,AdminSitesActivity::class.java)) }
+        ll_admin_home_sites.setOnClickListener { loadSites()  }
+        ll_admin_home_site_reports.setOnClickListener { loadSitesReport()  }
+        ll_admin_home_wrk_reports.setOnClickListener { loadWorkReport() }
 
+    }
+    fun loadSites()
+    {
+        val intent = Intent(this@AdminActivity, AdminSitesActivity::class.java)
+
+        val p1 = Pair(tv_admin_home_sites as View, getString(R.string.txt_adminhome_sites))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
+        startActivity(intent, options.toBundle())
+    }
+    fun loadSitesReport()
+    {
+        val intent = Intent(this@AdminActivity, AdminSiteReportsActivity::class.java)
+
+        val p1 = Pair(tv_admin_home_site_reports as View, getString(R.string.txt_adminhome_sitesreport))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
+        startActivity(intent, options.toBundle())
+    }
+    fun loadWorkReport()
+    {
+        val intent = Intent(this@AdminActivity, AdminWorkReportsActivity::class.java)
+
+        val p1 = Pair(tv_admin_home_wrk_reports as View, getString(R.string.txt_adminhome_wrkreport))
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
+        startActivity(intent, options.toBundle())
     }
     private fun showExitWarning() {
         val mAlert = AlertDialog.Builder(this).create()
@@ -48,13 +79,13 @@ class AdminActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        isLoggedIn = false
+       /* isLoggedIn = false
         displayName = ""
         useremail = ""
         userpassword = ""
         usertype = ""
-        finish()
-        //showExitWarning()
+        finish()*/
+        showExitWarning()
        // super.onBackPressed()
     }
 }

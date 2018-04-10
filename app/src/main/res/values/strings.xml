@@ -35,6 +35,14 @@
     <string name="password_login_register">password_login_register</string>
     <string name="passwordtext_login_register">passwordtext_login_register</string>
     <string name="register_login_register">register_login_register</string>
+
+    <string name="transition_adminhome_sites">adminhome_sites</string>
+    <string name="txt_adminhome_sites">txt_adminhome_sites</string>
+    <string name="transition_adminhome_sitesreprt">adminhome_sitesreport</string>
+    <string name="txt_adminhome_sitesreport">txt_adminhome_sitesreport</string>
+    <string name="transition_adminhome_wrkreport">adminhome_wrkreport</string>
+    <string name="txt_adminhome_wrkreport">txt_adminhome_wrkreport</string>
+
     <string name="sites">sites</string>
     <string name="work_reports">work reports</string>
     <string name="site_reports">site reports</string>

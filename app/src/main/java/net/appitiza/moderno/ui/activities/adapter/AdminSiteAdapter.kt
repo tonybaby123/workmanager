@@ -9,7 +9,7 @@ import net.appitiza.moderno.R
 import net.appitiza.moderno.ui.activities.interfaces.AdminSiteClick
 import net.appitiza.moderno.ui.model.SiteListdata
 
-class AdminSiteAdapter (val userList : ArrayList<SiteListdata>,val callback: AdminSiteClick) : RecyclerView.Adapter<AdminSiteAdapter.ViewHolder>() {
+class AdminSiteAdapter(val userList: ArrayList<SiteListdata>, val callback: AdminSiteClick) : RecyclerView.Adapter<AdminSiteAdapter.ViewHolder>() {
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -20,6 +20,9 @@ class AdminSiteAdapter (val userList : ArrayList<SiteListdata>,val callback: Adm
     //this method is binding the data on the list
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bindItems(userList[position])
+        holder.itemView.setOnClickListener {
+            callback.onSiteClick(userList[position])
+        }
     }
 
     //this method is giving the size of the list
@@ -32,9 +35,7 @@ class AdminSiteAdapter (val userList : ArrayList<SiteListdata>,val callback: Adm
 
         fun bindItems(data: SiteListdata) {
             itemView.tv_site_item_name.text = data.sitename
-            itemView.ll_site_item_root.setOnClickListener {
 
-            }
 
         }
     }

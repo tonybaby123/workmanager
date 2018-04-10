@@ -2,7 +2,10 @@ package net.appitiza.moderno.ui.activities.admin
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -30,6 +33,7 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         setContentView(R.layout.activity_admin_sites)
         initializeFireBase()
         setClick()
+        getAll()
     }
 
     private fun initializeFireBase() {
@@ -69,9 +73,14 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         mProgress?.setMessage(getString(R.string.getting_site))
         mProgress?.setCancelable(false)
         mProgress?.show()
+        tv_admin_site_all.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_all.setTypeface(tv_admin_site_all.getTypeface(), Typeface.BOLD)
+        tv_admin_site_completed.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_completed.setTypeface(tv_admin_site_completed.getTypeface(), Typeface.NORMAL)
+        tv_admin_site_undergoing.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_undergoing.setTypeface(tv_admin_site_undergoing.getTypeface(), Typeface.NORMAL)
 
         db.collection(Constants.COLLECTION_SITE)
-                /*.whereEqualTo(Constants.USER_EMAIL, mAuth?.currentUser?.email.toString())*/
                 .get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
@@ -111,6 +120,12 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         mProgress?.setMessage(getString(R.string.getting_undergoing_site))
         mProgress?.setCancelable(false)
         mProgress?.show()
+        tv_admin_site_all.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_all.setTypeface(tv_admin_site_all.getTypeface(), Typeface.NORMAL)
+        tv_admin_site_completed.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_completed.setTypeface(tv_admin_site_completed.getTypeface(), Typeface.NORMAL)
+        tv_admin_site_undergoing.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_undergoing.setTypeface(tv_admin_site_undergoing.getTypeface(), Typeface.BOLD)
         db.collection(Constants.COLLECTION_SITE)
                 .whereEqualTo(Constants.SITE_STATUS, "undergoing")
                 .get()
@@ -147,8 +162,14 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         mProgress?.setMessage(getString(R.string.getting_completed_site))
         mProgress?.setCancelable(false)
         mProgress?.show()
+        tv_admin_site_all.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_all.setTypeface(tv_admin_site_all.getTypeface(), Typeface.NORMAL)
+        tv_admin_site_completed.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_completed.setTypeface(tv_admin_site_completed.getTypeface(), Typeface.BOLD)
+        tv_admin_site_undergoing.setTextColor(ContextCompat.getColor(this, R.color.white))
+        tv_admin_site_undergoing.setTypeface(tv_admin_site_undergoing.getTypeface(), Typeface.NORMAL)
         db.collection(Constants.COLLECTION_SITE)
-                .whereEqualTo(Constants.SITE_STATUS, "completed")
+                .whereEqualTo(Constants.SITE_STATUS, "complete")
                 .get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
