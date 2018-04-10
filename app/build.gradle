@@ -13,7 +13,7 @@ android {
         config {
             keyAlias 'moderno'
             keyPassword 'moderno123'
-            storeFile file('E:/OpenCv/moderno/app/moderno.jks')
+            storeFile file('moderno.jks')
             storePassword 'moderno123'
         }
     }
