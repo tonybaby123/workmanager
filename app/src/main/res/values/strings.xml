@@ -103,7 +103,7 @@
     <string name="checking_in_user">Checking in User..</string>
     <string name="syn">Sync Information..</string>
     <string name="checking_out_user">Checking Out User..</string>
-    <string name="payment">Payment Recieved</string>
+    <string name="payment">Payment</string>
     <string name="notification">Notification</string>
     <string name="notification_title">Notification Title</string>
     <string name="notification_to">Notification To</string>
@@ -113,6 +113,18 @@
     <string name="user_missing">User Missing</string>
     <string name="message_missing">Message Missing</string>
     <string name="title_missing">Title Missing</string>
+    <string name="daily">daily</string>
+    <string name="monthly">monthly</string>
+    <string name="select_date">select date</string>
+    <string name="started_on">started on</string>
+    <string name="two_dot">:</string>
+    <string name="completed_on">conpleted on</string>
+    <string name="total_hours">total hours</string>
+    <string name="payment_recieved">payment received</string>
+    <string name="select_month">select month</string>
+    <string name="work_site">work site</string>
+    <string name="hours">hours</string>
+    <string name="fetching_data">Fetching data..</string>
 
 
 </resources>

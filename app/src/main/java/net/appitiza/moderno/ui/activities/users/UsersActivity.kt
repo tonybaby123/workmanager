@@ -11,11 +11,12 @@ import android.view.View
 import kotlinx.android.synthetic.main.activity_users.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
+import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.StartUpActivity
 import net.appitiza.moderno.utils.PreferenceHelper
 
 
-class UsersActivity : AppCompatActivity() {
+class UsersActivity : BaseActivity() {
     private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
     private var displayName by PreferenceHelper(Constants.PREF_KEY_IS_USER_DISPLAY_NAME, "")
     private var useremail by PreferenceHelper(Constants.PREF_KEY_IS_USER_EMAIL, "")
@@ -25,6 +26,7 @@ class UsersActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
         setClick()
+        hideKeyboard()
 
     }
 

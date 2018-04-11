@@ -52,5 +52,6 @@
     <color name="users_home_btn_solid" >#1A000000</color>
     <color name="admin_home_btn_strock" >#CCce6497</color>
     <color name="users_home_btn_strock" >#CC1cc98e</color>
+    <color name="text_clicked" >#DCDCDC</color>
 
 </resources>
