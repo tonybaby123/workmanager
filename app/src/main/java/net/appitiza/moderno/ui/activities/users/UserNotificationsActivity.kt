@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
 import kotlinx.android.synthetic.main.activity_admin_sites.*
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.activity_user_notifications.*
@@ -21,7 +21,9 @@ import net.appitiza.moderno.ui.activities.interfaces.NotificationClick
 import net.appitiza.moderno.ui.model.NotificationData
 import net.appitiza.moderno.ui.model.SiteListdata
 import net.appitiza.moderno.utils.PreferenceHelper
-import java.util.HashMap
+import java.util.*
+import java.util.EventListener
+
 
 class UserNotificationsActivity : BaseActivity(),NotificationClick {
 
@@ -111,6 +113,8 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
 
                     }
                 }
+
+
     }
     override fun onClick(data: NotificationData) {
     }

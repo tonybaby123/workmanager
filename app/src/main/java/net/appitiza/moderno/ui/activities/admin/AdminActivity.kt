@@ -60,8 +60,8 @@ class AdminActivity : AppCompatActivity() {
     }
     fun loadNotification()
     {
-        val intent = Intent(this@AdminActivity, NotificationActivity::class.java)
 
+        val intent = Intent(this@AdminActivity, NotificationActivity::class.java)
         val p1 = Pair(tv_admin_home_site_notification as View, getString(R.string.txt_adminhome_notification))
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
         startActivity(intent, options.toBundle())

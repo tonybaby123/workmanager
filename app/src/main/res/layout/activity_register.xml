@@ -44,6 +44,7 @@
             android:textColor="@color/colorPrimaryDark_login"
             android:maxLength="30"
             android:maxLines="1"
+            android:textSize="@dimen/text_size_medium"
             android:padding="@dimen/threefourth_padding" />
         <TextView
             android:id="@+id/tv_register_email_txt"
@@ -68,6 +69,7 @@
             android:maxLength="30"
             android:maxLines="1"
             android:padding="@dimen/threefourth_padding"
+            android:textSize="@dimen/text_size_medium"
             android:transitionName="@string/email_login_register"/>
 
         <TextView
@@ -93,6 +95,7 @@
             android:maxLength="30"
             android:maxLines="1"
             android:padding="@dimen/threefourth_padding"
+            android:textSize="@dimen/text_size_medium"
             android:transitionName="@string/password_login_register"
             />
 

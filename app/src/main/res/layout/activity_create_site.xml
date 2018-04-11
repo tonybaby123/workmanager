@@ -63,6 +63,7 @@
                 android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:textSize="@dimen/text_size_medium"
                 android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
@@ -117,6 +118,7 @@
                 android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:textSize="@dimen/text_size_medium"
                 android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
@@ -139,6 +141,7 @@
                 android:inputType="number"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:textSize="@dimen/text_size_medium"
                 android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
@@ -161,6 +164,7 @@
                 android:inputType="number"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:textSize="@dimen/text_size_medium"
                 android:padding="@dimen/threefourth_padding" />
             <TextView
                 android:layout_width="wrap_content"
@@ -182,6 +186,7 @@
                 android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:textSize="@dimen/text_size_medium"
                 android:padding="@dimen/threefourth_padding" />
             <View
                 android:layout_width="match_parent"
