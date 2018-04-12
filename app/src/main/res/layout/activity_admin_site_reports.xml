@@ -74,42 +74,162 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_margin="@dimen/default_padding"
-                    android:src="@android:drawable/arrow_down_float" />
+                    android:src="@drawable/down_arrow" />
             </RelativeLayout>
+
+
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/default_margin"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="@string/select_site_txt"
+                android:text="@string/select_date"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
+                android:textStyle="bold"
                 android:textSize="@dimen/text_size_small" />
 
-            <RelativeLayout
+            <EditText
+                android:id="@+id/iv_admin_site_report_calendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/quad_margin"
-                android:background="@drawable/white_strock_bg">
+                android:layout_centerVertical="true"
+                android:background="@drawable/white_strock_bg"
+                android:layout_marginTop="@dimen/semi_margin"
+                android:drawableEnd="@drawable/calendar"
+                android:drawableRight="@drawable/calendar"
+                android:padding="@dimen/threefourth_padding" />
 
-                <EditText
-                    android:layout_width="match_parent"
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent" />
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical|left|start"
+                    android:text="@string/total_hours"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
 
-                <ImageView
-                    android:id="@+id/iv_admin_site_report_calendar"
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/default_padding"
-                    android:src="@android:drawable/arrow_down_float" />
-            </RelativeLayout>
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/two_dot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
 
+                <TextView
+                    android:id="@+id/tv_admin_sitereport_total_hours"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/select_date"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical|left|start"
+                    android:text="@string/payment_recieved"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/two_dot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tv_admin_sitereport_payment"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/select_date"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center_vertical|left|start"
+                    android:text="@string/site_status"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/two_dot"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+
+                <TextView
+                    android:id="@+id/tv_admin_sitereport_completed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:gravity="center"
+                    android:text="@string/select_date"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_medium" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

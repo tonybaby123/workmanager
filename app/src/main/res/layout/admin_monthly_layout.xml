@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_users_daily_root"
+    android:id="@+id/ll_users_monthly_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -11,24 +11,71 @@
         android:layout_marginTop="@dimen/default_margin"
         android:fontFamily="@font/roboto"
         android:gravity="center"
-        android:text="@string/select_date"
+        android:text="@string/select_month"
         android:textAllCaps="true"
         android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="@dimen/text_size_small" />
+        android:textSize="@dimen/text_size_small"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/spnr_useres_history_daily_date"
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/semi_margin"
+        android:background="@color/admin_home_btn_strock" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:background="@drawable/white_strock_bg"
-        android:layout_marginTop="@dimen/semi_margin"
-        android:drawableEnd="@drawable/calendar"
-        android:drawableRight="@drawable/calendar"
-        android:padding="@dimen/threefourth_padding" />
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/semi_padding"
+        android:weightSum="2">
 
-    <!--<LinearLayout
+        <TextView
+            android:id="@+id/tv_user_history_monthly_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.75"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/year"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/quad_margin"
+            android:background="@color/admin_home_btn_strock" />
+
+        <TextView
+            android:id="@+id/tv_user_history_monthly_month"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.25"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/month"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/quad_margin"
+        android:background="@color/admin_home_btn_strock" />
+
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -144,14 +191,13 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_total_hours"
+            android:id="@+id/tv_useres_history_monthly_total_hours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/select_date"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
@@ -187,16 +233,99 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_payment"
+            android:id="@+id/tv_useres_history_monthly_payment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/select_date"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/default_margin"
+        android:background="@color/admin_home_btn_strock" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="@dimen/semi_padding"
+        android:weightSum="4">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical|left"
+            android:text="@string/date"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_small" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/work_site"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_small" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="@string/hours"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_small" />
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical|right"
+            android:text="@string/payment"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_size_small" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="@dimen/quad_margin"
+        android:background="@color/admin_home_btn_strock" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_history_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_margin"
+        android:overScrollMode="never"/>
 </LinearLayout>

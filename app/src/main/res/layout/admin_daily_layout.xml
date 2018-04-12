@@ -18,7 +18,7 @@
         android:textSize="@dimen/text_size_small" />
 
     <EditText
-        android:id="@+id/spnr_useres_history_daily_date"
+        android:id="@+id/spnr_admin_work_report_daily_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -144,7 +144,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_total_hours"
+            android:id="@+id/tv_admin_work_report_daily_total_hours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
@@ -187,7 +187,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_payment"
+            android:id="@+id/tv_admin_work_report_daily_payment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
