@@ -40,7 +40,7 @@
             android:layout_weight="0.75"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/daily"
+            android:text="@string/year"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium"
@@ -60,7 +60,7 @@
             android:layout_weight="1.25"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/monthly"
+            android:text="@string/month"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium"
@@ -75,7 +75,7 @@
         android:layout_marginTop="@dimen/quad_margin"
         android:background="@color/users_home_btn_strock" />
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -159,7 +159,7 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -191,14 +191,13 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_total_hours"
+            android:id="@+id/tv_useres_history_monthly_total_hours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/select_date"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
@@ -234,14 +233,13 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_payment"
+            android:id="@+id/tv_useres_history_monthly_payment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/select_date"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
@@ -268,10 +266,11 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
-            android:gravity="center"
+            android:gravity="center_vertical|left"
             android:text="@string/date"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_small" />
 
 
@@ -285,6 +284,7 @@
             android:text="@string/work_site"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_small" />
 
 
@@ -298,6 +298,7 @@
             android:text="@string/hours"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_small" />
 
 
@@ -307,10 +308,11 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
-            android:gravity="center"
+            android:gravity="center_vertical|right"
             android:text="@string/payment"
             android:textAllCaps="true"
             android:textColor="@color/white"
+            android:textStyle="bold"
             android:textSize="@dimen/text_size_small" />
     </LinearLayout>
 

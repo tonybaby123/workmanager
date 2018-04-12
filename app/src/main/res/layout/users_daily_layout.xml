@@ -28,7 +28,7 @@
         android:drawableRight="@drawable/calendar"
         android:padding="@dimen/threefourth_padding" />
 
-    <LinearLayout
+    <!--<LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -112,7 +112,7 @@
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
-    </LinearLayout>
+    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"

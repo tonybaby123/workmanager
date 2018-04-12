@@ -1,5 +1,7 @@
 package net.appitiza.moderno.ui.activities.adapter
 
+import android.content.Context
+import android.support.annotation.IntegerRes
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +12,10 @@ import net.appitiza.moderno.R
 import net.appitiza.moderno.ui.activities.interfaces.NotificationClick
 import net.appitiza.moderno.ui.model.CurrentCheckIndata
 import net.appitiza.moderno.ui.model.NotificationData
+import java.text.SimpleDateFormat
+import java.util.*
 
-class UserHistoryAdapter(val mList: ArrayList<CurrentCheckIndata>) : RecyclerView.Adapter<UserHistoryAdapter.NotificationHolder>() {
+class UserHistoryAdapter(var mContext : Context ,val mList: ArrayList<CurrentCheckIndata>) : RecyclerView.Adapter<UserHistoryAdapter.NotificationHolder>() {
 
     //this method is returning the view for each item in the list
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationHolder {
@@ -21,7 +25,7 @@ class UserHistoryAdapter(val mList: ArrayList<CurrentCheckIndata>) : RecyclerVie
 
     //this method is binding the data on the list
     override fun onBindViewHolder(holder: NotificationHolder, position: Int) {
-        holder.bindItems(mList[position])
+        holder.bindItems(mContext,mList[position])
 
     }
 
@@ -33,14 +37,25 @@ class UserHistoryAdapter(val mList: ArrayList<CurrentCheckIndata>) : RecyclerVie
     //the class is hodling the list view
     class NotificationHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindItems(data: CurrentCheckIndata) {
-            itemView.tv_historyitem_date.text = data.checkintime
+        fun bindItems(mContext : Context,data: CurrentCheckIndata) {
+            itemView.tv_historyitem_date.text = getDate(data.checkintime!!.toLong(),"dd MMM yyyy")
             itemView.tv_historyitem_site.text = data.sitename
-            itemView.tv_historyitem_hours.text = ""
+            var total_hours : Long = 0
+            total_hours = data.checkouttime!!.toLong() - data.checkintime!!.toLong()
+            total_hours /= (3600 * 1000)
+            itemView.tv_historyitem_hours.text = mContext.getString(R.string.hrs_symbl, total_hours)
             itemView.tv_historyitem_payment.text = data.payment
 
 
         }
+        private fun getDate(milli : Long,dateFormat: String): String {
+            val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+            var  calendar = Calendar.getInstance()
+            calendar.timeInMillis = milli
+            val value = format.format(calendar.time)
+            return value
+        }
     }
+
 
 }

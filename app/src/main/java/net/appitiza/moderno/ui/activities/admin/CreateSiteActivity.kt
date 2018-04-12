@@ -45,7 +45,6 @@ class CreateSiteActivity : BaseActivity() {
         type_list.add("Exterior")
                 mTypeAdapter = SiteTypesAdapter(this,type_list)
         spnr_admin_create_type.adapter = mTypeAdapter
-        spnr_admin_create_type.setAdapter(mTypeAdapter)
     }
     private fun setClick() {
         tv_admin_create_create.setOnClickListener {
@@ -98,7 +97,7 @@ class CreateSiteActivity : BaseActivity() {
         }
     }
 
-    fun createMap():HashMap<String, Any>
+    private fun createMap():HashMap<String, Any>
     {
         val map = HashMap<String, Any>()
         map[Constants.SITE_NAME] = et_admin_create_site_name.text.toString()

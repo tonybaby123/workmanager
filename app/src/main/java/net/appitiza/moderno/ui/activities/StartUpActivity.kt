@@ -114,7 +114,7 @@ class StartUpActivity : AppCompatActivity() {
                                 if (login_task.isSuccessful) {
                                     val document = login_task.result
                                     if (document.exists()) {
-                                        useremail = mAuth?.getCurrentUser()?.email.toString()
+                                        useremail = mAuth?.currentUser?.email.toString()
                                         isLoggedIn = true
                                         displayName = document.data[Constants.USER_DISPLAY_NAME].toString()
                                         userpassword = password

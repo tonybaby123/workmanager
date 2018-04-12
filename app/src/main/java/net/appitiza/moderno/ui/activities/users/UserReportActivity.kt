@@ -223,15 +223,6 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
     }
 
 
-    fun getDateFromString(datetoSaved: String): Date? {
-        val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        try {
-            return format.parse(datetoSaved)
-        } catch (e: ParseException) {
-            return null
-        }
-
-    }
 
     private fun getCheckInInfo() {
         mProgress?.setTitle(getString(R.string.app_name))
@@ -244,15 +235,15 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
                     if (fetchall_task.isSuccessful) {
-                        for (document in fetchall_task.getResult()) {
+                        for (document in fetchall_task.result) {
 
-                            mCheckInData.documentid = document.getId()
-                            mCheckInData.siteid = document.getData()[Constants.CHECKIN_SITE].toString()
-                            mCheckInData.sitename = document.getData()[Constants.CHECKIN_SITENAME].toString()
-                            mCheckInData.checkintime = document.getData()[Constants.CHECKIN_CHECKIN].toString()
-                            mCheckInData.checkouttime = document.getData()[Constants.CHECKIN_CHECKOUT].toString()
-                            mCheckInData.useremail = document.getData()[Constants.CHECKIN_USEREMAIL].toString()
-                            tv_user_report_checkin_at.text = document.getData()[Constants.CHECKIN_SITENAME].toString()
+                            mCheckInData.documentid = document.id
+                            mCheckInData.siteid = document.data[Constants.CHECKIN_SITE].toString()
+                            mCheckInData.sitename = document.data[Constants.CHECKIN_SITENAME].toString()
+                            mCheckInData.checkintime = document.data[Constants.CHECKIN_CHECKIN].toString()
+                            mCheckInData.checkouttime = document.data[Constants.CHECKIN_CHECKOUT].toString()
+                            mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
+                            tv_user_report_checkin_at.text = document.data[Constants.CHECKIN_SITENAME].toString()
                         }
 
                     }
@@ -282,16 +273,16 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
                     mProgress?.dismiss()
                     if (fetchall_task.isSuccessful) {
                         for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data: SiteListdata = SiteListdata()
-                            data.siteid = document.getId()
-                            data.sitename = document.getData()[Constants.SITE_NAME].toString()
-                            data.type = document.getData()[Constants.SITE_TYPE].toString()
-                            data.date = document.getData()[Constants.SITE_DATE].toString()
-                            data.cost = document.getData()[Constants.SITE_COST].toString()
-                            data.contact = document.getData()[Constants.SITE_CONTACT].toString()
-                            data.person = document.getData()[Constants.SITE_PERSON].toString()
-                            data.status = document.getData()[Constants.SITE_STATUS].toString()
+                            data.siteid = document.id
+                            data.sitename = document.data[Constants.SITE_NAME].toString()
+                            data.type = document.data[Constants.SITE_TYPE].toString()
+                            data.date = document.data[Constants.SITE_DATE].toString()
+                            data.cost = document.data[Constants.SITE_COST].toString()
+                            data.contact = document.data[Constants.SITE_CONTACT].toString()
+                            data.person = document.data[Constants.SITE_PERSON].toString()
+                            data.status = document.data[Constants.SITE_STATUS].toString()
                             mSiteList.add(data)
 
                         }

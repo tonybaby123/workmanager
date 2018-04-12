@@ -82,17 +82,17 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
                     if (fetchall_task.isSuccessful) {
-                        for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                        for (document in fetchall_task.result) {
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data: SiteListdata = SiteListdata()
-                            data.siteid = document.getId()
-                            data.sitename = document.getData()[Constants.SITE_NAME].toString()
-                            data.type = document.getData()[Constants.SITE_TYPE].toString()
-                            data.date = document.getData()[Constants.SITE_DATE].toString()
-                            data.cost = document.getData()[Constants.SITE_COST].toString()
-                            data.contact = document.getData()[Constants.SITE_CONTACT].toString()
-                            data.person = document.getData()[Constants.SITE_PERSON].toString()
-                            data.status = document.getData()[Constants.SITE_STATUS].toString()
+                            data.siteid = document.id
+                            data.sitename = document.data[Constants.SITE_NAME].toString()
+                            data.type = document.data[Constants.SITE_TYPE].toString()
+                            data.date = document.data[Constants.SITE_DATE].toString()
+                            data.cost = document.data[Constants.SITE_COST].toString()
+                            data.contact = document.data[Constants.SITE_CONTACT].toString()
+                            data.person = document.data[Constants.SITE_PERSON].toString()
+                            data.status = document.data[Constants.SITE_STATUS].toString()
                             mSiteList.add(data)
 
                         }
@@ -127,16 +127,16 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                     mProgress?.dismiss()
                     if (fetchall_task.isSuccessful) {
                         for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data: SiteListdata = SiteListdata()
-                            data.siteid = document.getId()
-                            data.sitename = document.getData()[Constants.SITE_NAME].toString()
-                            data.type = document.getData()[Constants.SITE_TYPE].toString()
-                            data.date = document.getData()[Constants.SITE_DATE].toString()
-                            data.cost = document.getData()[Constants.SITE_COST].toString()
-                            data.contact = document.getData()[Constants.SITE_CONTACT].toString()
-                            data.person = document.getData()[Constants.SITE_PERSON].toString()
-                            data.status = document.getData()[Constants.SITE_STATUS].toString()
+                            data.siteid = document.id
+                            data.sitename = document.data[Constants.SITE_NAME].toString()
+                            data.type = document.data[Constants.SITE_TYPE].toString()
+                            data.date = document.data[Constants.SITE_DATE].toString()
+                            data.cost = document.data[Constants.SITE_COST].toString()
+                            data.contact = document.data[Constants.SITE_CONTACT].toString()
+                            data.person = document.data[Constants.SITE_PERSON].toString()
+                            data.status = document.data[Constants.SITE_STATUS].toString()
                             mSiteList.add(data)
 
                         }
@@ -166,16 +166,16 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                     mProgress?.dismiss()
                     if (fetchall_task.isSuccessful) {
                         for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data: SiteListdata = SiteListdata()
-                            data.siteid = document.getId()
-                            data.sitename = document.getData()[Constants.SITE_NAME].toString()
-                            data.type = document.getData()[Constants.SITE_TYPE].toString()
-                            data.date = document.getData()[Constants.SITE_DATE].toString()
-                            data.cost = document.getData()[Constants.SITE_COST].toString()
-                            data.contact = document.getData()[Constants.SITE_CONTACT].toString()
-                            data.person = document.getData()[Constants.SITE_PERSON].toString()
-                            data.status = document.getData()[Constants.SITE_STATUS].toString()
+                            data.siteid = document.id
+                            data.sitename = document.data[Constants.SITE_NAME].toString()
+                            data.type = document.data[Constants.SITE_TYPE].toString()
+                            data.date = document.data[Constants.SITE_DATE].toString()
+                            data.cost = document.data[Constants.SITE_COST].toString()
+                            data.contact = document.data[Constants.SITE_CONTACT].toString()
+                            data.person = document.data[Constants.SITE_PERSON].toString()
+                            data.status = document.data[Constants.SITE_STATUS].toString()
                             mSiteList.add(data)
 
                         }

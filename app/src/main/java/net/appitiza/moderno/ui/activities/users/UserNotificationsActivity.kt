@@ -74,13 +74,13 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
 
                     if (fetchall_task.isSuccessful) {
                         for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data = NotificationData()
-                            data.notificationId = document.getId()
-                            data.title = document.getData()[Constants.NOTIFICATION_TITLE].toString()
-                            data.message = document.getData()[Constants.NOTIFICATION_MESSAGE].toString()
-                            data.time = document.getData()[Constants.NOTIFICATION_TIME].toString()
-                            data.to = document.getData()[Constants.NOTIFICATION_TO].toString()
+                            data.notificationId = document.id
+                            data.title = document.data[Constants.NOTIFICATION_TITLE].toString()
+                            data.message = document.data[Constants.NOTIFICATION_MESSAGE].toString()
+                            data.time = document.data[Constants.NOTIFICATION_TIME].toString()
+                            data.to = document.data[Constants.NOTIFICATION_TO].toString()
                             mNotificationList.add(data)
 
                         }
@@ -95,7 +95,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
                 }
     }
     private fun getMyNotification() {
-
+        mNotificationList.clear()
         db.collection(Constants.COLLECTION_NOTIFICATION)
                 .whereEqualTo(Constants.NOTIFICATION_TO, useremail)
                 .orderBy(Constants.NOTIFICATION_TIME,Query.Direction.DESCENDING)
@@ -103,14 +103,14 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
                 .addOnCompleteListener { fetchall_task ->
 
                     if (fetchall_task.isSuccessful) {
-                        for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                        for (document in fetchall_task.result) {
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data = NotificationData()
-                            data.notificationId = document.getId()
-                            data.title = document.getData()[Constants.NOTIFICATION_TITLE].toString()
-                            data.message = document.getData()[Constants.NOTIFICATION_MESSAGE].toString()
-                            data.time = document.getData()[Constants.NOTIFICATION_TIME].toString()
-                            data.to = document.getData()[Constants.NOTIFICATION_TO].toString()
+                            data.notificationId = document.id
+                            data.title = document.data[Constants.NOTIFICATION_TITLE].toString()
+                            data.message = document.data[Constants.NOTIFICATION_MESSAGE].toString()
+                            data.time = document.data[Constants.NOTIFICATION_TIME].toString()
+                            data.to = document.data[Constants.NOTIFICATION_TO].toString()
                             mNotificationList.add(data)
 
                         }

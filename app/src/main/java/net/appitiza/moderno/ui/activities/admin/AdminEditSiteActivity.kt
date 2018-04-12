@@ -34,7 +34,7 @@ class AdminEditSiteActivity : BaseActivity() {
         initializeFireBase()
         setSiteType()
         setStatusType()
-        getData()
+        data
         setClick()
     }
 

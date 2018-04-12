@@ -82,11 +82,11 @@ class NotificationActivity : BaseActivity(), UserClick {
                         data.emailId = "all"
                         data.username = "Send To All"
                         mUserList.add(data)
-                        for (document in fetchall_task.getResult()) {
-                            // Log.d(FragmentActivity.TAG, document.getId() + " => " + document.getData())
+                        for (document in fetchall_task.result) {
+                            // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data = UserListdata()
-                            data.emailId = document.getData()[Constants.USER_EMAIL].toString()
-                            data.username = document.getData()[Constants.USER_DISPLAY_NAME].toString()
+                            data.emailId = document.data[Constants.USER_EMAIL].toString()
+                            data.username = document.data[Constants.USER_DISPLAY_NAME].toString()
                             mUserList.add(data)
 
                         }

@@ -60,12 +60,12 @@ class RegisterActivity : BaseActivity() {
                         if (task.isSuccessful) {
 
                             // Sign in success, update UI with the signed-in user's information
-                            val user = mAuth?.getCurrentUser()
+                            val user = mAuth?.currentUser
                             val uid = user!!.uid
                             val deviceToken = FirebaseInstanceId.getInstance().token
                             val map = HashMap<String, Any>()
                             map[Constants.USER_DISPLAY_NAME] = displayname
-                            map[Constants.USER_EMAIL] = mAuth?.getCurrentUser()?.email.toString()
+                            map[Constants.USER_EMAIL] = mAuth?.currentUser?.email.toString()
                             map[Constants.USER_TOKEN] = deviceToken.toString()
                             map[Constants.USER_IMEI] = "123"
                             map[Constants.USER_TYPE] = "user"
@@ -74,12 +74,12 @@ class RegisterActivity : BaseActivity() {
 
 
                             db.collection(Constants.COLLECTION_USER)
-                                    .document(mAuth?.getCurrentUser()?.email.toString())
+                                    .document(mAuth?.currentUser?.email.toString())
                                     .set(map, SetOptions.merge())
                                     .addOnCompleteListener { reg_task ->
                                         if (reg_task.isSuccessful) {
                                             mProgress!!.dismiss()
-                                            useremail = mAuth?.getCurrentUser()?.email.toString()
+                                            useremail = mAuth?.currentUser?.email.toString()
                                             isLoggedIn = true
                                             this.displayName = displayname
                                             userpassword = password
