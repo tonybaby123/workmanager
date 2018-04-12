@@ -9,6 +9,7 @@ class CurrentCheckIndata : Serializable {
     var checkintime: String? = ""
     var checkouttime: String? = ""
     var useremail: String? = null
+    var payment: String? = null
 
 
 }

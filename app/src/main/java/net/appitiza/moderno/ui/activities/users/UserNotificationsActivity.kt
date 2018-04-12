@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
@@ -23,6 +24,11 @@ import net.appitiza.moderno.ui.model.SiteListdata
 import net.appitiza.moderno.utils.PreferenceHelper
 import java.util.*
 import java.util.EventListener
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.DocumentReference
+
+
 
 
 class UserNotificationsActivity : BaseActivity(),NotificationClick {
@@ -61,6 +67,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
         mProgress?.show()
         db.collection(Constants.COLLECTION_NOTIFICATION)
                 .whereEqualTo(Constants.NOTIFICATION_TO, "all")
+                .orderBy(Constants.NOTIFICATION_TIME,Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
@@ -82,6 +89,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
                     } else {
                         Toast.makeText(this@UserNotificationsActivity, fetchall_task.exception.toString(),
                                 Toast.LENGTH_SHORT).show()
+                        Log.e("link",fetchall_task.exception.toString())
 
                     }
                 }
@@ -90,6 +98,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
 
         db.collection(Constants.COLLECTION_NOTIFICATION)
                 .whereEqualTo(Constants.NOTIFICATION_TO, useremail)
+                .orderBy(Constants.NOTIFICATION_TIME,Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { fetchall_task ->
 
