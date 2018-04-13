@@ -21,6 +21,7 @@ import net.appitiza.moderno.utils.PreferenceHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
+
 class UserHistoryActivity : BaseActivity() {
     private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
     private var displayName by PreferenceHelper(Constants.PREF_KEY_IS_USER_DISPLAY_NAME, "")
@@ -43,7 +44,7 @@ class UserHistoryActivity : BaseActivity() {
     private fun initialize() {
         rv_history_list.layoutManager = LinearLayoutManager(this)
         mHistory = arrayListOf()
-        adapter = UserHistoryAdapter(applicationContext,mHistory)
+        adapter = UserHistoryAdapter(applicationContext, mHistory)
         rv_history_list.adapter = adapter
         mProgress = ProgressDialog(this)
         mAuth = FirebaseAuth.getInstance()
@@ -73,7 +74,6 @@ class UserHistoryActivity : BaseActivity() {
         //mCalender.set(mCalender.gety, 3, 1)
 
 
-
         db.collection(Constants.COLLECTION_CHECKIN_HISTORY)
                 .get()
                 .addOnCompleteListener { fetchall_task ->
@@ -91,14 +91,14 @@ class UserHistoryActivity : BaseActivity() {
                             mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toString()
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
-                            if(!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
+                            if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
                                 val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
                                 total += mPayment
                             }
                             mHistory.add(mCheckInData)
 
                         }
-                        tv_useres_history_daily_payment.text = getString(R.string.rupees,  0)
+                        tv_useres_history_daily_payment.text = getString(R.string.rupees, 0)
 
                     } else {
                         Toast.makeText(this@UserHistoryActivity, fetchall_task.exception.toString(),
@@ -128,18 +128,17 @@ class UserHistoryActivity : BaseActivity() {
         mCalender2.set(2018, 6, 1)
 
 
+        val historyRef = db.collection(Constants.COLLECTION_CHECKIN_HISTORY);
 
-        db.collection(Constants.COLLECTION_CHECKIN_HISTORY)
-                .whereEqualTo(Constants.CHECKIN_USEREMAIL,useremail)
-               /* .whereGreaterThan(Constants.CHECKIN_CHECKIN,"Thu Apr 10 00:01:01 GMT+05:30 2018")*/
-               /* .whereGreaterThan(Constants.CHECKIN_CHECKIN,mCalender1.timeInMillis.toString())*/
-                .get()
+        historyRef.whereEqualTo(Constants.CHECKIN_USEREMAIL, useremail)
+        historyRef.whereGreaterThan(Constants.CHECKIN_CHECKIN, "Thu Apr 13 00:01:01 GMT+05:30 2018")
+        historyRef.get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
 
                     if (fetchall_task.isSuccessful) {
                         var total_payment = 0
-                        var total_hours : Long = 0
+                        var total_hours: Long = 0
                         for (document in fetchall_task.result) {
                             Log.d(" data", document.id + " => " + document.getData())
 
@@ -153,18 +152,17 @@ class UserHistoryActivity : BaseActivity() {
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
                             mHistory.add(mCheckInData)
 
-                            if(!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
+                            if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
                                 val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
                                 total_payment += mPayment
                             }
-                                val mHours = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
-                                total_hours += (mHours)
+                            val mHours = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                            total_hours += (mHours)
 
-                            mHistory.add(mCheckInData)
 
                         }
-                        tv_useres_history_monthly_payment.text = getString(R.string.rupees,  total_payment)
-                        if(total_hours > 0) {
+                        tv_useres_history_monthly_payment.text = getString(R.string.rupees, total_payment)
+                        if (total_hours > 0) {
                             total_hours /= (3600 * 1000)
                             tv_useres_history_monthly_total_hours.text = getString(R.string.hours_symbl, total_hours)
                         }
@@ -178,7 +176,7 @@ class UserHistoryActivity : BaseActivity() {
     }
 
     private fun getDate(date: String): Date {
-        val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH)
+        val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
         val value: Date = format.parse(date)
         return value
     }

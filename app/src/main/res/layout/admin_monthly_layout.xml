@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/ll_users_monthly_root"
+    android:id="@+id/ll_admin_monthly_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -53,7 +53,7 @@
             android:background="@color/admin_home_btn_strock" />
 
         <TextView
-            android:id="@+id/tv_user_history_monthly_month"
+            android:id="@+id/tv_admin_history_monthly_month"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -105,7 +105,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_started"
+            android:id="@+id/tv_admines_history_daily_started"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
@@ -148,7 +148,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_daily_completed"
+            android:id="@+id/tv_admines_history_daily_completed"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
@@ -191,7 +191,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_monthly_total_hours"
+            android:id="@+id/tv_admin_history_monthly_total_hours"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
@@ -233,7 +233,7 @@
             android:textSize="@dimen/text_size_medium" />
 
         <TextView
-            android:id="@+id/tv_useres_history_monthly_payment"
+            android:id="@+id/tv_admin_history_monthly_payment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_margin"
