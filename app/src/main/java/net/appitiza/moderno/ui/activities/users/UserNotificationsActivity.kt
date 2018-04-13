@@ -3,6 +3,7 @@ package net.appitiza.moderno.ui.activities.users
 import android.app.ProgressDialog
 import android.graphics.Typeface
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
@@ -44,6 +45,8 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
     private var mProgress: ProgressDialog? = null
     private lateinit var mNotificationList: ArrayList<NotificationData>
     private lateinit var adapter: UserNotificationAdapter
+    private lateinit var allNotification : ListenerRegistration
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_notifications)
@@ -93,6 +96,30 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
 
                     }
                 }
+
+
+        /*allNotification =  db.collection("notes")
+                .addSnapshotListener(EventListener<QuerySnapshot> { snapshots, e ->
+                    if (e != null) {
+                        Log.w(TAG, "listen:error", e)
+                        return@EventListener
+                    }
+                    val notesList = mutableListOf<ContactsContract.CommonDataKinds.Note>()
+                    for (doc in snapshots) {
+                        val note = doc.toObject(Note::class.java)
+                        note.id = doc.id
+                        notesList.add(note)
+                    }
+                    // instead of simply using the entire query snapshot
+                    // see the actual changes to query results between query snapshots (added, removed, and modified)
+                    for (dc in snapshots.documentChanges) {
+                        when (dc.type) {
+                            DocumentChange.Type.ADDED -> Log.d(TAG, "New city: " + dc.document.data)
+                            DocumentChange.Type.MODIFIED -> Log.d(TAG, "Modified city: " + dc.document.data)
+                            DocumentChange.Type.REMOVED -> Log.d(TAG, "Removed city: " + dc.document.data)
+                        }
+                    }
+                })*/
     }
     private fun getMyNotification() {
         mNotificationList.clear()

@@ -49,7 +49,7 @@
                 android:layout_marginTop="@dimen/default_margin"
                 android:fontFamily="@font/roboto"
                 android:gravity="center"
-                android:text="@string/select_site_txt"
+                android:text="@string/select_users"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
@@ -61,7 +61,7 @@
                 android:background="@drawable/et_bg">
 
                 <Spinner
-                    android:id="@+id/spnr_admin_site_report"
+                    android:id="@+id/spnr_admin_work_report_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent" />
@@ -98,7 +98,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_marginTop="@dimen/quad_margin"
-                    android:background="@color/users_home_btn_strock" />
+                    android:background="@color/admin_home_btn_strock" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -126,7 +126,7 @@
                         android:layout_width="0.5dp"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/quad_margin"
-                        android:background="@color/users_home_btn_strock" />
+                        android:background="@color/admin_home_btn_strock" />
 
                     <TextView
                         android:id="@+id/tv_admin_history_monthly"
@@ -147,7 +147,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:background="@color/users_home_btn_strock" />
+                    android:background="@color/admin_home_btn_strock" />
 
 
                 <include layout="@layout/admin_daily_layout" />

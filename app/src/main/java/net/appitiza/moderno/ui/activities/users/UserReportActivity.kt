@@ -49,7 +49,13 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
         getCheckInInfo()
         setClick()
     }
+    private fun initializeFireBase() {
 
+        mSiteList = arrayListOf()
+        mProgress = ProgressDialog(this)
+        mAuth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
+    }
     private fun setClick() {
         tv_user_report_checkin.setOnClickListener {
             if (TextUtils.isEmpty(mCheckInData.siteid)) {
@@ -252,13 +258,7 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
     }
 
-    private fun initializeFireBase() {
 
-        mSiteList = arrayListOf()
-        mProgress = ProgressDialog(this)
-        mAuth = FirebaseAuth.getInstance()
-        db = FirebaseFirestore.getInstance()
-    }
 
     private fun getSites() {
         mProgress?.setTitle(getString(R.string.app_name))

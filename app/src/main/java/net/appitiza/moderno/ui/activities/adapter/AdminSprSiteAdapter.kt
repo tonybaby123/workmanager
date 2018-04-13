@@ -10,7 +10,7 @@ import net.appitiza.moderno.R
 import net.appitiza.moderno.ui.activities.interfaces.UserSiteClick
 import net.appitiza.moderno.ui.model.SiteListdata
 
-class UserCheckSiteAdapter : BaseAdapter {
+class AdminSprSiteAdapter : BaseAdapter {
 
     private var siteList = ArrayList<SiteListdata>()
     private var context: Context? = null
@@ -25,21 +25,20 @@ class UserCheckSiteAdapter : BaseAdapter {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
 
         val view: View?
-        val vh: UserCheckInSiteHolder
+        val vh: AdminSpnrSiteHolder
 
         if (convertView == null) {
             val inflater = context?.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-            view = inflater.inflate(R.layout.item_users_checkin_sitelist, parent, false)
-            vh = UserCheckInSiteHolder(view)
+            view = inflater.inflate(R.layout.item_admin_spnr_sitelist, parent, false)
+            vh = AdminSpnrSiteHolder(view)
             view.tag = vh
         } else {
             view = convertView
-            vh = view.tag as UserCheckInSiteHolder
+            vh = view.tag as AdminSpnrSiteHolder
         }
 
         vh.tvTitle.text = siteList[position].sitename
-        vh.tvTitle.setOnClickListener { callback?.onSiteClick(siteList[position]) }
         return view
     }
 
@@ -56,7 +55,7 @@ class UserCheckSiteAdapter : BaseAdapter {
     }
 }
 
-private class UserCheckInSiteHolder(view: View?) {
+private class AdminSpnrSiteHolder(view: View?) {
     val tvTitle: TextView
 
     init {
