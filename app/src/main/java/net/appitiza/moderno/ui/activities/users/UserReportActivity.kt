@@ -246,10 +246,48 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
                             mCheckInData.documentid = document.id
                             mCheckInData.siteid = document.data[Constants.CHECKIN_SITE].toString()
                             mCheckInData.sitename = document.data[Constants.CHECKIN_SITENAME].toString()
-                            mCheckInData.checkintime = document.data[Constants.CHECKIN_CHECKIN].toString()
-                            mCheckInData.checkouttime = document.data[Constants.CHECKIN_CHECKOUT].toString()
-                            mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
-                            tv_user_report_checkin_at.text = document.data[Constants.CHECKIN_SITENAME].toString()
+                            if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKIN].toString()) && !document.data[Constants.CHECKIN_CHECKIN].toString().equals("null")) {
+                                mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toLong()
+                            }
+                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
+                                mCheckInData.checkouttime =  getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
+                            }
+                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
+
+                        }
+
+                        if (!TextUtils.isEmpty(mCheckInData.checkintime.toString()) && !mCheckInData.checkintime.toString().equals("null")) {
+                            tv_user_report_date.text = convertDate(mCheckInData.checkintime!!.toLong(),"dd MMM yyyy")
+                            var total_hours : Long = 0
+                            val mCalender = Calendar.getInstance()
+                            total_hours = mCalender.timeInMillis - mCheckInData.checkintime!!.toLong()
+
+                            total_hours /= (3600 * 1000)
+
+                             if(total_hours > 1)
+                            {
+                                tv_user_report_completed_time.text = getString(R.string.hrs_symbl, total_hours)
+                            }
+                            else if(total_hours < 1)
+                            {
+                                total_hours *= 60
+                                tv_user_report_completed_time.text = getString(R.string.minutes_symbl, total_hours)
+                            }
+                            else
+                            {
+                                tv_user_report_completed_time.text = getString(R.string.hr_symbl, total_hours)
+                            }
+
+                        }
+                        else{
+                            val mCalender = Calendar.getInstance()
+                            tv_user_report_date.text  = convertDate(mCalender.timeInMillis,"dd MMM yyyy")
+                            tv_user_report_completed_time.text = getString(R.string.not_checked_in_any_where)
+                        }
+                        if (!TextUtils.isEmpty(mCheckInData.sitename) && !mCheckInData.sitename.equals("null")) {
+                            tv_user_report_checkin_at.text = mCheckInData.sitename.toString()   }
+                        else{
+                            tv_user_report_checkin_at.text = getString(R.string.not_checked_in_any_where)
                         }
 
                     }
@@ -301,7 +339,18 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
 
     }
-
+    private fun getDate(date: String): Date {
+        val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
+        val value: Date = format.parse(date)
+        return value
+    }
+    private fun convertDate(milli : Long,dateFormat: String): String {
+        val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+        var  calendar = Calendar.getInstance()
+        calendar.timeInMillis = milli
+        val value = format.format(calendar.time)
+        return value
+    }
     override fun onSiteClick(data: SiteListdata) {
         val intent = Intent(this@UserReportActivity, AdminEditSiteActivity::class.java)
         intent.putExtra("site_data", data)

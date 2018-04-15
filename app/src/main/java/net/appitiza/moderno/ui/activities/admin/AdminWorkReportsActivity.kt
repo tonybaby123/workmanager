@@ -3,6 +3,7 @@ package net.appitiza.moderno.ui.activities.admin
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
@@ -20,7 +21,6 @@ import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.AdminHistoryAdapter
 import net.appitiza.moderno.ui.activities.adapter.AdminSpnrUserAdapter
-import net.appitiza.moderno.ui.activities.adapter.UserHistoryAdapter
 import net.appitiza.moderno.ui.activities.interfaces.UserClick
 import net.appitiza.moderno.ui.model.CurrentCheckIndata
 import net.appitiza.moderno.ui.model.UserListdata
@@ -135,7 +135,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
 
 
         db.collection(Constants.COLLECTION_CHECKIN_HISTORY)
-                .whereEqualTo(Constants.CHECKIN_USEREMAIL,user?.emailId.toString())
+                .whereEqualTo(Constants.CHECKIN_USEREMAIL, user?.emailId.toString())
                 .get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
@@ -143,23 +143,29 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
                     if (fetchall_task.isSuccessful) {
                         var total = 0
                         for (document in fetchall_task.result) {
-                            Log.d(" data", document.id + " => " + document.getData())
+                            Log.d(" data", document.id + " => " + document.data)
                             val mCheckInData = CurrentCheckIndata()
                             mCheckInData.documentid = document.id
                             mCheckInData.siteid = document.data[Constants.CHECKIN_SITE].toString()
                             mCheckInData.sitename = document.data[Constants.CHECKIN_SITENAME].toString()
-                            mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toString()
-                            mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toString()
+
+                            if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKIN].toString()) && !document.data[Constants.CHECKIN_CHECKIN].toString().equals("null")) {
+                                mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                            }
+                            if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
+                                mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time
+                            }
+
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
-                            if(!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
+                            if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
                                 val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
                                 total += mPayment
                             }
                             mHistory.add(mCheckInData)
 
                         }
-                        tv_admin_history_daily_payment.text = getString(R.string.rupees,  0)
+                        tv_admin_history_daily_payment.text = getString(R.string.rupees, 0)
 
                     } else {
                         Toast.makeText(this@AdminWorkReportsActivity, fetchall_task.exception.toString(),
@@ -191,7 +197,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
 
 
         db.collection(Constants.COLLECTION_CHECKIN_HISTORY)
-                .whereEqualTo(Constants.CHECKIN_USEREMAIL,user?.emailId.toString())
+                .whereEqualTo(Constants.CHECKIN_USEREMAIL, user?.emailId.toString())
                 /* .whereGreaterThan(Constants.CHECKIN_CHECKIN,"Thu Apr 10 00:01:01 GMT+05:30 2018")*/
                 /* .whereGreaterThan(Constants.CHECKIN_CHECKIN,mCalender1.timeInMillis.toString())*/
                 .get()
@@ -200,21 +206,27 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
 
                     if (fetchall_task.isSuccessful) {
                         var total_payment = 0
-                        var total_hours : Long = 0
+                        var total_hours: Long = 0
                         for (document in fetchall_task.result) {
-                            Log.d(" data", document.id + " => " + document.getData())
+                            Log.d(" data", document.id + " => " + document.data)
 
                             val mCheckInData = CurrentCheckIndata()
                             mCheckInData.documentid = document.id
                             mCheckInData.siteid = document.data[Constants.CHECKIN_SITE].toString()
                             mCheckInData.sitename = document.data[Constants.CHECKIN_SITENAME].toString()
-                            mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toString()
-                            mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toString()
+
+                            if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKIN].toString()) && !document.data[Constants.CHECKIN_CHECKIN].toString().equals("null")) {
+                                mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                            }
+                            if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
+                                mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time
+                            }
+
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
                             mHistory.add(mCheckInData)
 
-                            if(!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
+                            if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
                                 val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
                                 total_payment += mPayment
                             }
@@ -223,8 +235,8 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
 
 
                         }
-                        tv_admin_history_monthly_payment.text = getString(R.string.rupees,  total_payment)
-                        if(total_hours > 0) {
+                        tv_admin_history_monthly_payment.text = getString(R.string.rupees, total_payment)
+                        if (total_hours > 0) {
                             total_hours /= (3600 * 1000)
                             tv_admin_history_monthly_total_hours.text = getString(R.string.hours_symbl, total_hours)
                         }
@@ -238,7 +250,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
     }
 
     private fun getDate(date: String): Date {
-        val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",Locale.ENGLISH)
+        val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
         val value: Date = format.parse(date)
         return value
     }

@@ -20,7 +20,7 @@
 
     <color name="colorPrimary_user">#028f6b</color>
     <color name="colorPrimaryDark_user">#006252</color>
-    <color name="colorAccent_user">#ffffff</color>
+    <color name="colorAccent_user">#006252</color>
     <color name="text_color_user">#ffffff</color>
     <color name="line_user">#CC02ba8b</color>
 
