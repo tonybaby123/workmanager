@@ -22,6 +22,7 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.synthetic.main.activity_admin_sites.*
 import net.appitiza.moderno.BuildConfig
 import net.appitiza.moderno.R
@@ -187,7 +188,11 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                             data.cost = document.data[Constants.SITE_COST].toString()
                             data.contact = document.data[Constants.SITE_CONTACT].toString()
                             data.person = document.data[Constants.SITE_PERSON].toString()
+                            data.lat = document.data[Constants.SITE_LAT].toString().toDouble()
+                            data.lon = document.data[Constants.SITE_LON].toString().toDouble()
+                            //  data.location = document.data[Constants.SITE_LOCATION]
                             data.status = document.data[Constants.SITE_STATUS].toString()
+
                             mSiteList.add(data)
 
                         }

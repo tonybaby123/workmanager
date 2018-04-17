@@ -99,6 +99,8 @@ class AdminSiteReportsActivity : BaseActivity(), UserSiteClick {
                             data.cost = document.data[Constants.SITE_COST].toString()
                             data.contact = document.data[Constants.SITE_CONTACT].toString()
                             data.person = document.data[Constants.SITE_PERSON].toString()
+                            data.lat = document.data[Constants.SITE_LAT].toString().toDouble()
+                            data.lon = document.data[Constants.SITE_LON].toString().toDouble()
                             data.status = document.data[Constants.SITE_STATUS].toString()
                             mSiteList.add(data)
 

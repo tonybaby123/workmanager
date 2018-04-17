@@ -28,6 +28,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_admin_edit_site.*
 import kotlinx.android.synthetic.main.activity_admin_sites.*
@@ -89,27 +90,15 @@ class AdminEditSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallback
             if (!checkPermissions()) {
                 requestPermissions()
             } else {
-                mGoogleApiClient = GoogleApiClient.Builder(this)
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
-                        .addApi(LocationServices.API)
-                        .build()
-
-                mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
-
-                checkLocation()
+                if(checkLocation()) {
+                    fetchGPS()
+                }
             }
 
         } else {
-            mGoogleApiClient = GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build()
-
-            mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
-
-            checkLocation()
+            if(checkLocation()) {
+                fetchGPS()
+            }
         }
     }
 
@@ -208,8 +197,9 @@ class AdminEditSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallback
         map[Constants.SITE_COST] = et_admin_edit_project_cost.text.toString()
         map[Constants.SITE_CONTACT] = et_admin_edit_contact_number.text.toString()
         map[Constants.SITE_PERSON] = et_admin_edit_contact_person.text.toString()
-        map[Constants.SITE_LAT] = 0.0
-        map[Constants.SITE_LON] = 0.0
+        map[Constants.SITE_LAT] = mLocation!!.latitude
+        map[Constants.SITE_LON] = mLocation!!.longitude
+        map[Constants.SITE_LOCATION] = GeoPoint(mLocation!!.latitude,mLocation!!.longitude)
         map[Constants.SITE_STATUS] = spnr_admin_edit_status.selectedItem.toString()
         return map
     }
@@ -292,7 +282,15 @@ class AdminEditSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallback
             showAlert();
         return isLocationEnabled();
     }
+    private fun fetchGPS() {
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build()
 
+        mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
+    }
     private fun isLocationEnabled(): Boolean {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
@@ -333,15 +331,9 @@ class AdminEditSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallback
                 Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission was granted.
-                mGoogleApiClient = GoogleApiClient.Builder(this)
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
-                        .addApi(LocationServices.API)
-                        .build()
-
-                mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
-
-                checkLocation()
+                if(checkLocation()) {
+                    fetchGPS()
+                }
             } else {
                 // Permission denied.
                 Snackbar.make(fab_admin_add_site,

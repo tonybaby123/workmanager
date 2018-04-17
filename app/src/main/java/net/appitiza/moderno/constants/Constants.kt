@@ -32,6 +32,7 @@ class Constants {
         const val SITE_PERSON = "site_person"
         const val SITE_LAT = "lat"
         const val SITE_LON = "lon"
+        const val SITE_LOCATION = "location"
         const val SITE_STATUS = "site_status"
         const val CHECKIN_SITE = "site"
         const val CHECKIN_SITENAME = "site_name"

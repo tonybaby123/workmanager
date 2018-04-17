@@ -95,27 +95,15 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
             if (!checkPermissions()) {
                 requestPermissions()
             } else {
-                mGoogleApiClient = GoogleApiClient.Builder(this)
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
-                        .addApi(LocationServices.API)
-                        .build()
-
-                mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
-
-                checkLocation()
+                if (checkLocation()) {
+                    fetchGPS()
+                }
             }
 
         } else {
-            mGoogleApiClient = GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build()
-
-            mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
-
-            checkLocation()
+            if (checkLocation()) {
+                fetchGPS()
+            }
         }
     }
 
@@ -417,6 +405,9 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                             data.contact = document.data[Constants.SITE_CONTACT].toString()
                             data.person = document.data[Constants.SITE_PERSON].toString()
                             data.status = document.data[Constants.SITE_STATUS].toString()
+                            data.lat = document.data[Constants.SITE_LAT].toString().toDouble()
+                            data.lon = document.data[Constants.SITE_LON].toString().toDouble()
+                            //  data.location = document.data[Constants.SITE_LOCATION]
                             mSiteList.add(data)
 
                         }
@@ -462,6 +453,16 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
         return isLocationEnabled();
     }
 
+    private fun fetchGPS() {
+        mGoogleApiClient = GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build()
+
+        mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
+    }
+
     private fun isLocationEnabled(): Boolean {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
@@ -502,15 +503,9 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                 Log.i(TAG, "User interaction was cancelled.");
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission was granted.
-                mGoogleApiClient = GoogleApiClient.Builder(this)
-                        .addConnectionCallbacks(this)
-                        .addOnConnectionFailedListener(this)
-                        .addApi(LocationServices.API)
-                        .build()
-
-                mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
-
-                checkLocation()
+                if (checkLocation()) {
+                    fetchGPS()
+                }
             } else {
                 // Permission denied.
                 Snackbar.make(fab_admin_add_site,
