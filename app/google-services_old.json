@@ -1,29 +1,21 @@
 {
   "project_info": {
-    "project_number": "7886826836",
-    "firebase_url": "https://modernoapp-488cd.firebaseio.com",
-    "project_id": "modernoapp-488cd",
-    "storage_bucket": "modernoapp-488cd.appspot.com"
+    "project_number": "671026419885",
+    "firebase_url": "https://moderno-fa9e7.firebaseio.com",
+    "project_id": "moderno-fa9e7",
+    "storage_bucket": "moderno-fa9e7.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:7886826836:android:dcefdedb53bd6187",
+        "mobilesdk_app_id": "1:671026419885:android:dcefdedb53bd6187",
         "android_client_info": {
           "package_name": "net.appitiza.moderno"
         }
       },
       "oauth_client": [
         {
-          "client_id": "7886826836-bmh7bo3hkmggib3a8h1qcva70g8okije.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "net.appitiza.moderno",
-            "certificate_hash": "c407604c624f6d040941e8e02ec062a5d82fd248"
-          }
-        },
-        {
-          "client_id": "7886826836-jpoe2bc3oc63f83gnpb75rkp55iaqu13.apps.googleusercontent.com",
+          "client_id": "671026419885-te45ob6s2l9esj0dpcamm2m45v7a8ssr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "net.appitiza.moderno",
@@ -31,7 +23,7 @@
           }
         },
         {
-          "client_id": "7886826836-85ndidbuf1q8b2ajsmetpstepj9lo3vi.apps.googleusercontent.com",
+          "client_id": "671026419885-as79u0cnf3sjkh2ti6ir71mama2teqqg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "net.appitiza.moderno",
@@ -39,13 +31,21 @@
           }
         },
         {
-          "client_id": "7886826836-33ha7l9eia96244ccd3ho595t8djshcr.apps.googleusercontent.com",
+          "client_id": "671026419885-vp7uoiv1mjoos3va30mkf3gkdfbhhjnn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.appitiza.moderno",
+            "certificate_hash": "c407604c624f6d040941e8e02ec062a5d82fd248"
+          }
+        },
+        {
+          "client_id": "671026419885-321mdpigf97dv0qca54spmub3odbd3hq.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBJPPSVekOks4Zvj9TaIxqZwPU4_3XMKHk"
+          "current_key": "AIzaSyCIKgGLMaVnRKQBbHNr3v0NtYgWeJJ0gw4"
         }
       ],
       "services": {
@@ -56,7 +56,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "7886826836-33ha7l9eia96244ccd3ho595t8djshcr.apps.googleusercontent.com",
+              "client_id": "671026419885-321mdpigf97dv0qca54spmub3odbd3hq.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
