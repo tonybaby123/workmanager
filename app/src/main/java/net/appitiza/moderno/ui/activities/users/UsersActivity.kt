@@ -56,6 +56,8 @@ class UsersActivity : BaseActivity() {
             } else {
                 loadReport()
             }
+
+
         }
         ll_users_home_history.setOnClickListener { loadHistory() }
         ll_users_home_notification.setOnClickListener { loadNotification() }
@@ -187,13 +189,8 @@ class UsersActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        isLoggedIn = false
-        displayName = ""
-        useremail = ""
-        userpassword = ""
-        usertype = ""
-        finish()
-        //showExitWarning()
+
+        showExitWarning()
         // super.onBackPressed()
     }
 

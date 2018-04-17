@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Moderno</string>
+    <string name="loading">Loading &#8230;</string>
     <string name="exit_message">Would you like to logout</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
@@ -14,7 +15,7 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing Location completions."</string>
+    <string name="permission_rationale">"Location permissions are needed for providing Location completions."</string>
     <string name="user_name">User Name</string>
     <string name="password">Password</string>
     <string name="login_text">Login</string>
@@ -26,6 +27,7 @@
     <string name="name_hint">Full Name</string>
     <string name="signing_message">Signing in &#8230;</string>
     <string name="registering_message">Registering &#8230;</string>
+    <string name="reset_message">Reset password link generation &#8230;</string>
 
 
     <!--transition name-->
@@ -133,6 +135,7 @@
     <string name="hrs_symbl">%1$d Hrs.</string>
     <string name="hr_symbl">%1$d Hr.</string>
     <string name="days_symbl">%1$d Days</string>
+    <string name="day_symbl">%1$d Day</string>
     <string name="minutes_symbl">%1$d Minutes.</string>
     <string name="at_time">AT\n%1$s</string>
     <string name="select_users">select user</string>

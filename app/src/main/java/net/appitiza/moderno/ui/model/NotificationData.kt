@@ -8,6 +8,6 @@ class NotificationData {
     var title: String? = null
     var message: String? = null
     var to: String? = null
-    var time: String? = null
+    var time: String = ""
 
 }

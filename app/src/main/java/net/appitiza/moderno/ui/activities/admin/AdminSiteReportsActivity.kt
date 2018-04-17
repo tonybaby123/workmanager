@@ -180,7 +180,16 @@ class AdminSiteReportsActivity : BaseActivity(), UserSiteClick {
 
 
                         if(Utils.getDate(selectedSite!!.date,"dd MMM yyyy").before(mSelectedCalender.time)){
-                            tv_admin_sitereport_days.text = Utils.convertDays(Utils.getDate(selectedSite!!.date,"dd MMM yyyy").time,mSelectedCalender.timeInMillis).toString()
+                            val day : Int = Utils.convertDays(Utils.getDate(selectedSite!!.date,"dd MMM yyyy").time,mSelectedCalender.timeInMillis).toInt()
+                            if(day > 1)
+                            {
+                                tv_admin_sitereport_days.text = getString(R.string.days_symbl,  day)
+                            }
+                            else
+                            {
+                                tv_admin_sitereport_days.text = getString(R.string.day_symbl,  day)
+                            }
+
                         }
                         else
                         {

@@ -39,5 +39,12 @@ class Utils {
             val value: Date = format.parse(date)
             return value
         }
+        fun getDateTimestamp(date: String): Date {
+            val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
+            val value: Date = format.parse(date)
+            return value
+        }
+
+
     }
 }

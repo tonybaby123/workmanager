@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activities.SplashActivity"
-            android:theme="@style/MainMaterialTheme.Base.login"
+            android:theme="@style/MainMaterialTheme.Base.splash"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

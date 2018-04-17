@@ -11,6 +11,7 @@ import net.appitiza.moderno.ui.activities.interfaces.AdminSiteClick
 import net.appitiza.moderno.ui.activities.interfaces.NotificationClick
 import net.appitiza.moderno.ui.model.NotificationData
 import net.appitiza.moderno.ui.model.SiteListdata
+import net.appitiza.moderno.utils.Utils
 
 class UserNotificationAdapter(val mList: ArrayList<NotificationData>, val callback: NotificationClick) : RecyclerView.Adapter<UserNotificationAdapter.NotificationHolder>() {
 
@@ -39,7 +40,8 @@ class UserNotificationAdapter(val mList: ArrayList<NotificationData>, val callba
         fun bindItems(data: NotificationData) {
             itemView.tv_notification_title.text = data.title
             itemView.tv_notification_message.text = data.message
-            itemView.tv_notification_time.text = data.time
+            itemView.tv_notification_time.text =  Utils.convertDate(Utils.getDateTimestamp(data.time).time, "dd MMM yyyy")
+
 
 
         }

@@ -50,7 +50,7 @@ class RegisterActivity : BaseActivity() {
     private fun registerUser(displayname: String, email: String, password: String) {
         if (validation(displayname, email, password)) {
             mProgress?.setTitle(getString(R.string.app_name))
-            mProgress?.setMessage(getString(R.string.signing_message))
+            mProgress?.setMessage(getString(R.string.registering_message))
             mProgress?.setCancelable(false)
             mProgress?.show()
             //val tm = getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager

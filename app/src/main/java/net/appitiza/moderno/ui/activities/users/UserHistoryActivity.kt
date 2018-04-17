@@ -121,10 +121,10 @@ class UserHistoryActivity : BaseActivity() {
                             mCheckInData.siteid = document.data[Constants.CHECKIN_SITE].toString()
                             mCheckInData.sitename = document.data[Constants.CHECKIN_SITENAME].toString()
                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKIN].toString()) && !document.data[Constants.CHECKIN_CHECKIN].toString().equals("null")) {
-                                mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toLong()
+                                mCheckInData.checkintime = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toLong()
                             }
                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
-                                mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
+                                mCheckInData.checkouttime = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
                             }
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
@@ -136,7 +136,7 @@ class UserHistoryActivity : BaseActivity() {
                                 }
                                 if (mCheckInData.checkintime != 0L) {
                                     if (mCheckInData.checkouttime != 0L) {
-                                        val mHours = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                                        val mHours = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKIN].toString()).time
                                         total_hours += (mHours)
                                     }
                                 }
@@ -144,14 +144,14 @@ class UserHistoryActivity : BaseActivity() {
                             }
 
                         }
-                        tv_admin_history_daily_payment.text = getString(R.string.rupees, total_payment)
+                        tv_useres_history_daily_payment.text = getString(R.string.rupees, total_payment)
 
                         if (total_hours > 0) {
 
-                            tv_admin_work_report_daily_total_hours.text = Utils.convertHours(total_hours)
+                            tv_useres_history_daily_total_hours.text = Utils.convertHours(total_hours)
 
                         } else {
-                            tv_admin_work_report_daily_total_hours.text = getString(R.string.not_checked_out)
+                            tv_useres_history_daily_total_hours.text = getString(R.string.not_checked_out)
                         }
 
                     } else {
@@ -202,10 +202,10 @@ class UserHistoryActivity : BaseActivity() {
                             mCheckInData.siteid = document.data[Constants.CHECKIN_SITE].toString()
                             mCheckInData.sitename = document.data[Constants.CHECKIN_SITENAME].toString()
                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKIN].toString()) && !document.data[Constants.CHECKIN_CHECKIN].toString().equals("null")) {
-                                mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toLong()
+                                mCheckInData.checkintime = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toLong()
                             }
                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
-                                mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
+                                mCheckInData.checkouttime = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
                             }
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
@@ -217,7 +217,7 @@ class UserHistoryActivity : BaseActivity() {
                             }
                             if (mCheckInData.checkintime != 0L) {
                                 if (mCheckInData.checkouttime != 0L) {
-                                    val mHours = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                                    val mHours = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKIN].toString()).time
                                     total_hours += (mHours)
                                 }
                             }
@@ -245,10 +245,6 @@ class UserHistoryActivity : BaseActivity() {
                 }
     }
 
-    private fun getDate(date: String): Date {
-        val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
-        val value: Date = format.parse(date)
-        return value
-    }
+
 
 }

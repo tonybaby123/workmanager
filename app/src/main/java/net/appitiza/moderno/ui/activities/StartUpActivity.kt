@@ -73,7 +73,7 @@ class StartUpActivity : AppCompatActivity() {
     private fun resetPassword(email: String) {
         if (!et_login_email.text.equals("")) {
             mProgress?.setTitle(getString(R.string.app_name))
-            mProgress?.setMessage(getString(R.string.registering_message))
+            mProgress?.setMessage(getString(R.string.reset_message))
             mProgress?.setCancelable(false)
             mProgress?.show()
             FirebaseAuth.getInstance().sendPasswordResetEmail(email).addOnCompleteListener { resetTask ->
@@ -122,7 +122,9 @@ class StartUpActivity : AppCompatActivity() {
                                         mProgress?.dismiss()
                                         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@StartUpActivity, tv_login_login,
                                                 ViewCompat.getTransitionName(tv_login_login))
-                                        if (usertype.equals("user")) {
+                                        et_login_email.text.clear()
+                                        et_login_password.text.clear()
+                                        if (usertype == "user") {
                                             val intent = Intent(this@StartUpActivity, UsersActivity::class.java)
 
                                             startActivity(intent, options.toBundle())

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_container_bg"
     tools:context=".ui.activities.SplashActivity">
 
     <include layout="@layout/top_layout" />
@@ -11,9 +12,11 @@
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/loading"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/pb_splash"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_large"
          />
 
     <ProgressBar

@@ -140,6 +140,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
     }
 
     private fun loadDaily() {
+        isDailyClicked = true
         ll_admin_daily_root.visibility = View.VISIBLE
         tv_admin_history_daily.setTextColor(ContextCompat.getColor(this, R.color.text_clicked))
         ll_admin_monthly_root.visibility = View.GONE
@@ -212,7 +213,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
     }
 
     private fun loadMonthly() {
-
+        isDailyClicked = false
         ll_admin_daily_root.visibility = View.GONE
         tv_admin_history_daily.setTextColor(ContextCompat.getColor(this, R.color.white))
         ll_admin_monthly_root.visibility = View.VISIBLE

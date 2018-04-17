@@ -18,6 +18,17 @@
     <item name="android:statusBarColor">@color/colorPrimaryDark_login</item>
     <item name="android:windowContentTransitions">true</item>
 
+</style><style name="MainMaterialTheme.Base.splash" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="android:windowDisablePreview">true</item>
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="colorPrimary">@color/colorPrimary_login</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark_login</item>
+    <item name="colorAccent">@color/white</item>
+    <item name="android:textColorPrimary">@color/text_color_login</item>
+    <item name="android:statusBarColor">@color/colorPrimaryDark_login</item>
+    <item name="android:windowContentTransitions">true</item>
+
 </style>
     <style name="MainMaterialTheme.Base.admin" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowDisablePreview">true</item>
