@@ -19,7 +19,6 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.android.gms.common.api.GoogleApiClient
-import com.google.android.gms.common.api.ResultCallback
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -30,8 +29,6 @@ import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.AdminSiteAdapter
 import net.appitiza.moderno.ui.activities.interfaces.AdminSiteClick
-import net.appitiza.moderno.ui.activities.services.LocationUpdatesService
-import net.appitiza.moderno.ui.activities.utils.Utils
 import net.appitiza.moderno.ui.model.SiteListdata
 
 
@@ -44,28 +41,7 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
     val LOCATION_SETTINGS = 2
     private val TAG = "LOCATION"
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
-    private var mGpsLocation: Location? = null
-    // Monitors the state of the connection to the service.
-    private lateinit var myReceiver : BroadcastReceiver
 
-    // A reference to the service used to get location updates.
-    private var mService: LocationUpdatesService? = null
-
-    // Tracks the bound state of the service.
-    private var mBound = false
-    private val mServiceConnection = object : ServiceConnection {
-
-        override fun onServiceConnected(name: ComponentName, service: IBinder) {
-            val binder = service as LocationUpdatesService.LocalBinder
-            mService = binder.service
-            mBound = true
-        }
-
-        override fun onServiceDisconnected(name: ComponentName) {
-            mService = null
-            mBound = false
-        }
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin_sites)
@@ -74,30 +50,7 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         getAll()
     }
 
-    override fun onResume() {
-        super.onResume()
-        LocalBroadcastManager.getInstance(this).registerReceiver(myReceiver,
-                IntentFilter(LocationUpdatesService.ACTION_BROADCAST))
-    }
-
-    override fun onPause() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(myReceiver)
-        super.onPause()
-    }
-
-    override fun onStop() {
-        if (mBound) {
-            // Unbind from the service. This signals to the service that this activity is no longer
-            // in the foreground, and the service can respond by promoting itself to a foreground
-            // service.
-            unbindService(mServiceConnection)
-            mBound = false
-        }
-        /* PreferenceManager.getDefaultSharedPreferences(getActivity())
-                .unregisterOnSharedPreferenceChangeListener(this);*/
-        super.onStop()
-    }
-    private fun initializeFireBase() {
+      private fun initializeFireBase() {
         rv_admin_site_all.layoutManager = LinearLayoutManager(this)
 
         mSiteList = arrayListOf()
@@ -105,7 +58,6 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        myReceiver = MyReceiver()
     }
 
     private fun setClick() {
@@ -336,67 +288,6 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
         startActivity(intent)
     }
 
-    private fun displayLocationSettingsRequest() {
-        /* PreferenceManager.getDefaultSharedPreferences(getActivity())
-                .registerOnSharedPreferenceChangeListener(this);*/
-        bindService(Intent(this, LocationUpdatesService::class.java), mServiceConnection,
-                Context.BIND_AUTO_CREATE)
-        val googleApiClient = GoogleApiClient.Builder(this)
-                .addApi(LocationServices.API).build()
-        googleApiClient.connect()
-
-        val locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 10000
-        locationRequest.fastestInterval = (10000 / 2).toLong()
-
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(locationRequest)
-        builder.setAlwaysShow(true)
-
-        val result = LocationServices.SettingsApi.checkLocationSettings(googleApiClient, builder.build())
-        result.setResultCallback { result ->
-            val status = result.status
-            when (status.statusCode) {
-                LocationSettingsStatusCodes.SUCCESS -> initiateLocationReceiverAndService()
-                LocationSettingsStatusCodes.RESOLUTION_REQUIRED -> try {
-                    status.startResolutionForResult(this, LOCATION_SETTINGS)
-                } catch (e: IntentSender.SendIntentException) {
-
-                }
-
-                LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE -> {
-                }
-            }
-        }
-    }
-
-    private fun initiateLocationReceiverAndService() {
 
 
-        if (mProgress != null && mProgress!!.isShowing()) {
-            mProgress?.dismiss()
-        }
-        mProgress?.setTitle(getString(R.string.app_name))
-        mProgress?.setMessage(getString(R.string.getting_site))
-        mProgress?.setCancelable(false)
-        mProgress?.show()
-        mService!!.requestLocationUpdates()
-    }
-    /**
-     * Receiver for broadcasts sent by [LocationUpdatesService].
-     */
-    private inner class MyReceiver : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            val location = intent.getParcelableExtra<Location>(LocationUpdatesService.EXTRA_LOCATION)
-            if (location != null) {
-                Toast.makeText(applicationContext, Utils.getLocationText(location),
-                        Toast.LENGTH_SHORT).show()
-                mService?.removeLocationUpdates()
-                if (mProgress != null && mProgress!!.isShowing()) {
-                    mProgress?.dismiss()
-                }
-                mGpsLocation = location
-            }
-        }
-    }
 }

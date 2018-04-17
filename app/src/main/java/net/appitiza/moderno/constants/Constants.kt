@@ -7,6 +7,7 @@ class Constants {
         const val PREF_KEY_IS_USER_EMAIL = "useremail"
         const val PREF_KEY_IS_USER_PASSWORD = "userpassword"
         const val PREF_KEY_IS_USER_USER_TYPE = "usertype"
+        const val KEY_REQUESTING_LOCATION_UPDATES = "requesting_locaction_updates"
         const val PREF_NAME = "prefModerno"
         const val COLLECTION_USER = "users"
         const val COLLECTION_SITE = "sites"

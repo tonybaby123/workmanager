@@ -1,17 +1,38 @@
 package net.appitiza.moderno.ui.activities.users
 
+import android.Manifest
+import android.app.AlertDialog
 import android.app.ProgressDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Location
+import android.location.LocationManager
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.support.design.widget.Snackbar
+import android.support.v4.app.ActivityCompat
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import kotlinx.android.synthetic.main.activity_admin_sites.*
 import kotlinx.android.synthetic.main.activity_user_report.*
+import net.appitiza.moderno.BuildConfig
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
@@ -21,12 +42,11 @@ import net.appitiza.moderno.ui.activities.interfaces.UserSiteClick
 import net.appitiza.moderno.ui.model.CurrentCheckIndata
 import net.appitiza.moderno.ui.model.SiteListdata
 import net.appitiza.moderno.utils.PreferenceHelper
-import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class UserReportActivity : BaseActivity(), UserSiteClick {
+class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
     private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
     private var displayName by PreferenceHelper(Constants.PREF_KEY_IS_USER_DISPLAY_NAME, "")
     private var useremail by PreferenceHelper(Constants.PREF_KEY_IS_USER_EMAIL, "")
@@ -41,6 +61,20 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
     private val mCheckInData: CurrentCheckIndata = CurrentCheckIndata()
     private var checkinSite: SiteListdata = SiteListdata()
     private var checkoutSite: SiteListdata = SiteListdata()
+
+
+    private val TAG = "UserReport"
+    private lateinit var mGoogleApiClient: GoogleApiClient
+    private var mLocationManager: LocationManager? = null
+    lateinit var mLocation: Location
+    private var mLocationRequest: LocationRequest? = null
+    private val listener: com.google.android.gms.location.LocationListener? = null
+    private val UPDATE_INTERVAL = (2 * 1000).toLong()  /* 10 secs */
+    private val FASTEST_INTERVAL: Long = 2000 /* 2 sec */
+
+    lateinit var locationManager: LocationManager
+    private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_report)
@@ -49,13 +83,88 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
         getCheckInInfo()
         setClick()
     }
+
     private fun initializeFireBase() {
 
         mSiteList = arrayListOf()
         mProgress = ProgressDialog(this)
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (!checkPermissions()) {
+                requestPermissions()
+            } else {
+                mGoogleApiClient = GoogleApiClient.Builder(this)
+                        .addConnectionCallbacks(this)
+                        .addOnConnectionFailedListener(this)
+                        .addApi(LocationServices.API)
+                        .build()
+
+                mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
+
+                checkLocation()
+            }
+
+        } else {
+            mGoogleApiClient = GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build()
+
+            mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
+
+            checkLocation()
+        }
     }
+
+    private fun checkPermissions(): Boolean {
+        return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+    }
+
+    private fun requestPermissions() {
+        val shouldProvideRationale = ActivityCompat.shouldShowRequestPermissionRationale(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+
+        // Provide an additional rationale to the user. This would happen if the user denied the
+        // request previously, but didn't check the "Don't ask again" checkbox.
+        if (shouldProvideRationale) {
+            Log.i(TAG, "Displaying permission rationale to provide additional context.")
+            Snackbar.make(
+                    fab_admin_add_site,
+                    R.string.permission_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction(R.string.ok, View.OnClickListener {
+                        requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                                REQUEST_PERMISSIONS_REQUEST_CODE)
+                    })
+                    .show()
+        } else {
+            Log.i(TAG, "Requesting permission")
+
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_PERMISSIONS_REQUEST_CODE)
+
+        }
+    }
+
+    override fun onStart() {
+
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect()
+        }
+        super.onStart()
+    }
+
+    override fun onStop() {
+        if (mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.disconnect();
+        }
+        super.onStop()
+    }
+
     private fun setClick() {
         tv_user_report_checkin.setOnClickListener {
             if (TextUtils.isEmpty(mCheckInData.siteid)) {
@@ -71,10 +180,9 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
             if (!TextUtils.isEmpty(mCheckInData.siteid)) {
                 if (mCheckInData.siteid.equals(checkoutSite.siteid)) {
-                    if(!TextUtils.isEmpty(et_users_site_payment.text.toString())) {
+                    if (!TextUtils.isEmpty(et_users_site_payment.text.toString())) {
                         updateHistory()
-                    }
-                    else {
+                    } else {
                         Toast.makeText(this@UserReportActivity, "Please Enter a Payment",
                                 Toast.LENGTH_SHORT).show()
                     }
@@ -146,7 +254,6 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
     }
 
-
     private fun checkinClear() {
         mProgress?.setTitle(getString(R.string.app_name))
         mProgress?.setMessage(getString(R.string.checking_out_user))
@@ -201,7 +308,6 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
                 }
     }
 
-
     private fun updateHistory() {
         mProgress?.setTitle(getString(R.string.app_name))
         mProgress?.setMessage(getString(R.string.syn))
@@ -228,8 +334,6 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
                 }
     }
 
-
-
     private fun getCheckInInfo() {
         mProgress?.setTitle(getString(R.string.app_name))
         mProgress?.setMessage(getString(R.string.get_checkin_info))
@@ -249,44 +353,38 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKIN].toString()) && !document.data[Constants.CHECKIN_CHECKIN].toString().equals("null")) {
                                 mCheckInData.checkintime = getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time.toLong()
                             }
-                             if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
-                                mCheckInData.checkouttime =  getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
+                            if (!TextUtils.isEmpty(document.data[Constants.CHECKIN_CHECKOUT].toString()) && !document.data[Constants.CHECKIN_CHECKOUT].toString().equals("null")) {
+                                mCheckInData.checkouttime = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time.toLong()
                             }
-                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
+                            mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
 
                         }
 
                         if (!TextUtils.isEmpty(mCheckInData.checkintime.toString()) && !mCheckInData.checkintime.toString().equals("null")) {
-                            tv_user_report_date.text = convertDate(mCheckInData.checkintime!!.toLong(),"dd MMM yyyy")
-                            var total_hours : Long = 0
+                            tv_user_report_date.text = convertDate(mCheckInData.checkintime!!.toLong(), "dd MMM yyyy")
+                            var total_hours: Long = 0
                             val mCalender = Calendar.getInstance()
                             total_hours = mCalender.timeInMillis - mCheckInData.checkintime!!.toLong()
 
                             total_hours /= (3600 * 1000)
 
-                             if(total_hours > 1)
-                            {
+                            if (total_hours > 1) {
                                 tv_user_report_completed_time.text = getString(R.string.hrs_symbl, total_hours)
-                            }
-                            else if(total_hours < 1)
-                            {
+                            } else if (total_hours < 1) {
                                 total_hours *= 60
                                 tv_user_report_completed_time.text = getString(R.string.minutes_symbl, total_hours)
-                            }
-                            else
-                            {
+                            } else {
                                 tv_user_report_completed_time.text = getString(R.string.hr_symbl, total_hours)
                             }
 
-                        }
-                        else{
+                        } else {
                             val mCalender = Calendar.getInstance()
-                            tv_user_report_date.text  = convertDate(mCalender.timeInMillis,"dd MMM yyyy")
+                            tv_user_report_date.text = convertDate(mCalender.timeInMillis, "dd MMM yyyy")
                             tv_user_report_completed_time.text = getString(R.string.not_checked_in_any_where)
                         }
                         if (!TextUtils.isEmpty(mCheckInData.sitename) && !mCheckInData.sitename.equals("null")) {
-                            tv_user_report_checkin_at.text = mCheckInData.sitename.toString()   }
-                        else{
+                            tv_user_report_checkin_at.text = mCheckInData.sitename.toString()
+                        } else {
                             tv_user_report_checkin_at.text = getString(R.string.not_checked_in_any_where)
                         }
 
@@ -295,8 +393,6 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
 
     }
-
-
 
     private fun getSites() {
         mProgress?.setTitle(getString(R.string.app_name))
@@ -339,25 +435,144 @@ class UserReportActivity : BaseActivity(), UserSiteClick {
 
 
     }
+
     private fun getDate(date: String): Date {
         val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
         val value: Date = format.parse(date)
         return value
     }
-    private fun convertDate(milli : Long,dateFormat: String): String {
+
+    private fun convertDate(milli: Long, dateFormat: String): String {
         val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
-        var  calendar = Calendar.getInstance()
+        var calendar = Calendar.getInstance()
         calendar.timeInMillis = milli
         val value = format.format(calendar.time)
         return value
     }
+
     override fun onSiteClick(data: SiteListdata) {
         val intent = Intent(this@UserReportActivity, AdminEditSiteActivity::class.java)
         intent.putExtra("site_data", data)
         startActivity(intent)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    private fun checkLocation(): Boolean {
+        if (!isLocationEnabled())
+            showAlert();
+        return isLocationEnabled();
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+    }
+
+    private fun showAlert() {
+        val dialog = AlertDialog.Builder(this)
+        dialog.setTitle("Enable Location")
+                .setMessage("Your Locations Settings is set to 'Off'.\nPlease Enable Location to " + "use this app")
+                .setPositiveButton("Location Settings", DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+                    val myIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(myIntent)
+                })
+                .setNegativeButton("Cancel", DialogInterface.OnClickListener { paramDialogInterface, paramInt -> })
+        dialog.show()
+    }
+
+    protected fun startLocationUpdates() {
+
+        // Create the location request
+        mLocationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL)
+                .setFastestInterval(FASTEST_INTERVAL);
+        // Request location updates
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,
+                mLocationRequest, this);
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
+            if (grantResults.isEmpty()) {
+                // If user interaction was interrupted, the permission request is cancelled and you
+                // receive empty arrays.
+                Log.i(TAG, "User interaction was cancelled.");
+            } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission was granted.
+                mGoogleApiClient = GoogleApiClient.Builder(this)
+                        .addConnectionCallbacks(this)
+                        .addOnConnectionFailedListener(this)
+                        .addApi(LocationServices.API)
+                        .build()
+
+                mLocationManager = this.getSystemService(android.content.Context.LOCATION_SERVICE) as LocationManager
+
+                checkLocation()
+            } else {
+                // Permission denied.
+                Snackbar.make(fab_admin_add_site,
+                        R.string.permission_rationale,
+                        Snackbar.LENGTH_INDEFINITE)
+                        .setAction(R.string.ok, View.OnClickListener {
+                            var intent: Intent = Intent()
+                            intent.setAction(
+                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                            var uri: Uri = Uri.fromParts("package",
+                                    BuildConfig.APPLICATION_ID, null)
+                            intent.setData(uri)
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            startActivity(intent)
+                        })
+                        .show()
+
+            }
+        }
+
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+
+        Log.i(TAG, "Connection Suspended");
+        mGoogleApiClient.connect();
+    }
+
+    override fun onConnectionFailed(connectionResult: ConnectionResult) {
+        Log.i(TAG, "Connection failed. Error: " + connectionResult.getErrorCode());
+    }
+
+    override fun onLocationChanged(location: Location) {
+
+
+        var msg = "Updated Location: Latitude " + location.latitude.toString() + location.longitude;
+        mLocation = location
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    override fun onConnected(p0: Bundle?) {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+
+        startLocationUpdates();
+
+        var fusedLocationProviderClient:
+                FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        fusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(this, OnSuccessListener<Location> { location ->
+                    // Got last known location. In some rare situations this can be null.
+                    if (location != null) {
+                        // Logic to handle location object
+                        mLocation = location;
+
+                    }
+                })
     }
 }
