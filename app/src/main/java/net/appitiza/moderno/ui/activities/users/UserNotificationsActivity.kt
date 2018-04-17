@@ -76,7 +76,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
                     mProgress?.dismiss()
 
                     if (fetchall_task.isSuccessful) {
-                        for (document in fetchall_task.getResult()) {
+                        for (document in fetchall_task.result) {
                             // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data = NotificationData()
                             data.notificationId = document.id
