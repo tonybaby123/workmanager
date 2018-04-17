@@ -12,7 +12,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_history.*
-import kotlinx.android.synthetic.main.item_users_history.view.*
+import kotlinx.android.synthetic.main.admin_daily_layout.*
 import kotlinx.android.synthetic.main.users_daily_layout.*
 import kotlinx.android.synthetic.main.users_monthly_layout.*
 import net.appitiza.moderno.R
@@ -21,6 +21,7 @@ import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.UserHistoryAdapter
 import net.appitiza.moderno.ui.model.CurrentCheckIndata
 import net.appitiza.moderno.utils.PreferenceHelper
+import net.appitiza.moderno.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -59,7 +60,7 @@ class UserHistoryActivity : BaseActivity() {
         db = FirebaseFirestore.getInstance()
         ll_users_daily_root.visibility = View.GONE
         ll_users_monthly_root.visibility = View.GONE
-        tv_useres_history_daily_date.text = convertDate(mSelectedCalender.timeInMillis,"dd MMM yyyy")
+        tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
 
     }
 
@@ -77,7 +78,7 @@ class UserHistoryActivity : BaseActivity() {
         val datePickerDialog = android.app.DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     mSelectedCalender.set(year, monthOfYear, dayOfMonth)
-                    tv_useres_history_daily_date.text = convertDate(mSelectedCalender.timeInMillis,"dd MMM yyyy")
+                    tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
                     loadDaily()
                 }, mYear, mMonth, mDay)
 
@@ -105,6 +106,7 @@ class UserHistoryActivity : BaseActivity() {
 
 
         db.collection(Constants.COLLECTION_CHECKIN_HISTORY)
+                .whereEqualTo(Constants.CHECKIN_USEREMAIL, useremail)
                 .get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
@@ -127,7 +129,7 @@ class UserHistoryActivity : BaseActivity() {
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
 
-                            if(mCheckInData.checkintime !!>= mSelectedCalender.timeInMillis && mCheckInData.checkintime !!<= (mSelectedCalender.timeInMillis + (24*60*60*1000))) {
+                            if (mCheckInData.checkintime!! >= mSelectedCalender.timeInMillis && mCheckInData.checkintime!! <= (mSelectedCalender.timeInMillis + (24 * 60 * 60 * 1000))) {
                                 if (!mCheckInData.payment.equals("null") && mCheckInData.payment.toString().equals("")) {
                                     val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
                                     total_payment += mPayment
@@ -142,27 +144,16 @@ class UserHistoryActivity : BaseActivity() {
                             }
 
                         }
-                        tv_useres_history_daily_payment.text = getString(R.string.rupees, total_payment)
-
+                        tv_admin_history_daily_payment.text = getString(R.string.rupees, total_payment)
 
                         if (total_hours > 0) {
-                            total_hours /= (3600 * 1000)
 
-                            if (total_hours > 1) {
-                                tv_useres_history_daily_total_hours.text = getString(R.string.hours_symbl, total_hours)
-                            } else if (total_hours < 1) {
-                                total_hours *= 60
-                                tv_useres_history_daily_total_hours.text = getString(R.string.minutes_symbl, total_hours)
-                            } else {
-                                tv_useres_history_daily_total_hours.text = getString(R.string.hr_symbl, total_hours)
-                            }
+                            tv_admin_work_report_daily_total_hours.text = Utils.convertHours(total_hours)
 
+                        } else {
+                            tv_admin_work_report_daily_total_hours.text = getString(R.string.not_checked_out)
                         }
-                        else
-                        {
-                            tv_useres_history_daily_total_hours.text = getString(R.string.not_checked_out)
 
-                        }
                     } else {
                         Toast.makeText(this@UserHistoryActivity, fetchall_task.exception.toString(),
                                 Toast.LENGTH_SHORT).show()
@@ -234,19 +225,16 @@ class UserHistoryActivity : BaseActivity() {
 
                         }
                         tv_useres_history_monthly_payment.text = getString(R.string.rupees, total_payment)
+
                         if (total_hours > 0) {
-                            total_hours /= (3600 * 1000)
 
-                            if (total_hours > 1) {
-                                tv_useres_history_monthly_total_hours.text = getString(R.string.hours_symbl, total_hours)
-                            } else if (total_hours < 1) {
-                                total_hours *= 60
-                                tv_useres_history_monthly_total_hours.text = getString(R.string.minutes_symbl, total_hours)
-                            } else {
-                                tv_useres_history_monthly_total_hours.text = getString(R.string.hr_symbl, total_hours)
-                            }
+                            tv_useres_history_monthly_total_hours.text = Utils.convertHours(total_hours)
 
+                        } else {
+                            tv_useres_history_monthly_total_hours.text = getString(R.string.not_checked_out)
                         }
+
+
                         mHistoryDisplay.addAll(mHistoryMonthly)
                         adapterMonthly.notifyDataSetChanged()
                     } else {
@@ -262,11 +250,5 @@ class UserHistoryActivity : BaseActivity() {
         val value: Date = format.parse(date)
         return value
     }
-    private fun convertDate(milli : Long,dateFormat: String): String {
-        val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
-        var  calendar = Calendar.getInstance()
-        calendar.timeInMillis = milli
-        val value = format.format(calendar.time)
-        return value
-    }
+
 }

@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_admin_sites.*
 import kotlinx.android.synthetic.main.activity_user_report.*
+import kotlinx.android.synthetic.main.users_daily_layout.*
 import net.appitiza.moderno.BuildConfig
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
@@ -42,6 +43,7 @@ import net.appitiza.moderno.ui.activities.interfaces.UserSiteClick
 import net.appitiza.moderno.ui.model.CurrentCheckIndata
 import net.appitiza.moderno.ui.model.SiteListdata
 import net.appitiza.moderno.utils.PreferenceHelper
+import net.appitiza.moderno.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -156,7 +158,15 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
     private fun setClick() {
         tv_user_report_checkin.setOnClickListener {
             if (TextUtils.isEmpty(mCheckInData.siteid)) {
-                insertHistory()
+                if (Utils.isWithinRange(checkinSite.lat, checkinSite.lon, mLocation.latitude, mLocation.longitude, 10f))
+                {
+                    insertHistory()
+                }
+                else{
+                    Toast.makeText(this@UserReportActivity, "Not in Range",
+                            Toast.LENGTH_SHORT).show()
+
+                }
             } else {
                 mProgress!!.hide()
                 Toast.makeText(this@UserReportActivity, "already checked in " + mCheckInData.checkintime + "  \nPlease check out",
@@ -169,7 +179,18 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
             if (!TextUtils.isEmpty(mCheckInData.siteid)) {
                 if (mCheckInData.siteid.equals(checkoutSite.siteid)) {
                     if (!TextUtils.isEmpty(et_users_site_payment.text.toString())) {
-                        updateHistory()
+
+                        if (mLocation != null && mLocation.latitude != 0.0 && mLocation.longitude != 0.0) {
+                            if (Utils.isWithinRange(checkoutSite.lat, checkoutSite.lon, mLocation.latitude, mLocation.longitude, 10f))
+                            {
+                                updateHistory()
+                            }
+                            else{
+                                Toast.makeText(this@UserReportActivity, "Not in Range",
+                                        Toast.LENGTH_SHORT).show()
+
+                            }
+                        }
                     } else {
                         Toast.makeText(this@UserReportActivity, "Please Enter a Payment",
                                 Toast.LENGTH_SHORT).show()
@@ -348,26 +369,17 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
 
                         }
 
-                        if (!TextUtils.isEmpty(mCheckInData.checkintime.toString()) && !mCheckInData.checkintime.toString().equals("null")) {
-                            tv_user_report_date.text = convertDate(mCheckInData.checkintime!!.toLong(), "dd MMM yyyy")
-                            var total_hours: Long = 0
+                        if (!TextUtils.isEmpty(mCheckInData.checkintime.toString()) && mCheckInData.checkintime != 0L && !mCheckInData.checkintime.toString().equals("null")) {
+                            tv_user_report_date.text = Utils.convertDate(mCheckInData.checkintime!!.toLong(), "dd MMM yyyy")
+                            var total_hours: Double = 0.0
                             val mCalender = Calendar.getInstance()
-                            total_hours = mCalender.timeInMillis - mCheckInData.checkintime!!.toLong()
 
-                            total_hours /= (3600 * 1000)
+                            tv_user_report_completed_time.text = Utils.convertHours((mCalender.timeInMillis - mCheckInData.checkintime!!.toLong()))
 
-                            if (total_hours > 1) {
-                                tv_user_report_completed_time.text = getString(R.string.hrs_symbl, total_hours)
-                            } else if (total_hours < 1) {
-                                total_hours *= 60
-                                tv_user_report_completed_time.text = getString(R.string.minutes_symbl, total_hours)
-                            } else {
-                                tv_user_report_completed_time.text = getString(R.string.hr_symbl, total_hours)
-                            }
 
                         } else {
                             val mCalender = Calendar.getInstance()
-                            tv_user_report_date.text = convertDate(mCalender.timeInMillis, "dd MMM yyyy")
+                            tv_user_report_date.text = Utils.convertDate(mCalender.timeInMillis, "dd MMM yyyy")
                             tv_user_report_completed_time.text = getString(R.string.not_checked_in_any_where)
                         }
                         if (!TextUtils.isEmpty(mCheckInData.sitename) && !mCheckInData.sitename.equals("null")) {
@@ -430,14 +442,6 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
     private fun getDate(date: String): Date {
         val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH)
         val value: Date = format.parse(date)
-        return value
-    }
-
-    private fun convertDate(milli: Long, dateFormat: String): String {
-        val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
-        var calendar = Calendar.getInstance()
-        calendar.timeInMillis = milli
-        val value = format.format(calendar.time)
         return value
     }
 

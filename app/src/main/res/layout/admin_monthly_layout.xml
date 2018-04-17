@@ -323,7 +323,7 @@
         android:background="@color/admin_home_btn_strock" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_history_list"
+        android:id="@+id/rv_adminhistory_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/default_margin"

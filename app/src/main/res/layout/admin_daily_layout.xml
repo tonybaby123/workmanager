@@ -17,11 +17,14 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_size_small" />
 
-    <EditText
-        android:id="@+id/spnr_admin_work_report_daily_date"
+    <TextView
+        android:id="@+id/tv_admin_work_report_daily_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:textColor="@color/white"
+        android:layout_gravity="center_vertical"
+        android:gravity="center_vertical"
         android:background="@drawable/white_strock_bg"
         android:layout_marginTop="@dimen/semi_margin"
         android:drawableEnd="@drawable/calendar"
@@ -151,7 +154,6 @@
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/select_date"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />
@@ -194,7 +196,6 @@
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:gravity="center"
-            android:text="@string/select_date"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_medium" />

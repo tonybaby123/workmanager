@@ -39,6 +39,7 @@ import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.SiteStatussAdapter
 import net.appitiza.moderno.ui.activities.adapter.SiteTypesAdapter
 import net.appitiza.moderno.ui.model.SiteListdata
+import net.appitiza.moderno.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -212,7 +213,7 @@ class AdminEditSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallback
         val datePickerDialog = android.app.DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     mSelectedCalender.set(year, monthOfYear, dayOfMonth)
-                    et_admin_edit_start_date.setText(convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy"))
+                    et_admin_edit_start_date.setText(Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy"))
                 }, mYear, mMonth, mDay)
 
         datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
@@ -223,13 +224,7 @@ class AdminEditSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallback
         datePickerDialog.show()
     }
 
-    private fun convertDate(milli: Long, dateFormat: String): String {
-        val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
-        var calendar = Calendar.getInstance()
-        calendar.timeInMillis = milli
-        val value = format.format(calendar.time)
-        return value
-    }
+
 
     private fun checkPermissions(): Boolean {
         return PackageManager.PERMISSION_GRANTED == ActivityCompat.checkSelfPermission(this,

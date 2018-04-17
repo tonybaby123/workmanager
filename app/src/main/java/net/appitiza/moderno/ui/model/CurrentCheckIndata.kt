@@ -12,4 +12,5 @@ class CurrentCheckIndata : Serializable {
     var payment: String? = null
 
 
+
 }

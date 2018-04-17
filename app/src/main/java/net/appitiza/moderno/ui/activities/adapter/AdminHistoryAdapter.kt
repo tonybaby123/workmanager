@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.item_users_history.view.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.ui.model.CurrentCheckIndata
+import net.appitiza.moderno.utils.Utils
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -39,42 +40,20 @@ class AdminHistoryAdapter(var mContext: Context, val mList: ArrayList<CurrentChe
 
             if (data.checkintime != 0L) {
                 if (data.checkouttime != 0L) {
-                    var total_hours: Long = 0
-                    total_hours = data.checkouttime!!.toLong() - data.checkintime!!.toLong()
-                    total_hours /= (3600 * 1000)
-                    if(total_hours > 1)
-                    {
-                        itemView.tv_historyitem_hours.text = mContext.getString(R.string.hrs_symbl, total_hours)
-                    }
-                    else if(total_hours < 1)
-                    {
-                        total_hours *= 60
-                        itemView.tv_historyitem_hours.text = mContext.getString(R.string.minutes_symbl, total_hours)
-                    }
-                    else
-                    {
-                        itemView.tv_historyitem_hours.text = mContext.getString(R.string.hr_symbl, total_hours)
-                    }
 
-                }
-                else
-                {
+                    itemView.tv_historyitem_hours.text = Utils.convertHours((data.checkouttime!!.toLong() - data.checkintime!!.toLong()))
+
+                } else {
                     itemView.tv_historyitem_hours.text = mContext.getString(R.string.not_checked_out)
                 }
             }
-            else
-            {
-                itemView.tv_historyitem_hours.text = mContext.getString(R.string.not_checked_out)
-            }
+
             if (!data.payment.toString().equals("null")) {
 
                 itemView.tv_historyitem_payment.text = data.payment
-            }
-            else
-            {
+            } else {
                 itemView.tv_historyitem_payment.text = mContext.getString(R.string.not_checked_out)
             }
-
 
 
         }
