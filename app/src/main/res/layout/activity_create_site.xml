@@ -114,9 +114,12 @@
                 android:layout_marginTop="@dimen/semi_margin"
                 android:background="@drawable/et_bg"
                 android:longClickable="false"
-                android:textColor="@color/colorPrimaryDark_admin"
+                android:focusable="false"
+                android:inputType="none"
                 android:maxLength="30"
                 android:maxLines="1"
+                android:lines="1"
+                android:textColor="@color/colorPrimaryDark_admin"
                 android:textSize="@dimen/text_size_medium"
                 android:padding="@dimen/threefourth_padding" />
             <TextView

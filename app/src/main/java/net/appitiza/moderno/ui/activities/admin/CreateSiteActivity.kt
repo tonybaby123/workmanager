@@ -2,6 +2,7 @@ package net.appitiza.moderno.ui.activities.admin
 
 import android.Manifest
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.DialogInterface
@@ -35,7 +36,8 @@ import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.SiteTypesAdapter
-import java.util.HashMap
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.set
 
@@ -48,8 +50,6 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
     private lateinit var mTypeAdapter: SiteTypesAdapter
 
     var createClicked: Boolean = false
-
-
     private val TAG = "CreateSite"
     private lateinit var mGoogleApiClient: GoogleApiClient
     private var mLocationManager: LocationManager? = null
@@ -61,6 +61,8 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
 
     lateinit var locationManager: LocationManager
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
+
+    val mSelectedCalender = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -176,6 +178,34 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
             }
 
         }
+        et_admin_create_start_date.setOnClickListener { loadCalendar() }
+    }
+
+    private fun loadCalendar() {
+        val c = Calendar.getInstance()
+        val mYear = c.get(Calendar.YEAR)
+        val mMonth = c.get(Calendar.MONTH)
+        val mDay = c.get(Calendar.DAY_OF_MONTH)
+        val datePickerDialog = android.app.DatePickerDialog(this,
+                DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                    mSelectedCalender.set(year, monthOfYear, dayOfMonth)
+                    et_admin_create_start_date.setText(convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy"))
+                }, mYear, mMonth, mDay)
+
+        datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
+
+
+        datePickerDialog.setTitle(null)
+        datePickerDialog.setCancelable(false)
+        datePickerDialog.show()
+    }
+
+    private fun convertDate(milli: Long, dateFormat: String): String {
+        val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+        var calendar = Calendar.getInstance()
+        calendar.timeInMillis = milli
+        val value = format.format(calendar.time)
+        return value
     }
 
     private fun createSite() {
