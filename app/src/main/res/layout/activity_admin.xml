@@ -170,7 +170,7 @@
                     android:gravity="center"
                     android:text="@string/notification"
                     android:textAllCaps="true"
-                    android:transitionName="@string/transition_adminhome_notification"
+                    android:transitionName="@string/txt_adminhome_notification"
                     android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>

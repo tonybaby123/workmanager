@@ -76,6 +76,9 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
         ll_admin_daily_root.visibility = View.GONE
         ll_admin_monthly_root.visibility = View.GONE
         mSelectedCalender.set(mSelectedCalender.get(Calendar.YEAR), mSelectedCalender.get(Calendar.MONTH), mSelectedCalender.get(Calendar.DAY_OF_MONTH),0,0,1)
+        tv_admin_history_monthly_year.text = Utils.convertDate(mSelectedCalender.timeInMillis,"yyyy")
+        tv_admin_history_monthly_monthly.text = Utils.convertDate(mSelectedCalender.timeInMillis,"MMMM")
+
         tv_admin_work_report_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
     }
 
@@ -102,7 +105,9 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
         }
         tv_admin_history_daily.setOnClickListener { loadDaily() }
         tv_admin_history_monthly.setOnClickListener { loadMonthly() }
-        tv_admin_work_report_daily_date.setOnClickListener { loadCalendar() }
+        tv_admin_work_report_daily_date.setOnClickListener { loadCalendar(0) }
+        tv_admin_history_monthly_year.setOnClickListener { loadCalendar(1) }
+        tv_admin_history_monthly_monthly.setOnClickListener { loadCalendar(1) }
     }
 
     private fun getUser() {
@@ -257,19 +262,20 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
                             }
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
-                            mHistoryMonthly.add(mCheckInData)
 
-                            if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
-                                val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
-                                total_payment += mPayment
-                            }
-                            if (mCheckInData.checkintime != 0L) {
-                                if (mCheckInData.checkouttime != 0L) {
-                                    val mHours = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
-                                    total_hours += (mHours)
+                            if (mCheckInData.checkintime!! >= (mSelectedCalender.timeInMillis - (mSelectedCalender.get(Calendar.DAY_OF_MONTH) * 24 * 60 * 60 * 1000)) && mCheckInData.checkintime!! <= (mSelectedCalender.timeInMillis + ((mSelectedCalender.getActualMaximum(Calendar.DATE) - mSelectedCalender.get(Calendar.DAY_OF_MONTH))* 24 * 60 * 60 * 1000))) {
+                                if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
+                                    val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
+                                    total_payment += mPayment
                                 }
+                                if (mCheckInData.checkintime != 0L) {
+                                    if (mCheckInData.checkouttime != 0L) {
+                                        val mHours = getDate(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - getDate(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                                        total_hours += (mHours)
+                                    }
+                                }
+                                mHistoryMonthly.add(mCheckInData)
                             }
-
 
                         }
                         tv_admin_history_monthly_payment.text = getString(R.string.rupees, total_payment)
@@ -293,7 +299,8 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
                 }
     }
 
-    private fun loadCalendar() {
+
+    private fun loadCalendar(from : Int) {
         val c = Calendar.getInstance()
         val mYear = c.get(Calendar.YEAR)
         val mMonth = c.get(Calendar.MONTH)
@@ -301,8 +308,20 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
         val datePickerDialog = android.app.DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     mSelectedCalender.set(year, monthOfYear, dayOfMonth,0,0,1)
-                    tv_admin_work_report_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
-                    loadDaily()
+                   if(from == 0)
+                   {
+                       tv_admin_work_report_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
+                       loadDaily()
+                   }
+
+                    else
+                   {
+                       tv_admin_history_monthly_year.text = Utils.convertDate(mSelectedCalender.timeInMillis,"yyyy")
+                       tv_admin_history_monthly_monthly.text = Utils.convertDate(mSelectedCalender.timeInMillis,"MMMM")
+
+                       loadMonthly()
+                   }
+
                 }, mYear, mMonth, mDay)
 
         datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000

@@ -53,7 +53,7 @@
             android:background="@color/users_home_btn_strock" />
 
         <TextView
-            android:id="@+id/tv_user_history_monthly_month"
+            android:id="@+id/tv_user_history_monthly_monthly"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"

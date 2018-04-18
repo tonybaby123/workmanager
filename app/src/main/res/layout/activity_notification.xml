@@ -34,14 +34,15 @@
                 android:text="@string/notification"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
-                android:transitionName="@string/txt_adminhome_sitesreport"
-                android:textSize="@dimen/text_size_large" />
+                android:textSize="@dimen/text_size_large"
+                android:transitionName="@string/txt_adminhome_notification" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:layout_marginTop="@dimen/quad_margin"
                 android:background="@color/admin_home_btn_strock" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -52,6 +53,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,6 +77,7 @@
                     android:layout_margin="@dimen/default_padding"
                     android:src="@drawable/down_arrow" />
             </RelativeLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -85,6 +88,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
+
             <EditText
                 android:id="@+id/et_admin_notification_title"
                 android:layout_width="match_parent"
@@ -93,11 +97,11 @@
                 android:background="@drawable/et_bg"
                 android:inputType="textCapCharacters"
                 android:longClickable="false"
-                android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="1"
                 android:padding="@dimen/threefourth_padding"
-                android:textSize="@dimen/text_size_medium"/>
+                android:textColor="@color/colorPrimaryDark_admin"
+                android:textSize="@dimen/text_size_medium" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -109,6 +113,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_size_medium" />
+
             <EditText
                 android:id="@+id/et_admin_notification_message"
                 android:layout_width="match_parent"
@@ -116,12 +121,12 @@
                 android:layout_marginTop="@dimen/semi_margin"
                 android:background="@drawable/et_bg"
                 android:inputType="textMultiLine"
+                android:lines="2"
                 android:longClickable="false"
-                android:textColor="@color/colorPrimaryDark_admin"
                 android:maxLength="30"
                 android:maxLines="2"
-                android:lines="2"
-                android:padding="@dimen/threefourth_padding" />
+                android:padding="@dimen/threefourth_padding"
+                android:textColor="@color/colorPrimaryDark_admin" />
 
             <View
                 android:layout_width="match_parent"
@@ -138,7 +143,7 @@
                 android:padding="@dimen/default_padding"
                 android:text="@string/send"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_large"/>
+                android:textSize="@dimen/text_size_large" />
 
             <View
                 android:layout_width="match_parent"

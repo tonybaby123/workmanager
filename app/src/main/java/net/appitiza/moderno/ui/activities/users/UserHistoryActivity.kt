@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_history.*
 import kotlinx.android.synthetic.main.admin_daily_layout.*
+import kotlinx.android.synthetic.main.admin_monthly_layout.*
 import kotlinx.android.synthetic.main.users_daily_layout.*
 import kotlinx.android.synthetic.main.users_monthly_layout.*
 import net.appitiza.moderno.R
@@ -61,6 +62,9 @@ class UserHistoryActivity : BaseActivity() {
         ll_users_daily_root.visibility = View.GONE
         ll_users_monthly_root.visibility = View.GONE
         mSelectedCalender.set(mSelectedCalender.get(Calendar.YEAR), mSelectedCalender.get(Calendar.MONTH), mSelectedCalender.get(Calendar.DAY_OF_MONTH),0,0,1)
+        tv_user_history_monthly_year.text = Utils.convertDate(mSelectedCalender.timeInMillis,"yyyy")
+        tv_user_history_monthly_monthly.text = Utils.convertDate(mSelectedCalender.timeInMillis,"MMMM")
+
         tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
 
 
@@ -69,10 +73,12 @@ class UserHistoryActivity : BaseActivity() {
     private fun setClick() {
         tv_user_history_daily.setOnClickListener { loadDaily() }
         tv_user_history_monthly.setOnClickListener { loadMonthly() }
-        tv_useres_history_daily_date.setOnClickListener { loadCalendar() }
+        tv_useres_history_daily_date.setOnClickListener { loadCalendar(0) }
+        tv_user_history_monthly_year.setOnClickListener { loadCalendar(1) }
+        tv_user_history_monthly_monthly.setOnClickListener { loadCalendar(1) }
     }
 
-    private fun loadCalendar() {
+    private fun loadCalendar(from : Int) {
         val c = Calendar.getInstance()
         val mYear = c.get(Calendar.YEAR)
         val mMonth = c.get(Calendar.MONTH)
@@ -80,8 +86,21 @@ class UserHistoryActivity : BaseActivity() {
         val datePickerDialog = android.app.DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     mSelectedCalender.set(year, monthOfYear, dayOfMonth,0,0,1)
-                    tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
-                    loadDaily()
+
+
+                    if(from == 0)
+                    {
+                        tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
+                        loadDaily()
+                    }
+
+                    else
+                    {
+                        tv_user_history_monthly_year.text = Utils.convertDate(mSelectedCalender.timeInMillis,"yyyy")
+                        tv_user_history_monthly_monthly.text = Utils.convertDate(mSelectedCalender.timeInMillis,"MMMM")
+
+                        loadMonthly()
+                    }
                 }, mYear, mMonth, mDay)
 
         datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
@@ -211,19 +230,23 @@ class UserHistoryActivity : BaseActivity() {
                             }
                             mCheckInData.useremail = document.data[Constants.CHECKIN_USEREMAIL].toString()
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
-                            mHistoryMonthly.add(mCheckInData)
 
-                            if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
-                                val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
-                                total_payment += mPayment
-                            }
-                            if (mCheckInData.checkintime != 0L) {
-                                if (mCheckInData.checkouttime != 0L) {
-                                    val mHours = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKIN].toString()).time
-                                    total_hours += (mHours)
+
+                            if (mCheckInData.checkintime!! >= (mSelectedCalender.timeInMillis - (mSelectedCalender.get(Calendar.DAY_OF_MONTH) * 24 * 60 * 60 * 1000)) && mCheckInData.checkintime!! <= (mSelectedCalender.timeInMillis + ((mSelectedCalender.getActualMaximum(Calendar.DATE) - mSelectedCalender.get(Calendar.DAY_OF_MONTH))* 24 * 60 * 60 * 1000))) {
+
+
+                                if (!document.data[Constants.CHECKIN_PAYMENT].toString().equals("null") && !document.data[Constants.CHECKIN_PAYMENT].toString().equals("")) {
+                                    val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
+                                    total_payment += mPayment
                                 }
+                                if (mCheckInData.checkintime != 0L) {
+                                    if (mCheckInData.checkouttime != 0L) {
+                                        val mHours = Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKOUT].toString()).time - Utils.getDateTimestamp(document.data[Constants.CHECKIN_CHECKIN].toString()).time
+                                        total_hours += (mHours)
+                                    }
+                                }
+                                mHistoryMonthly.add(mCheckInData)
                             }
-
 
                         }
                         tv_useres_history_monthly_payment.text = getString(R.string.rupees, total_payment)
