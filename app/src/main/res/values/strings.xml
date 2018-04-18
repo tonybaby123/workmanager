@@ -31,6 +31,7 @@
 
 
     <!--transition name-->
+    <string name="splash_other">splash_other</string>
     <string name="transition_login_register">login_register</string>
     <string name="email_login_register">email_login_register</string>
     <string name="emailtext_login_register">emailtext_login_register</string>
