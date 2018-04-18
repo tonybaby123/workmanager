@@ -158,7 +158,7 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
     private fun setClick() {
         tv_user_report_checkin.setOnClickListener {
             if (TextUtils.isEmpty(mCheckInData.siteid)) {
-                if (Utils.isWithinRange(checkinSite.lat, checkinSite.lon, mLocation.latitude, mLocation.longitude, 10f))
+                if (Utils.isWithinRange(checkinSite.lat, checkinSite.lon, mLocation.latitude, mLocation.longitude, 1f))
                 {
                     insertHistory()
                 }

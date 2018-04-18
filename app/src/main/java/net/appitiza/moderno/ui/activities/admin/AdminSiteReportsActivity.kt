@@ -60,6 +60,7 @@ class AdminSiteReportsActivity : BaseActivity(), UserSiteClick {
         mProgress = ProgressDialog(this)
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+        mSelectedCalender.set(mSelectedCalender.get(Calendar.YEAR), mSelectedCalender.get(Calendar.MONTH), mSelectedCalender.get(Calendar.DAY_OF_MONTH),0,0,1)
         tv_admin_site_report_calendar.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
 
     }
@@ -217,7 +218,7 @@ class AdminSiteReportsActivity : BaseActivity(), UserSiteClick {
         val mDay = c.get(Calendar.DAY_OF_MONTH)
         val datePickerDialog = android.app.DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    mSelectedCalender.set(year, monthOfYear, dayOfMonth)
+                    mSelectedCalender.set(year, monthOfYear, dayOfMonth,0,0,1)
                     tv_admin_site_report_calendar.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
                     loadSiteDetails()
                 }, mYear, mMonth, mDay)

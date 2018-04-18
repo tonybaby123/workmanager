@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_register.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
@@ -62,7 +63,7 @@ class RegisterActivity : BaseActivity() {
                             // Sign in success, update UI with the signed-in user's information
                             val user = mAuth?.currentUser
                             val uid = user!!.uid
-                            val deviceToken = FirebaseInstanceId.getInstance().token
+                            val deviceToken : String? = FirebaseInstanceId.getInstance().token
                             val map = HashMap<String, Any>()
                             map[Constants.USER_DISPLAY_NAME] = displayname
                             map[Constants.USER_EMAIL] = mAuth?.currentUser?.email.toString()
@@ -84,6 +85,7 @@ class RegisterActivity : BaseActivity() {
                                             this.displayName = displayname
                                             userpassword = password
                                             usertype = "user"
+                                            FirebaseMessaging.getInstance().subscribeToTopic("notification");
                                             startActivity(Intent(this@RegisterActivity, UsersActivity::class.java))
                                             finish()
 

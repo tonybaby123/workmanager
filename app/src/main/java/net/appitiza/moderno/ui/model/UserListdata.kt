@@ -6,6 +6,4 @@ open class UserListdata : Serializable{
      var emailId: String? = null
      var username: String? = null
 
-
-
 }

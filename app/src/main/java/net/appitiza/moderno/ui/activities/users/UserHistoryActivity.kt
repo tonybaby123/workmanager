@@ -60,7 +60,9 @@ class UserHistoryActivity : BaseActivity() {
         db = FirebaseFirestore.getInstance()
         ll_users_daily_root.visibility = View.GONE
         ll_users_monthly_root.visibility = View.GONE
+        mSelectedCalender.set(mSelectedCalender.get(Calendar.YEAR), mSelectedCalender.get(Calendar.MONTH), mSelectedCalender.get(Calendar.DAY_OF_MONTH),0,0,1)
         tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
+
 
     }
 
@@ -77,7 +79,7 @@ class UserHistoryActivity : BaseActivity() {
         val mDay = c.get(Calendar.DAY_OF_MONTH)
         val datePickerDialog = android.app.DatePickerDialog(this,
                 DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    mSelectedCalender.set(year, monthOfYear, dayOfMonth)
+                    mSelectedCalender.set(year, monthOfYear, dayOfMonth,0,0,1)
                     tv_useres_history_daily_date.text = Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy")
                     loadDaily()
                 }, mYear, mMonth, mDay)
@@ -130,7 +132,7 @@ class UserHistoryActivity : BaseActivity() {
                             mCheckInData.payment = document.data[Constants.CHECKIN_PAYMENT].toString()
 
                             if (mCheckInData.checkintime!! >= mSelectedCalender.timeInMillis && mCheckInData.checkintime!! <= (mSelectedCalender.timeInMillis + (24 * 60 * 60 * 1000))) {
-                                if (!mCheckInData.payment.equals("null") && mCheckInData.payment.toString().equals("")) {
+                                if (!mCheckInData.payment.equals("null") && !mCheckInData.payment.toString().equals("")) {
                                     val mPayment = Integer.parseInt(document.data[Constants.CHECKIN_PAYMENT].toString())
                                     total_payment += mPayment
                                 }

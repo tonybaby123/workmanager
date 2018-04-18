@@ -185,7 +185,7 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
                     et_admin_create_start_date.setText(Utils.convertDate(mSelectedCalender.timeInMillis, "dd MMM yyyy"))
                 }, mYear, mMonth, mDay)
 
-        datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
+        //datePickerDialog.datePicker.maxDate = System.currentTimeMillis() - 1000
 
 
         datePickerDialog.setTitle(null)
