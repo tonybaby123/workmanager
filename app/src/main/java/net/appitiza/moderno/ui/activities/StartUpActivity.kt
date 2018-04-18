@@ -7,6 +7,7 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
+import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
@@ -71,7 +72,7 @@ class StartUpActivity : AppCompatActivity() {
     }
 
     private fun resetPassword(email: String) {
-        if (!et_login_email.text.equals("")) {
+        if (!TextUtils.isEmpty(email)) {
             mProgress?.setTitle(getString(R.string.app_name))
             mProgress?.setMessage(getString(R.string.reset_message))
             mProgress?.setCancelable(false)

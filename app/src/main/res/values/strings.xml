@@ -27,7 +27,7 @@
     <string name="name_hint">Full Name</string>
     <string name="signing_message">Signing in &#8230;</string>
     <string name="registering_message">Registering &#8230;</string>
-    <string name="reset_message">Reset password link generation &#8230;</string>
+    <string name="reset_message">Reset password link generating &#8230;</string>
 
 
     <!--transition name-->
