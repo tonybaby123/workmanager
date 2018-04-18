@@ -8,6 +8,9 @@ import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.view.View
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_admin.*
 import kotlinx.android.synthetic.main.activity_start_up.*
 import net.appitiza.moderno.R
@@ -15,6 +18,7 @@ import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.RegisterActivity
 import net.appitiza.moderno.ui.activities.StartUpActivity
 import net.appitiza.moderno.utils.PreferenceHelper
+import java.util.HashMap
 
 class AdminActivity : AppCompatActivity() {
     private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
@@ -22,11 +26,18 @@ class AdminActivity : AppCompatActivity() {
     private var useremail by PreferenceHelper(Constants.PREF_KEY_IS_USER_EMAIL, "")
     private var userpassword by PreferenceHelper(Constants.PREF_KEY_IS_USER_PASSWORD, "")
     private var usertype by PreferenceHelper(Constants.PREF_KEY_IS_USER_USER_TYPE, "")
+    private lateinit var db: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
+        initialize()
         setclick()
     }
+    fun initialize() {
+        db = FirebaseFirestore.getInstance()
+        updateFcm()
+    }
+
     private fun setclick() {
         ll_admin_home_sites.setOnClickListener { loadSites()  }
         ll_admin_home_site_reports.setOnClickListener { loadSitesReport()  }
@@ -65,6 +76,14 @@ class AdminActivity : AppCompatActivity() {
         val p1 = Pair(tv_admin_home_site_notification as View, getString(R.string.txt_adminhome_notification))
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@AdminActivity, p1)
         startActivity(intent, options.toBundle())
+    }
+    private fun updateFcm() {
+        val deviceToken: String? = FirebaseInstanceId.getInstance().token
+        val map = HashMap<String, Any>()
+        map[Constants.USER_TOKEN] = deviceToken.toString()
+        db.collection(Constants.COLLECTION_USER)
+                .document(useremail)
+                .set(map, SetOptions.merge())
     }
     private fun showExitWarning() {
         val mAlert = AlertDialog.Builder(this).create()

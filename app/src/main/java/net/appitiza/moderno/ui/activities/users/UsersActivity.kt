@@ -15,6 +15,10 @@ import android.support.v4.app.ActivityOptionsCompat
 import android.support.v4.util.Pair
 import android.util.Log
 import android.view.View
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_admin_sites.*
 import kotlinx.android.synthetic.main.activity_users.*
 import net.appitiza.moderno.BuildConfig
@@ -23,6 +27,7 @@ import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.StartUpActivity
 import net.appitiza.moderno.utils.PreferenceHelper
+import java.util.*
 
 
 class UsersActivity : BaseActivity() {
@@ -34,13 +39,19 @@ class UsersActivity : BaseActivity() {
 
     private val TAG = "LOCATION"
     private val REQUEST_PERMISSIONS_REQUEST_CODE = 34
-
+    private lateinit var db: FirebaseFirestore
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_users)
+        initialize()
         setClick()
         hideKeyboard()
 
+    }
+
+    fun initialize() {
+        db = FirebaseFirestore.getInstance()
+        updateFcm()
     }
 
     fun setClick() {
@@ -124,6 +135,16 @@ class UsersActivity : BaseActivity() {
         val p1 = Pair(tv_users_home_notification as View, getString(R.string.txt_usershome_notification))
         val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@UsersActivity, p1)
         startActivity(intent, options.toBundle())
+    }
+
+    private fun updateFcm() {
+        val deviceToken: String? = FirebaseInstanceId.getInstance().token
+        val map = HashMap<String, Any>()
+        map[Constants.USER_TOKEN] = deviceToken.toString()
+        db.collection(Constants.COLLECTION_USER)
+                .document(useremail)
+                .set(map, SetOptions.merge())
+        FirebaseMessaging.getInstance().subscribeToTopic("notification");
     }
 
     private fun checkPermissions(): Boolean {

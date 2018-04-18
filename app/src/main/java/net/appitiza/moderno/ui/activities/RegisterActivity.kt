@@ -85,7 +85,6 @@ class RegisterActivity : BaseActivity() {
                                             this.displayName = displayname
                                             userpassword = password
                                             usertype = "user"
-                                            FirebaseMessaging.getInstance().subscribeToTopic("notification");
                                             startActivity(Intent(this@RegisterActivity, UsersActivity::class.java))
                                             finish()
 
