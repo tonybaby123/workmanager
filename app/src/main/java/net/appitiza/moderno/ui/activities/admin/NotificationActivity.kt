@@ -10,7 +10,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import kotlinx.android.synthetic.main.activity_notification.*
-import kotlinx.android.synthetic.main.activity_user_report.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
@@ -96,7 +95,7 @@ class NotificationActivity : BaseActivity(), UserClick {
                         mProgress?.dismiss()
 
                     } else {
-                        Utils.showDialog(this,fetchall_task.exception?.message.toString())
+                        Utils.showDialog(this, fetchall_task.exception?.message.toString())
                     }
                 }
 
@@ -127,18 +126,19 @@ class NotificationActivity : BaseActivity(), UserClick {
                     .addOnCompleteListener { send_task ->
                         if (send_task.isSuccessful) {
                             mProgress!!.dismiss()
-                            Utils.showDialog(this,"Notification Sent")
-                            finish()
+                            Utils.showDialog(this, "Notification Sent")
+                            et_admin_notification_title.setText("")
+                            et_admin_notification_message.setText("")
 
                         } else {
                             mProgress!!.hide()
-                            Utils.showDialog(this,send_task.exception?.message.toString())
+                            Utils.showDialog(this, send_task.exception?.message.toString())
                         }
                     }
 
 
         } else {
-            Utils.showDialog(this,"Please fill all details")
+            Utils.showDialog(this, "Please fill all details")
 
         }
     }
