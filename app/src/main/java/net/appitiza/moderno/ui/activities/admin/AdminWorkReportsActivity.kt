@@ -9,7 +9,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_admin_work_reports.*
@@ -136,8 +135,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
                         mProgress?.dismiss()
 
                     } else {
-                        Toast.makeText(this@AdminWorkReportsActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
 
                     }
                 }
@@ -209,8 +207,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
 
 
                     } else {
-                        Toast.makeText(this@AdminWorkReportsActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
                         Log.e("With time", fetchall_task.exception.toString())
                     }
                 }
@@ -292,8 +289,7 @@ class AdminWorkReportsActivity : BaseActivity(), UserClick {
                         mHistoryDisplay.addAll(mHistoryMonthly)
                         adapterMonthly.notifyDataSetChanged()
                     } else {
-                        Toast.makeText(this@AdminWorkReportsActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
                         Log.e("With time", fetchall_task.exception.toString())
                     }
                 }

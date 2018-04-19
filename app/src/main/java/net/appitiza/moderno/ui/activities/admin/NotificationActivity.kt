@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,6 +18,7 @@ import net.appitiza.moderno.ui.activities.adapter.AdminSpnrUserAdapter
 import net.appitiza.moderno.ui.activities.interfaces.UserClick
 import net.appitiza.moderno.ui.model.UserListdata
 import net.appitiza.moderno.utils.PreferenceHelper
+import net.appitiza.moderno.utils.Utils
 import java.util.*
 
 class NotificationActivity : BaseActivity(), UserClick {
@@ -96,9 +96,7 @@ class NotificationActivity : BaseActivity(), UserClick {
                         mProgress?.dismiss()
 
                     } else {
-                        Toast.makeText(this@NotificationActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
-
+                        Utils.showDialog(this,fetchall_task.exception?.message.toString())
                     }
                 }
 
@@ -129,21 +127,19 @@ class NotificationActivity : BaseActivity(), UserClick {
                     .addOnCompleteListener { send_task ->
                         if (send_task.isSuccessful) {
                             mProgress!!.dismiss()
-                            Toast.makeText(this@NotificationActivity, "Sent",
-                                    Toast.LENGTH_SHORT).show()
+                            Utils.showDialog(this,"Notification Sent")
                             finish()
 
                         } else {
                             mProgress!!.hide()
-                            Toast.makeText(this@NotificationActivity, send_task.exception?.message.toString(),
-                                    Toast.LENGTH_SHORT).show()
+                            Utils.showDialog(this,send_task.exception?.message.toString())
                         }
                     }
 
 
         } else {
-            Toast.makeText(this@NotificationActivity, "incomplete",
-                    Toast.LENGTH_SHORT).show()
+            Utils.showDialog(this,"Please fill all details")
+
         }
     }
 

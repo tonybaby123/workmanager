@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.telephony.TelephonyManager
 import android.text.TextUtils
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
@@ -18,6 +17,7 @@ import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.users.UsersActivity
 import net.appitiza.moderno.utils.PreferenceHelper
+import net.appitiza.moderno.utils.Utils
 import java.util.*
 
 
@@ -90,22 +90,19 @@ class RegisterActivity : BaseActivity() {
 
                                         } else {
                                             mProgress!!.hide()
-                                            Toast.makeText(this@RegisterActivity, task.exception?.message.toString(),
-                                                    Toast.LENGTH_SHORT).show()
+
+                                            Utils.showDialog(this,reg_task.exception?.message.toString())
                                         }
                                     }
 
 
                         } else {
                             mProgress!!.hide()
-                            // If sign in fails, display a message to the user.
-                            Toast.makeText(this@RegisterActivity, task.exception?.message.toString(),
-                                    Toast.LENGTH_SHORT).show()
+                            Utils.showDialog(this,task.exception?.message.toString())
                         }
                     }
         } else {
-            Toast.makeText(this@RegisterActivity, "incomplete",
-                    Toast.LENGTH_SHORT).show()
+            Utils.showDialog(this,"Incomplete Entry")
         }
     }
 

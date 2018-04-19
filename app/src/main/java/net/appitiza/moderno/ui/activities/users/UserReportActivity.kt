@@ -19,7 +19,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -163,14 +162,14 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                     insertHistory()
                 }
                 else{
-                    Toast.makeText(this@UserReportActivity, "Not in Range",
-                            Toast.LENGTH_SHORT).show()
+
+
+                    Utils.showDialog(this,"Not in Range")
 
                 }
             } else {
                 mProgress!!.hide()
-                Toast.makeText(this@UserReportActivity, "already checked in " + mCheckInData.checkintime + "  \nPlease check out",
-                        Toast.LENGTH_SHORT).show()
+                Utils.showDialog(this,"already checked in " + mCheckInData.checkintime + "  \nPlease check out")
             }
 
         }
@@ -186,23 +185,20 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                                 updateHistory()
                             }
                             else{
-                                Toast.makeText(this@UserReportActivity, "Not in Range",
-                                        Toast.LENGTH_SHORT).show()
+                                Utils.showDialog(this,"Not in Range")
 
                             }
                         }
                     } else {
-                        Toast.makeText(this@UserReportActivity, "Please Enter a Payment",
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,"Please Enter a Payment")
                     }
                 } else {
-                    Toast.makeText(this@UserReportActivity, "You have checked in at " + mCheckInData.sitename + " \nPlease check out from same site",
-                            Toast.LENGTH_SHORT).show()
+                    Utils.showDialog(this,"You have checked in at " + mCheckInData.sitename + " \nPlease check out from same site")
                 }
 
             } else {
-                Toast.makeText(this@UserReportActivity, "You need to check in first",
-                        Toast.LENGTH_SHORT).show()
+
+                Utils.showDialog(this,"You need to check in first")
             }
 
         }
@@ -249,14 +245,12 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                 .addOnCompleteListener { checkin_task ->
                     if (checkin_task.isSuccessful) {
                         mProgress!!.dismiss()
-                        Toast.makeText(this@UserReportActivity, "CHECKED IN",
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,"CHECKED IN")
                         finish()
 
                     } else {
                         mProgress!!.hide()
-                        Toast.makeText(this@UserReportActivity, checkin_task.exception?.message.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,checkin_task.exception?.message.toString())
                     }
                 }
 
@@ -274,14 +268,13 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                 .addOnCompleteListener { clear_task ->
                     if (clear_task.isSuccessful) {
                         mProgress!!.dismiss()
-                        Toast.makeText(this@UserReportActivity, "CHECKED OUT",
-                                Toast.LENGTH_SHORT).show()
+
+                        Utils.showDialog(this,"CHECKED OUT")
                         finish()
 
                     } else {
                         mProgress!!.hide()
-                        Toast.makeText(this@UserReportActivity, clear_task.exception?.message.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,clear_task.exception?.message.toString())
                     }
                 }
     }
@@ -307,13 +300,11 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                     mCheckInData.useremail = useremail
                     mProgress!!.dismiss()
                     checkInData()
-                    Toast.makeText(this@UserReportActivity, "Sync Done",
-                            Toast.LENGTH_SHORT).show()
+
                 }
                 .addOnFailureListener { e ->
                     mProgress!!.dismiss()
-                    Toast.makeText(this@UserReportActivity, "Sync failed",
-                            Toast.LENGTH_SHORT).show()
+
                 }
     }
 
@@ -331,14 +322,12 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                 .addOnCompleteListener { sync_task ->
                     if (sync_task.isSuccessful) {
                         mProgress!!.dismiss()
-                        Toast.makeText(this@UserReportActivity, "Sync Done",
-                                Toast.LENGTH_SHORT).show()
+
                         checkinClear()
 
                     } else {
                         mProgress!!.hide()
-                        Toast.makeText(this@UserReportActivity, sync_task.exception?.message.toString(),
-                                Toast.LENGTH_SHORT).show()
+
                     }
                 }
     }
@@ -406,7 +395,7 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
                     if (fetchall_task.isSuccessful) {
-                        for (document in fetchall_task.getResult()) {
+                        for (document in fetchall_task.result) {
                             // Log.d(FragmentActivity.TAG, document.id + " => " + document.getData())
                             val data: SiteListdata = SiteListdata()
                             data.siteid = document.id
@@ -430,9 +419,7 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
                         mProgress?.dismiss()
 
                     } else {
-                        Toast.makeText(this@UserReportActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
-
+                        Utils.showDialog(this,fetchall_task.exception?.message.toString())
                     }
                 }
 
@@ -547,7 +534,7 @@ class UserReportActivity : BaseActivity(), UserSiteClick, GoogleApiClient.Connec
 
         var msg = "Updated Location: Latitude " + location.latitude.toString() + location.longitude;
         mLocation = location
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
 
     }

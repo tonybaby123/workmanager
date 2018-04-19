@@ -8,7 +8,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_user_history.*
@@ -176,8 +175,7 @@ class UserHistoryActivity : BaseActivity() {
                         }
 
                     } else {
-                        Toast.makeText(this@UserHistoryActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception?.message.toString())
                         Log.e("With time", fetchall_task.exception.toString())
                     }
                 }
@@ -263,8 +261,7 @@ class UserHistoryActivity : BaseActivity() {
                         mHistoryDisplay.addAll(mHistoryMonthly)
                         adapterMonthly.notifyDataSetChanged()
                     } else {
-                        Toast.makeText(this@UserHistoryActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception?.message.toString())
                         Log.e("With time", fetchall_task.exception.toString())
                     }
                 }

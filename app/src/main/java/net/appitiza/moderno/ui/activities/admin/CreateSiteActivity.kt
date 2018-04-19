@@ -19,7 +19,6 @@ import android.support.v4.app.ActivityCompat
 import android.text.TextUtils
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -201,7 +200,7 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
                 createClicked = false
                 addToFirestore()
             } else {
-                Toast.makeText(applicationContext, "Location not recieved", Toast.LENGTH_SHORT).show()
+                Utils.showDialog(this,"Location not recieved")
             }
         } else {
             createClicked = true
@@ -217,14 +216,12 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
                 .addOnCompleteListener { add_task ->
                     if (add_task.isSuccessful) {
                         mProgress!!.dismiss()
-                        Toast.makeText(this@CreateSiteActivity, "Added",
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,"Site Added")
                         finish()
 
                     } else {
                         mProgress!!.hide()
-                        Toast.makeText(this@CreateSiteActivity, add_task.exception?.message.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,add_task.exception?.message.toString())
                     }
                 }
 
@@ -363,7 +360,7 @@ class CreateSiteActivity : BaseActivity(), GoogleApiClient.ConnectionCallbacks, 
 
         var msg = "Updated Location: Latitude " + location.latitude.toString() + location.longitude;
         mLocation = location
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
 
     }

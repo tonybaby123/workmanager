@@ -17,7 +17,6 @@ import android.support.v4.content.LocalBroadcastManager
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import android.widget.Toast
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.*
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +30,7 @@ import net.appitiza.moderno.ui.activities.BaseActivity
 import net.appitiza.moderno.ui.activities.adapter.AdminSiteAdapter
 import net.appitiza.moderno.ui.activities.interfaces.AdminSiteClick
 import net.appitiza.moderno.ui.model.SiteListdata
+import net.appitiza.moderno.utils.Utils
 
 
 class AdminSitesActivity : BaseActivity(), AdminSiteClick {
@@ -200,8 +200,7 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                         rv_admin_site_all.adapter = adapter
 
                     } else {
-                        Toast.makeText(this@AdminSitesActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
 
                     }
                 }
@@ -241,8 +240,7 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                         rv_admin_site_all.adapter = adapter
 
                     } else {
-                        Toast.makeText(this@AdminSitesActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
 
                     }
                 }
@@ -280,8 +278,7 @@ class AdminSitesActivity : BaseActivity(), AdminSiteClick {
                         rv_admin_site_all.adapter = adapter
 
                     } else {
-                        Toast.makeText(this@AdminSitesActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
 
                     }
                 }

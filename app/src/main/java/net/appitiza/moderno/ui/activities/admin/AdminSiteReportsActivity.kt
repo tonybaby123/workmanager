@@ -7,7 +7,6 @@ import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_admin_site_reports.*
@@ -117,8 +116,7 @@ class AdminSiteReportsActivity : BaseActivity(), UserSiteClick {
                         mProgress?.dismiss()
 
                     } else {
-                        Toast.makeText(this@AdminSiteReportsActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
+                        Utils.showDialog(this,fetchall_task.exception.toString())
 
                     }
                 }
@@ -199,9 +197,7 @@ class AdminSiteReportsActivity : BaseActivity(), UserSiteClick {
 
 
                     } else {
-                        Toast.makeText(this@AdminSiteReportsActivity, fetchall_task.exception.toString(),
-                                Toast.LENGTH_SHORT).show()
-                        Log.e("With time", fetchall_task.exception.toString())
+                        Utils.showDialog(this,fetchall_task.exception.toString())
                     }
                 }
     }
