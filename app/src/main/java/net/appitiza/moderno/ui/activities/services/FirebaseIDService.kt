@@ -13,6 +13,7 @@ import java.util.HashMap
 class FirebaseIDService: FirebaseInstanceIdService() {
     private lateinit var db: FirebaseFirestore
     private var useremail by PreferenceHelper(Constants.PREF_KEY_IS_USER_EMAIL, "")
+    private var usertype by PreferenceHelper(Constants.PREF_KEY_IS_USER_USER_TYPE, "")
     override fun onTokenRefresh() {
         val refreshedToken = FirebaseInstanceId.getInstance().token.toString()
         updateFcm(refreshedToken)
@@ -25,6 +26,8 @@ class FirebaseIDService: FirebaseInstanceIdService() {
         db.collection(Constants.COLLECTION_USER)
                 .document(useremail)
                 .set(map, SetOptions.merge())
-        FirebaseMessaging.getInstance().subscribeToTopic("notification");
+        if (usertype.equals("user")) {
+            FirebaseMessaging.getInstance().subscribeToTopic("notification");
+        }
     }
 }
