@@ -1,13 +1,29 @@
 package net.appitiza.moderno.utils
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.location.Location
+import net.appitiza.moderno.R
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
 
+
+
 class Utils {
     companion object {
+
+
+        fun showDialog(mContext : Context,message:String )
+        {
+            var mdialog: AlertDialog = AlertDialog.Builder(mContext).create()
+            mdialog.setTitle(mContext.getString(R.string.app_name))
+            mdialog.setMessage(message)
+            mdialog.setButton(AlertDialog.BUTTON_NEUTRAL, mContext.getString(R.string.ok), DialogInterface.OnClickListener { dialog, which -> mdialog.dismiss() })
+            mdialog.show()
+        }
         fun convertDate(milli: Long, dateFormat: String): String {
             val format = SimpleDateFormat(dateFormat, Locale.ENGLISH)
             var calendar = Calendar.getInstance()

@@ -9,7 +9,6 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
-import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
@@ -19,6 +18,7 @@ import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.admin.AdminActivity
 import net.appitiza.moderno.ui.activities.users.UsersActivity
 import net.appitiza.moderno.utils.PreferenceHelper
+import net.appitiza.moderno.utils.Utils
 
 
 class StartUpActivity : AppCompatActivity() {
@@ -81,16 +81,16 @@ class StartUpActivity : AppCompatActivity() {
 
                 mProgress?.dismiss()
                 if (resetTask.isSuccessful) {
-                    Toast.makeText(this@StartUpActivity, "reset link sent",
-                            Toast.LENGTH_SHORT).show()
+
+                    Utils.showDialog(this,"reset link sent")
                 } else {
-                    Toast.makeText(this@StartUpActivity, resetTask.exception.toString(),
-                            Toast.LENGTH_SHORT).show()
+
+                    Utils.showDialog(this,resetTask.exception!!.message.toString())
                 }
             }
         } else {
-            Toast.makeText(this@StartUpActivity, "email missing",
-                    Toast.LENGTH_SHORT).show()
+
+            Utils.showDialog(this,"email missing")
         }
 
     }
@@ -138,26 +138,23 @@ class StartUpActivity : AppCompatActivity() {
 
                                     } else {
                                         mProgress?.dismiss()
-                                        Toast.makeText(this@StartUpActivity, "no User Exist",
-                                                Toast.LENGTH_SHORT).show()
+                                        Utils.showDialog(this,"no User Exist")
                                     }
 
                                 } else {
                                     mProgress?.dismiss()
-                                    Toast.makeText(this@StartUpActivity, login_task.exception.toString(),
-                                            Toast.LENGTH_SHORT).show()
+                                    Utils.showDialog(this,login_task.exception!!.message.toString())
 
                                 }
                             }
                 } else {
                     mProgress?.hide()
-                    Toast.makeText(this@StartUpActivity, auth_task.exception.toString(),
-                            Toast.LENGTH_SHORT).show()
+
+                    Utils.showDialog(this,auth_task.exception!!.message.toString())
                 }
             }
         } else {
-            Toast.makeText(this@StartUpActivity, "incomplete",
-                    Toast.LENGTH_SHORT).show()
+            Utils.showDialog(this,"incomplete")
         }
     }
 
