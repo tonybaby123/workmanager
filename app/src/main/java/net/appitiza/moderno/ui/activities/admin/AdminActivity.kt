@@ -11,6 +11,7 @@ import android.view.View
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_admin.*
 import kotlinx.android.synthetic.main.activity_start_up.*
 import net.appitiza.moderno.R
@@ -84,6 +85,9 @@ class AdminActivity : AppCompatActivity() {
         db.collection(Constants.COLLECTION_USER)
                 .document(useremail)
                 .set(map, SetOptions.merge())
+        if (usertype.equals("user")) {
+            FirebaseMessaging.getInstance().subscribeToTopic("notification");
+        }
     }
     private fun showExitWarning() {
         val mAlert = AlertDialog.Builder(this).create()
