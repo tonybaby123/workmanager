@@ -1,38 +1,24 @@
 package net.appitiza.moderno.ui.activities.users
 
 import android.app.ProgressDialog
-import android.graphics.Typeface
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
-import kotlinx.android.synthetic.main.activity_admin_sites.*
-import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.activity_user_notifications.*
 import net.appitiza.moderno.R
 import net.appitiza.moderno.constants.Constants
 import net.appitiza.moderno.ui.activities.BaseActivity
-import net.appitiza.moderno.ui.activities.adapter.AdminSiteAdapter
 import net.appitiza.moderno.ui.activities.adapter.UserNotificationAdapter
 import net.appitiza.moderno.ui.activities.interfaces.NotificationClick
 import net.appitiza.moderno.ui.model.NotificationData
-import net.appitiza.moderno.ui.model.SiteListdata
 import net.appitiza.moderno.utils.PreferenceHelper
 import java.util.*
-import java.util.EventListener
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.DocumentReference
 
 
-
-
-class UserNotificationsActivity : BaseActivity(),NotificationClick {
+class UserNotificationsActivity : BaseActivity(), NotificationClick {
 
 
     private var isLoggedIn by PreferenceHelper(Constants.PREF_KEY_IS_USER_LOGGED_IN, false)
@@ -45,7 +31,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
     private var mProgress: ProgressDialog? = null
     private lateinit var mNotificationList: ArrayList<NotificationData>
     private lateinit var adapter: UserNotificationAdapter
-    private lateinit var allNotification : ListenerRegistration
+    private lateinit var allNotification: ListenerRegistration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +40,7 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
         getAllNotification()
         getMyNotification()
     }
+
     private fun initializeFireBase() {
         rv_notification_list.layoutManager = LinearLayoutManager(this)
         mNotificationList = arrayListOf()
@@ -63,14 +50,16 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
         mAuth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
     }
+
     private fun getAllNotification() {
+        mNotificationList.clear()
         mProgress?.setTitle(getString(R.string.app_name))
         mProgress?.setMessage(getString(R.string.getting_undergoing_site))
         mProgress?.setCancelable(false)
         mProgress?.show()
-        db.collection(Constants.COLLECTION_NOTIFICATION)
+       /* db.collection(Constants.COLLECTION_NOTIFICATION)
                 .whereEqualTo(Constants.NOTIFICATION_TO, "all")
-                .orderBy(Constants.NOTIFICATION_TIME,Query.Direction.DESCENDING)
+                .orderBy(Constants.NOTIFICATION_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { fetchall_task ->
                     mProgress?.dismiss()
@@ -92,40 +81,36 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
                     } else {
                         Toast.makeText(this@UserNotificationsActivity, fetchall_task.exception.toString(),
                                 Toast.LENGTH_SHORT).show()
-                        Log.e("link",fetchall_task.exception.toString())
+                        Log.e("link", fetchall_task.exception.toString())
 
                     }
-                }
+                }*/
+        db.collection(Constants.COLLECTION_NOTIFICATION)
+                .whereEqualTo(Constants.NOTIFICATION_TO, "all")
+                .orderBy(Constants.NOTIFICATION_TIME, Query.Direction.DESCENDING)
+                .addSnapshotListener(this,
+                        { querySnapshot: QuerySnapshot, e: FirebaseFirestoreException? ->
 
+                            mProgress?.dismiss()
+                            for (document in querySnapshot!!.documents) {
+                                val data = NotificationData()
+                                data.notificationId = document.id
+                                data.title = document.data[Constants.NOTIFICATION_TITLE].toString()
+                                data.message = document.data[Constants.NOTIFICATION_MESSAGE].toString()
+                                data.time = document.data[Constants.NOTIFICATION_TIME].toString()
+                                data.to = document.data[Constants.NOTIFICATION_TO].toString()
+                                mNotificationList.add(data)
 
-        /*allNotification =  db.collection("notes")
-                .addSnapshotListener(EventListener<QuerySnapshot> { snapshots, e ->
-                    if (e != null) {
-                        Log.w(TAG, "listen:error", e)
-                        return@EventListener
-                    }
-                    val notesList = mutableListOf<ContactsContract.CommonDataKinds.Note>()
-                    for (doc in snapshots) {
-                        val note = doc.toObject(Note::class.java)
-                        note.id = doc.id
-                        notesList.add(note)
-                    }
-                    // instead of simply using the entire query snapshot
-                    // see the actual changes to query results between query snapshots (added, removed, and modified)
-                    for (dc in snapshots.documentChanges) {
-                        when (dc.type) {
-                            DocumentChange.Type.ADDED -> Log.d(TAG, "New city: " + dc.document.data)
-                            DocumentChange.Type.MODIFIED -> Log.d(TAG, "Modified city: " + dc.document.data)
-                            DocumentChange.Type.REMOVED -> Log.d(TAG, "Removed city: " + dc.document.data)
-                        }
-                    }
-                })*/
+                            }
+                            adapter.notifyDataSetChanged()
+                        })
     }
+
     private fun getMyNotification() {
-        mNotificationList.clear()
+       /* mNotificationList.clear()
         db.collection(Constants.COLLECTION_NOTIFICATION)
                 .whereEqualTo(Constants.NOTIFICATION_TO, useremail)
-                .orderBy(Constants.NOTIFICATION_TIME,Query.Direction.DESCENDING)
+                .orderBy(Constants.NOTIFICATION_TIME, Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener { fetchall_task ->
 
@@ -148,10 +133,30 @@ class UserNotificationsActivity : BaseActivity(),NotificationClick {
                                 Toast.LENGTH_SHORT).show()
 
                     }
-                }
+                }*/
+        db.collection(Constants.COLLECTION_NOTIFICATION)
+                .whereEqualTo(Constants.NOTIFICATION_TO, useremail)
+                .orderBy(Constants.NOTIFICATION_TIME, Query.Direction.DESCENDING)
+                .addSnapshotListener(this,
+                        { querySnapshot: QuerySnapshot, e: FirebaseFirestoreException? ->
+
+                            mProgress?.dismiss()
+                            for (document in querySnapshot!!.documents) {
+                                val data = NotificationData()
+                                data.notificationId = document.id
+                                data.title = document.data[Constants.NOTIFICATION_TITLE].toString()
+                                data.message = document.data[Constants.NOTIFICATION_MESSAGE].toString()
+                                data.time = document.data[Constants.NOTIFICATION_TIME].toString()
+                                data.to = document.data[Constants.NOTIFICATION_TO].toString()
+                                mNotificationList.add(data)
+
+                            }
+                            adapter.notifyDataSetChanged()
+                        })
 
 
     }
+
     override fun onClick(data: NotificationData) {
     }
 }

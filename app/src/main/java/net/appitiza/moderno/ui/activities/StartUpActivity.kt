@@ -138,7 +138,7 @@ class StartUpActivity : AppCompatActivity() {
 
                                     } else {
                                         mProgress?.dismiss()
-                                        Utils.showDialog(this,"no User Exist")
+                                        Utils.showDialog(this,"Invalid Profile")
                                     }
 
                                 } else {
@@ -154,7 +154,7 @@ class StartUpActivity : AppCompatActivity() {
                 }
             }
         } else {
-            Utils.showDialog(this,"incomplete")
+            Utils.showDialog(this,"Email or Password is missing")
         }
     }
 
