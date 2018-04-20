@@ -6,7 +6,9 @@ You can use this application as a reference for implementing Frestore.
 To continue,you need some basic idea about Kotlin and Firestore.
 
 Here are some links to start with
-[![IMAGE ALT TEXT HERE](https://i1.ytimg.com/vi/ZIHnQQsfvD4/default.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
+
+
+[![IMAGE ALT TEXT HERE](https://i1.ytimg.com/vi/ZIHnQQsfvD4/0.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
 
 
 ## Getting Started
