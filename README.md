@@ -1,6 +1,14 @@
 # "Moderno" a Firestore implementation using Kotlin
 
 You can use this application as a reference for implementing Frestore.
+
+## Prerequisite
+To continue,you need some basic idea about Kotlin and Firestore.
+
+Here are some links to start with
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZIHnQQsfvD4&t=20s/0.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
+
+
 ## Getting Started
 You can use this library either by downloading the drawing pad module or by importing it directly as shown below.
 ## Import
