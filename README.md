@@ -23,9 +23,18 @@ In Firebase there are mainly two main database concepts.One is [Realtime databas
 **Sptep 2.** Provide  details like Packagename,SHA1 etc to configure
 **Sptep 2.** On completing step2,a file named `google-services.json`.Download this file and add to the app folder.With this process your done with configuring firebase.
 
+### Push Notification in serverless application
+
+We are going to develope a cloud function and host them in Googe cloud functions.On hosting you can view them in your firebase console.
+To start with,you need to  installed in your local system.With help of firebase tool you need to create a cloud function.On completeing this process you can upload it in to firebase cloud function.
+**Sptep 1.** Install node.js in your local system[Click Here to download Nodejs](https://nodejs.org/en/") 
+**Sptep 1.** Make folder for 
+
+
 ### Note:
 I have removed `google-services.json` file from this project.You need to include it.
 As i said above,Firestore is in beta so there are possibilities change.I will be updating them.
+Methods associated with push notification is only tested in Windows system.
 
 
 ## ScreenShot
