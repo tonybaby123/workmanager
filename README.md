@@ -48,7 +48,7 @@ I have added the cloud function code in firebasefunction folder please have a lo
 ### Note:
 I have removed `google-services.json` file from this project.You need to include it.
 
-As i said above,Firestore is in beta so there are possibilities change.I will be updating them.
+As i said above,Firestore is in beta so there are possibilities of change.I will be updating them.
 
 Methods associated with push notification is only tested in Windows system.
 
