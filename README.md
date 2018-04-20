@@ -25,10 +25,17 @@ In Firebase there are mainly two main database concepts.One is [Realtime databas
 
 ### Push Notification in serverless application
 
-We are going to develope a cloud function and host them in Googe cloud functions.On hosting you can view them in your firebase console.
-To start with,you need to  installed in your local system.With help of firebase tool you need to create a cloud function.On completeing this process you can upload it in to firebase cloud function.
-**Sptep 1.** Install node.js in your local system[Click Here to download Nodejs](https://nodejs.org/en/") 
-**Sptep 1.** Make folder for 
+We are going to develop a cloud function and host them in Googe cloud functions.On hosting you can view them on your firebase console.
+To start with,you need to install Nodejs in your local system.With help of nodejs framework and firebase tool, you need to create a cloud function.On completeing this process you can upload it on to firebase cloud function.I have kept everything simple in here.The logic is quite simple, We have a collection(For the time being let us assume collection to be a table) named Notification.Whenever there is an entry in notification collection, we need to trigger our cloud function.This cloud function will send the push notification.
+
+**Step 1.** Install node.js in your local system[Click Here to download Nodejs](https://nodejs.org/en/") 
+**Step 2.** Make a folder for cloud function and open command prompt here
+**Step 3.** Use this command to install firebase tools `npm install -g firebase-tools`
+**Step 4.** Now login to your account using `firebase login`
+**Step 5.** Now configure your application using `firebase init`, on completing you can find an index.js file
+**Step 6.** add necessary code in the index.js file and upload the function using `firebase deploy` 
+
+I have added the cloud function code in firebasefunction folder please have a look.
 
 
 ### Note:
