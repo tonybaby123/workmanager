@@ -6,9 +6,8 @@ You can use this application as a reference for implementing Frestore.
 To continue,you need some basic idea about Kotlin and Firestore.
 
 Here are some links to start with
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ZIHnQQsfvD4&t=20s/0.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
+[![IMAGE ALT TEXT HERE](https://i1.ytimg.com/vi/ZIHnQQsfvD4/default.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
 
-<iframe width="854" height="480" src="https://www.youtube.com/embed/ZIHnQQsfvD4" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 ## Getting Started
 You can use this library either by downloading the drawing pad module or by importing it directly as shown below.
