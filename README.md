@@ -1,6 +1,6 @@
-# Signature/Drawing pad
+# "Moderno" a Firestore implementation using Kotlin
 
-powerful and easy to integrate Signature/Drawing pad library for Android.
+You can use this application as a reference for implementing Frestore.
 ## Getting Started
 You can use this library either by downloading the drawing pad module or by importing it directly as shown below.
 ## Import
