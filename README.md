@@ -1,4 +1,4 @@
-# "Moderno" a Firestore implementation using Kotlin
+# "Moderno" a serverless mobile android application using Kotlin and firestore
 
 You can use this application as a reference for implementing Frestore.
 
@@ -14,47 +14,18 @@ Here is a video on Kotlin
 [Click Here to know more about Firestore](https://firebase.google.com/docs/firestore/quickstart")
 
 ## Getting Started
-In fire base there are mainly two main database concepts.One is [Realtime database](https://firebase.google.com/docs/database/")  and the other one is [Firestore](https://firebase.google.com/docs/firestore/").Firestore is in beta mode,which means code can change.In this application,We are concentrating on Firestore.
+In Firebase there are mainly two main database concepts.One is [Realtime database](https://firebase.google.com/docs/database/")  and the other one is [Firestore](https://firebase.google.com/docs/firestore/").Firestore is in beta mode,which means code can change.In this application,We are concentrating on Firestore.
 [Click Here to know more about the deference between Realtime database and Firestore](https://firebase.google.com/docs/database/rtdb-vs-firestore")
+
+
 ### Project creation in firebase
 **Sptep 1.** Create a project in Firebase [Link](https://firebase.google.com/docs/firestore/quickstart"):
 **Sptep 2.** Provide  details like Packagename,SHA1 etc to configure
 **Sptep 2.** On completing step2,a file named `google-services.json`.Download this file and add to the app folder.With this process your done with configuring firebase.
 
-
-### Usage
-#### To use the signaturepad
-Copy the below code to use signnaturepad
-
-```
-<net.appitiza.android.drawingpad.drawpad.views.SignatureView
-        android:id="@+id/signature_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        attr:clearOnDoubleTap="true"
-        attr:penColor="@android:color/holo_blue_dark"
-        attr:penMaxWidth="9dp"
-        attr:penMinWidth="5dp"
-        attr:speedimpressionWeight=".1" />
-```
-
-You can use attributes to adjust the features of signature pad
-Example 
-```
-        attr:penMaxWidth="9dp"
-        attr:penMinWidth="5dp"
-```
-With above code, you can adjust the pen width
-
-#### To use the drawingpad
-Copy the below code to use drawingpad
-
-```
-<net.appitiza.android.drawingpad.drawpad.views.DrawingView
-        android:id="@+id/drawing_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-```
+### Note:
+I have removed `google-services.json` file from this project.You need to include it.
+As i said above,Firestore is in beta so there are possibilities change.I will be updating them.
 
 
 ## ScreenShot
