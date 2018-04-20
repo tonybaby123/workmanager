@@ -11,26 +11,15 @@ Here is a video on Kotlin
 [![IMAGE ALT TEXT HERE](https://i1.ytimg.com/vi/ZIHnQQsfvD4/0.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
 
 
-##[Click Here to know more about Firestore](https://firebase.google.com/docs/firestore/quickstart")
+[Click Here to know more about Firestore](https://firebase.google.com/docs/firestore/quickstart")
 
 ## Getting Started
-You can use this library either by downloading the drawing pad module or by importing it directly as shown below.
-## Import
-**Sptep 1.** Add jitpack to your root `build.gradle`:
-```gradle
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-```
-**Step 2.** Add the dependency:
-```gradle
-dependencies {
-     implementation 'com.github.appitiza:SignatureApp:-SNAPSHOT'
-}
-```
+In fire base there are mainly two main database concepts.One is [Realtime database](https://firebase.google.com/docs/database/")  and the other one is [Firestore](https://firebase.google.com/docs/firestore/").Firestore is in beta mode,which means code can change.In this application,We are concentrating on Firestore.
+[Click Here to know more about the deference between Realtimedatabase and Firestore](https://firebase.google.com/docs/database/rtdb-vs-firestore")
+### Project creation in firebase
+**Sptep 1.** Create a project in Firebase [Link](https://firebase.google.com/docs/firestore/quickstart"):
+**Sptep 2.** Provide  details like Packagename,SHA1 etc to configure
+**Sptep 2.** On completing step2,a file named `google-services.json`.Download this file and add to the app folder.With this process your done with configuring firebase.
 
 
 ### Usage
@@ -77,7 +66,6 @@ Copy the below code to use drawingpad
 
 ## License
 
-This project is licensed under the MIT License
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
