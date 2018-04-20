@@ -15,7 +15,7 @@ Here is a video on Kotlin
 
 ## Getting Started
 In fire base there are mainly two main database concepts.One is [Realtime database](https://firebase.google.com/docs/database/")  and the other one is [Firestore](https://firebase.google.com/docs/firestore/").Firestore is in beta mode,which means code can change.In this application,We are concentrating on Firestore.
-[Click Here to know more about the deference between Realtimedatabase and Firestore](https://firebase.google.com/docs/database/rtdb-vs-firestore")
+[Click Here to know more about the deference between Realtime database and Firestore](https://firebase.google.com/docs/database/rtdb-vs-firestore")
 ### Project creation in firebase
 **Sptep 1.** Create a project in Firebase [Link](https://firebase.google.com/docs/firestore/quickstart"):
 **Sptep 2.** Provide  details like Packagename,SHA1 etc to configure
