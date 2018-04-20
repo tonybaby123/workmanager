@@ -11,11 +11,7 @@ Here is a video on Kotlin
 [![IMAGE ALT TEXT HERE](https://i1.ytimg.com/vi/ZIHnQQsfvD4/0.jpg)](https://www.youtube.com/watch?v=ZIHnQQsfvD4&t=20s)
 
 
-Follow this link to know more about fire store
-
-https://firebase.google.com/docs/firestore/quickstart
-
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+##[Click Here to know more about Firestore](https://firebase.google.com/docs/firestore/quickstart")
 
 ## Getting Started
 You can use this library either by downloading the drawing pad module or by importing it directly as shown below.
