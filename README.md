@@ -1,6 +1,6 @@
 # "Moderno" a serverless mobile android application using Kotlin and firestore
 
-You can use this application as a reference for implementing Frestore.
+Moderno is a server less android application where data is saved in firestore.We will be creating a cloud funtion to send push notification.You can use this application as a reference for implementing Frestore.
 
 ## Prerequisite
 To continue,you need some basic idea about Kotlin and Firestore.
